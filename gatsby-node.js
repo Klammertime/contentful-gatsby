@@ -5,11 +5,18 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
   // Define a template for blog post
   const blogPost = path.resolve('./src/templates/blog-post.js')
+  const portfolioPost = path.resolve('./src/templates/portfolio-post.js')
 
   const result = await graphql(
     `
       {
         allContentfulBlogPost {
+          nodes {
+            title
+            slug
+          }
+        }
+        allContentfulPortfolioPost {
           nodes {
             title
             slug
@@ -28,6 +35,8 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   }
 
   const posts = result.data.allContentfulBlogPost.nodes
+  const portfolioPosts = result.data.allContentfulPortfolioPost.nodes
+
 
   // Create blog posts pages
   // But only if there's at least one blog post found in Contentful
@@ -46,6 +55,19 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
           slug: post.slug,
           previousPostSlug,
           nextPostSlug,
+        },
+      })
+    })
+  }
+
+  if (portfolioPosts.length > 0) {
+    portfolioPosts.forEach((post, index) => {
+
+      createPage({
+        path: `/portfolio/${post.slug}/`,
+        component: portfolioPost,
+        context: {
+          slug: post.slug
         },
       })
     })
