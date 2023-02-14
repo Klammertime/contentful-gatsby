@@ -5,6 +5,7 @@ import './variables.css'
 import './global.css'
 import Seo from './seo'
 import Navigation from './navigation'
+import Nav from './nav'
 import Footer from './footer'
 
 const Site = styled.div`
@@ -51,7 +52,8 @@ class Template extends React.Component {
         <Site>
           <Seo />
           <SiteHeader role="banner">
-            <Navigation />
+            {/*<Navigation />*/}
+            <Nav/>
           </SiteHeader>
           <SiteMain role="main">
             {children}
