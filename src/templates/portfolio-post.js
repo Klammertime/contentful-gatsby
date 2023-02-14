@@ -14,35 +14,45 @@ import * as styles from './portfolio-post.module.css'
 
 class PortfolioPostTemplate extends React.Component {
     render() {
-        const post = get(this.props, 'data.contentfulPortfolioPost')
-        const previous = get(this.props, 'data.previous')
-        const next = get(this.props, 'data.next')
+      const post = get(this.props, 'data.contentfulPortfolioPost')
+      const previous = get(this.props, 'data.previous')
+      const next = get(this.props, 'data.next')
+      const plainTextDescription = documentToPlainTextString(
+        JSON.parse(post.description.raw)
+      )
 
-        const options = {
-            renderNode: {
-                [BLOCKS.EMBEDDED_ASSET]: (node) => {
-                    const { gatsbyImage } = node.data.target
-                    return (
-                        <GatsbyImage
-                            image={getImage(gatsbyImage)}
-                        />
-                    )
-                },
-            },
-        };
+      const options = {
+          renderNode: {
+              [BLOCKS.EMBEDDED_ASSET]: (node) => {
+                  const { gatsbyImage, description } = node.data.target
+                  return (
+                      <GatsbyImage
+                          image={getImage(gatsbyImage)}
+                          alt={description}
+                      />
+                  )
+              },
+          },
+      };
 
         return (
             <Layout location={this.props.location}>
                 <Seo
                     title={post.title}
+                    description={plainTextDescription}
                     image={`http:${post.heroImage.resize.src}`}
                 />
                 <Hero
                     image={post.heroImage?.gatsbyImage}
                     title={post.title}
+                    content={post.description}
                 />
+
                 <div className={styles.container}>
                     <div className={styles.article}>
+                        <div className={styles.body}>
+                          {post.body?.raw && renderRichText(post.body, options)}
+                        </div>
                         <Tags tags={post.tags} />
                         {(previous || next) && (
                             <nav>
@@ -88,7 +98,13 @@ export const pageQuery = graphql`
           src
         }
       }
+      body {
+        raw
+      }
       tags
+      description {
+        raw
+      }
     }
     previous: contentfulPortfolioPost(slug: { eq: $previousPostSlug }) {
       slug
