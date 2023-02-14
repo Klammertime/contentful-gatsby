@@ -5,7 +5,6 @@ import { renderRichText } from 'gatsby-source-contentful/rich-text'
 import { documentToPlainTextString } from '@contentful/rich-text-plain-text-renderer'
 import { BLOCKS } from '@contentful/rich-text-types'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
-import readingTime from 'reading-time'
 
 import Seo from '../components/seo'
 import Layout from '../components/layout'
@@ -16,6 +15,8 @@ import * as styles from './portfolio-post.module.css'
 class PortfolioPostTemplate extends React.Component {
     render() {
         const post = get(this.props, 'data.contentfulPortfolioPost')
+        const previous = get(this.props, 'data.previous')
+        const next = get(this.props, 'data.next')
 
         const options = {
             renderNode: {
@@ -43,6 +44,26 @@ class PortfolioPostTemplate extends React.Component {
                 <div className={styles.container}>
                     <div className={styles.article}>
                         <Tags tags={post.tags} />
+                        {(previous || next) && (
+                            <nav>
+                                <ul className={styles.articleNavigation}>
+                                    {previous && (
+                                        <li>
+                                            <Link to={`/portfolio/${previous.slug}`} rel="prev">
+                                                ← {previous.title}
+                                            </Link>
+                                        </li>
+                                    )}
+                                    {next && (
+                                        <li>
+                                            <Link to={`/portfolio/${next.slug}`} rel="next">
+                                                {next.title} →
+                                            </Link>
+                                        </li>
+                                    )}
+                                </ul>
+                            </nav>
+                        )}
                     </div>
                 </div>
             </Layout>
@@ -55,6 +76,8 @@ export default PortfolioPostTemplate
 export const pageQuery = graphql`
   query PortfolioPostBySlug(
     $slug: String!
+    $previousPostSlug: String
+    $nextPostSlug: String
   ) {
     contentfulPortfolioPost(slug: { eq: $slug }) {
       slug
@@ -66,6 +89,14 @@ export const pageQuery = graphql`
         }
       }
       tags
+    }
+    previous: contentfulPortfolioPost(slug: { eq: $previousPostSlug }) {
+      slug
+      title
+    }
+    next: contentfulPortfolioPost(slug: { eq: $nextPostSlug }) {
+      slug
+      title
     }
   }
 `

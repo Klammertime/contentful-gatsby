@@ -62,12 +62,17 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
   if (portfolioPosts.length > 0) {
     portfolioPosts.forEach((post, index) => {
+      const previousPostSlug = index === 0 ? null : portfolioPosts[index - 1].slug
+      const nextPostSlug =
+          index === portfolioPosts.length - 1 ? null : portfolioPosts[index + 1].slug
 
       createPage({
         path: `/portfolio/${post.slug}/`,
         component: portfolioPost,
         context: {
-          slug: post.slug
+          slug: post.slug,
+          previousPostSlug,
+          nextPostSlug,
         },
       })
     })
