@@ -51,7 +51,8 @@ class PortfolioPostTemplate extends React.Component {
                 <div className={styles.container}>
                     <div className={styles.article}>
                         <div className={styles.body}>
-                          {post.body?.raw && renderRichText(post.body, options)}
+                          "body is here usually"
+                          {/*{post.body?.raw && renderRichText(post.body, options)}*/}
                         </div>
                         <Tags tags={post.tags} />
                         {(previous || next) && (
@@ -97,9 +98,6 @@ export const pageQuery = graphql`
         resize(height: 630, width: 1200) {
           src
         }
-      }
-      body {
-        raw
       }
       tags
       description {

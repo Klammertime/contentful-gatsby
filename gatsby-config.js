@@ -4,8 +4,21 @@ require("dotenv").config({
 
 module.exports = {
   siteMetadata: {
-    title: "Gatsby Contentful Starter",
-    description: "Official Contentful Gatsby Starter",
+    title: `Audrey Klammer`,
+    author: {
+      name: `Audrey Klammer`,
+      summary: `I am passionate about web development and building useful things.`,
+    },
+    twitterUsername: '@klammertime',
+    image: `/gatsby-icon.png`,
+    heading: `My name is Audrey Klammer. I'm a UI Engineer based in San Francisco.`,
+    description: `change`,
+    siteUrl: `https://audreyklammer.com`,
+    social: {
+      twitter: `https://twitter.com/Klammertime`,
+      github: `https://github.com/Klammertime`,
+      linkedin: `https://www.linkedin.com/in/audreyklammer/`,
+    },
   },
   plugins: [
     "gatsby-transformer-sharp",
