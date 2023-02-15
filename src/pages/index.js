@@ -28,6 +28,18 @@ export default RootIndex
 
 export const pageQuery = graphql`
   query HomeQuery {
+    contentfulHomepage {
+        title
+        pageHeader {
+          pageHeader
+        }
+        description {
+          description
+        }
+        header {
+          raw
+        }
+     }
     allContentfulBlogPost(sort: { publishDate: DESC }) {
       nodes {
         title
