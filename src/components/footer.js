@@ -96,7 +96,7 @@ const Footer = () => {
       <FooterNav>
         <StyledLink to="/">Home</StyledLink>
         <StyledLink to="/portfolio">Portfolio</StyledLink>
-        {/*<StyledLink to="/about">About</StyledLink>*/}
+        <StyledLink to="/about">About</StyledLink>
         <StyledLink to="/blog">Blog</StyledLink>
         <StyledLink to="/contact">Contact</StyledLink>
       </FooterNav>

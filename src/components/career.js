@@ -1,5 +1,4 @@
 import React from 'react'
-import { useStaticQuery, graphql } from 'gatsby'
 import styled from 'styled-components'
 import Section from '../components/Section'
 // import downloadFile from '../data/downloads/Audrey_Klammer_Resume.pdf'
@@ -154,26 +153,7 @@ const DownloadButton = styled.a`
   }
 `
 
-const Career = () => {
-  const data = useStaticQuery(graphql`
-      query {
-      contentfulResumeContent {
-        test {
-          bullets
-          city
-          company
-          date
-          jobTitle
-        }
-        resumePdf {
-          file {
-            url
-          }
-        }
-      }
-    }
-  `)
-
+const Career = ({ jobHistoryJson, resume }) => {
   return (
     <Wrapper>
       <Section>
@@ -183,12 +163,12 @@ const Career = () => {
             Versatile front end engineer with user experience knowledge and design sensibility,
             drawing from years of experience working directly with customers in marketing.
           </StyledText>
-          <DownloadButton href={data.contentfulResumeContent.resumePdf.file.url} download>
+          <DownloadButton href={resume} download>
             Download Resume
           </DownloadButton>
         </SectionLeft>
         <SectionRight>
-          {data.contentfulResumeContent.test.map((job, index) => (
+          {jobHistoryJson.map((job, index) => (
             <CareerBlock key={`${job.company}${index}`}>
               <Date>{job.date}</Date>
               <Timeline>
