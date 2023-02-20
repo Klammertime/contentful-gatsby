@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import Link from './Link'
+import * as styles from './navigation.module.css'
 import styled from 'styled-components'
 
-const NavContainer = styled.nav`
+const Navigation = styled.nav`
   font-size: 16px;
   line-height: 18px;
   max-width: 600px;
@@ -14,11 +15,12 @@ const NavContainer = styled.nav`
     grid-template-columns: repeat(4, auto);
   }
 `
+
 const NotScrolled = styled.div`
   background: white;
   position: fixed;
   width: 100%;
-  padding: 13px 0;
+  padding: 15px 0;
   z-index: 100;
   transition: 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
   top: 0;
@@ -27,10 +29,12 @@ const NotScrolled = styled.div`
     padding: 10px 0;
   }
 `
+
 const Scrolled = styled(NotScrolled)`
   backdrop-filter: blur(20px);
 `
-const LogoWrapper = styled.div`
+
+const LogoWrapper = styled.span`
   align-items: center;
   border-radius: 50%;
   background-color: #f2f3f5;
@@ -40,6 +44,7 @@ const LogoWrapper = styled.div`
   display: flex;
   color: #f83f5a;
 `
+
 const StyledLink = styled(Link)`
   overflow: hidden;
   color: #151515;
@@ -90,15 +95,34 @@ const Nav = () => {
   return (
     <>
       <Scrolled>
-        <NavContainer>
-          <LogoWrapper>
-            <StyledLinkLogo to={'/'}>Ǡ </StyledLinkLogo>
-          </LogoWrapper>
-          <StyledLink to="/portfolio">Portfolio</StyledLink>
-          <StyledLink to="/about">About</StyledLink>
-          <StyledLink to="/blog">Blog</StyledLink>
-          <StyledLink to="/contact">Contact</StyledLink>
-        </NavContainer>
+        <Navigation role="navigation" aria-label="Main">
+
+          <StyledLinkLogo className={styles.logoLink} to={'/'}>
+            <LogoWrapper className={styles.logo}>Ǡ</LogoWrapper>
+          </StyledLinkLogo>
+          <ul className={styles.navigation}>
+            <li className={styles.navigationItem}>
+              <StyledLink to="/portfolio" activeClassName="active">
+                Portfolio
+              </StyledLink>
+            </li>
+            <li className={styles.navigationItem}>
+              <StyledLink to="/about" activeClassName="active">
+                About
+              </StyledLink>
+            </li>
+            <li className={styles.navigationItem}>
+              <StyledLink to="/blog" activeClassName="active">
+                Blog
+              </StyledLink>
+            </li>
+            <li className={styles.navigationItem}>
+              <StyledLink to="/contact" activeClassName="active">
+                Contact
+              </StyledLink>
+            </li>
+          </ul>
+        </Navigation>
       </Scrolled>
     </>
   )

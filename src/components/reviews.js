@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import Section from '../components/Section'
+import GridSection from '../components/grid-section'
 
 const ReviewContainer = styled.div`
   overflow: hidden;
@@ -34,17 +34,14 @@ const ReviewInfo = styled.div`
 
 const Reviews = ({ reviewsList }) => {
   return (
-    <Section
-      sectionLabel="CONTACT"
-      sectionHeader="What My Coworkers Say"
-    >
+    <GridSection sectionLabel="CONTACT" sectionHeader="What My Coworkers Say">
       {reviewsList.map((reviewItem, index) => (
         <ReviewContainer key={index}>
           <ReviewText>"{reviewItem.review}"</ReviewText>
           <ReviewInfo>- {reviewItem.name}</ReviewInfo>
         </ReviewContainer>
       ))}
-    </Section>
+    </GridSection>
   )
 }
 

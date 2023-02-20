@@ -2,8 +2,7 @@ import React from 'react'
 import { Link } from 'gatsby'
 import { GatsbyImage } from 'gatsby-plugin-image'
 import { renderRichText } from 'gatsby-source-contentful/rich-text'
-
-import Container from './container'
+import Section from '../components/section'
 import Tags from './tags'
 import * as styles from './article-preview.module.css'
 
@@ -12,7 +11,7 @@ const ArticlePreview = ({ posts }) => {
   if (!Array.isArray(posts)) return null
 
   return (
-    <Container>
+    <Section>
       <ul className={styles.articleList}>
         {posts.map((post) => {
           return (
@@ -32,7 +31,7 @@ const ArticlePreview = ({ posts }) => {
           )
         })}
       </ul>
-    </Container>
+    </Section>
   )
 }
 

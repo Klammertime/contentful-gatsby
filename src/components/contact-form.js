@@ -1,5 +1,3 @@
-/** @format */
-
 import React from 'react'
 import styled from 'styled-components'
 import { navigate } from 'gatsby'
@@ -156,7 +154,12 @@ const ContactForm = ({ formDescription, formHeader }) => {
         <NameLabel>
           Name
           <br />
-          <StyledInput type="text" name="name" placeholder="Your Name" onChange={handleChange} />
+          <StyledInput
+            type="text"
+            name="name"
+            placeholder="Your Name"
+            onChange={handleChange}
+          />
         </NameLabel>
         <TextAreaLabel>
           Message

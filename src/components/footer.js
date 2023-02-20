@@ -103,7 +103,9 @@ const Footer = () => {
 
       <div>
         <StyledHeader> Let's work together</StyledHeader>
-        <StyledText>Have a project in mind? Don’t hesitate to contact me.</StyledText>
+        <StyledText>
+          Have a project in mind? Don’t hesitate to contact me.
+        </StyledText>
       </div>
 
       <FooterLinks>

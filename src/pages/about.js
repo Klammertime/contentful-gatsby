@@ -1,12 +1,14 @@
 import React from 'react'
 import styled from 'styled-components'
-import { GatsbyImage } from "gatsby-plugin-image";
+import { GatsbyImage } from 'gatsby-plugin-image'
 import { graphql } from 'gatsby'
 import Layout from '../components/layout'
 import Seo from '../components/seo'
-import Reviews from '../components/Reviews'
-import Section from '../components/Section'
-import Career from '../components/Career'
+import Reviews from '../components/reviews'
+import GridSection from '../components/grid-section'
+
+import Career from '../components/career'
+import PageHeader from '../components/page-header'
 
 const AboutImgWrapper = styled.div`
   grid-row: 1/2;
@@ -72,9 +74,16 @@ const AboutPage = ({ location, data }) => {
   const { pageHeader, bioText, bioHeader, quote } = data.contentfulAboutPage
 
   return (
-    <Layout header="About" location={location} pageDescription={pageHeader.pageHeader}>
+    <Layout
+      header="About"
+      location={location}
+      pageDescription={pageHeader.pageHeader}
+    >
       <Seo title="about" />
-      <Section>
+      <PageHeader
+        header="About"
+      />
+      <GridSection>
         <AboutImgWrapper>
           <GatsbyImage
             image={data.contentfulAboutPage.profilePic?.gatsbyImageData}
@@ -86,8 +95,8 @@ const AboutPage = ({ location, data }) => {
           <StyledBlockquote>{quote.quote}</StyledBlockquote>
           {/*- {author}*/}
         </AboutTextWrapper>
-      </Section>
-      <Section
+      </GridSection>
+      <GridSection
         sectionLabel="PROFESSIONAL"
         sectionHeader="My Current Skill Set"
       >
@@ -97,7 +106,7 @@ const AboutPage = ({ location, data }) => {
               <GatsbyImage
                 image={val.gatsbyImageData}
                 imgStyle={{
-                  width: "44px"
+                  width: '44px',
                 }}
                 alt={val.description}
               />
@@ -105,11 +114,14 @@ const AboutPage = ({ location, data }) => {
             </SkillCircle>
           ))}
         </SkillsRow>
-        </Section>
-      <Career resume={data.contentfulResumeContent.resumePdf.file.url} jobHistoryJson={data.contentfulAboutPage.jobHistoryJson}/>
-      <Reviews reviewsList={data.contentfulReviews.reviewsList}/>
+      </GridSection>
+      <Career
+        resume={data.contentfulResumeContent.resumePdf.file.url}
+        jobHistoryJson={data.contentfulAboutPage.jobHistoryJson}
+      />
+      <Reviews reviewsList={data.contentfulReviews.reviewsList} />
     </Layout>
-  );
+  )
 }
 
 export default AboutPage
@@ -118,7 +130,7 @@ export const query = graphql`
   query {
     contentfulAboutPage {
       skillLogos {
-        gatsbyImageData (
+        gatsbyImageData(
           layout: FIXED
           width: 44
           height: 44

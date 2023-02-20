@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import Section from '../components/Section'
+import GridSection from './grid-section'
 // import downloadFile from '../data/downloads/Audrey_Klammer_Resume.pdf'
 
 const Wrapper = styled.div`
@@ -156,12 +156,13 @@ const DownloadButton = styled.a`
 const Career = ({ jobHistoryJson, resume }) => {
   return (
     <Wrapper>
-      <Section>
+      <GridSection>
         <SectionLeft>
           <StyledHeader>Work History</StyledHeader>
           <StyledText>
-            Versatile front end engineer with user experience knowledge and design sensibility,
-            drawing from years of experience working directly with customers in marketing.
+            Versatile front end engineer with user experience knowledge and
+            design sensibility, drawing from years of experience working
+            directly with customers in marketing.
           </StyledText>
           <DownloadButton href={resume} download>
             Download Resume
@@ -190,7 +191,7 @@ const Career = ({ jobHistoryJson, resume }) => {
             </CareerBlock>
           ))}
         </SectionRight>
-      </Section>
+      </GridSection>
     </Wrapper>
   )
 }

@@ -13,7 +13,10 @@ const Site = styled.div`
   min-height: 100vh;
   display: grid;
   grid:
-    auto-flow minmax(4em, auto) 1fr minmax(1em, auto) / 2em 1fr minmax(auto, 60em)
+    auto-flow minmax(4em, auto) 1fr minmax(1em, auto) / 2em 1fr minmax(
+      auto,
+      60em
+    )
     1fr 2em;
 `
 
@@ -53,11 +56,9 @@ class Template extends React.Component {
           <Seo />
           <SiteHeader role="banner">
             {/*<Navigation />*/}
-            <Nav/>
+            <Nav />
           </SiteHeader>
-          <SiteMain role="main">
-            {children}
-          </SiteMain>
+          <SiteMain role="main">{children}</SiteMain>
           <SiteFooter role="contentinfo">
             <Footer />
             <FooterBottom>

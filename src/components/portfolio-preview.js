@@ -3,16 +3,16 @@ import { Link } from 'gatsby'
 import { GatsbyImage } from 'gatsby-plugin-image'
 import { renderRichText } from 'gatsby-source-contentful/rich-text'
 
-import Container from './container'
 import Tags from './tags'
 import * as styles from './portfolio-preview.module.css'
+import Section from './section'
 
 const PortfolioPreview = ({ posts }) => {
-    if (!posts) return null
-    if (!Array.isArray(posts)) return null
+  if (!posts) return null
+  if (!Array.isArray(posts)) return null
 
     return (
-        <Container>
+        <Section>
             <ul className={styles.articleList}>
                 {posts.map((post) => {
                     return (
@@ -31,7 +31,7 @@ const PortfolioPreview = ({ posts }) => {
                     )
                 })}
             </ul>
-        </Container>
+        </Section>
     )
 }
 

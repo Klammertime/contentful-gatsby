@@ -4,9 +4,8 @@ import get from 'lodash/get'
 
 import Seo from '../components/seo'
 import Layout from '../components/layout'
-import Hero from '../components/hero'
 import ArticlePreview from '../components/article-preview'
-
+import PageHeader from '../components/page-header'
 class BlogIndex extends React.Component {
   render() {
     const posts = get(this, 'props.data.allContentfulBlogPost.nodes')
@@ -14,7 +13,10 @@ class BlogIndex extends React.Component {
     return (
       <Layout location={this.props.location}>
         <Seo title="Blog" />
-        <Hero title="Blog" />
+        <PageHeader
+          header="Blog"
+          pageDescription="pageDescription"
+        />
         <ArticlePreview posts={posts} />
       </Layout>
     )
@@ -40,6 +42,9 @@ export const pageQuery = graphql`
           )
         }
         description {
+          raw
+        }
+        body {
           raw
         }
       }

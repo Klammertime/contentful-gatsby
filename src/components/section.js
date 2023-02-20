@@ -7,35 +7,10 @@ const StyledSection = styled.section`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 100px 32px;
+  padding: 128px 5%;
   width: 100%;
   margin: 0 auto;
   background-color: transparent;
-`
-
-const Grid = styled.div`
-  grid: ${(props) =>
-  props.columns
-    ? 'auto auto / repeat(3, 1fr [col-start])'
-    : 'auto auto / repeat(12, 1fr [col-start])'};
-  width: 100%;
-  perspective: 2000px;
-  display: grid;
-  grid-gap: 14px 30px;
-  @media (max-width: 640px) {
-    grid-gap: 0;
-    grid: auto auto / 1fr;
-  }
-`
-
-const Header = styled.h2`
-  grid-row: 2/3;
-  grid-column: 1/13;
-  margin: 0 auto 64px auto;
-  font: normal 700 39px/48px Inter, sans-serif;
-  @media (max-width: 640px) {
-    font: normal 700 24px/48px Inter, sans-serif;
-  }
 `
 
 const Label = styled.div`
@@ -51,11 +26,9 @@ const Label = styled.div`
 const Section = ({ children, sectionLabel, sectionHeader, columns }) => {
   return (
     <StyledSection>
-      <Grid columns={columns}>
         {sectionLabel && <Label>{sectionLabel}</Label>}
-        {sectionHeader && <Header>{sectionHeader}</Header>}
+        {/*{sectionHeader && <Header>{sectionHeader}</Header>}*/}
         {children}
-      </Grid>
     </StyledSection>
   )
 }

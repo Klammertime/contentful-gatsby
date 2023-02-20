@@ -4,21 +4,24 @@ import get from 'lodash/get'
 
 import Seo from '../components/seo'
 import Layout from '../components/layout'
-import Hero from '../components/hero'
 import PortfolioPreview from '../components/portfolio-preview'
+import PageHeader from '../components/page-header'
 
 class PortfolioIndex extends React.Component {
-    render() {
-        const posts = get(this, 'props.data.allContentfulPortfolioPost.nodes')
+  render() {
+    const posts = get(this, 'props.data.allContentfulPortfolioPost.nodes')
 
-        return (
-            <Layout location={this.props.location}>
-                <Seo title="Portfolio" />
-                <Hero title="Portfolio" />
-                <PortfolioPreview posts={posts} />
-            </Layout>
-        )
-    }
+    return (
+      <Layout location={this.props.location}>
+        <Seo title="Portfolio" />
+        <PageHeader
+          header="Portfolio"
+          pageDescription="pageDescription"
+        />
+        <PortfolioPreview posts={posts} />
+      </Layout>
+    )
+  }
 }
 
 export default PortfolioIndex
@@ -32,10 +35,9 @@ export const pageQuery = graphql`
         tags
         heroImage {
           gatsbyImage(
-            layout: FULL_WIDTH
             placeholder: BLURRED
-            width: 424
-            height: 212
+            width: 528
+            height: 389
           )
         }
       }

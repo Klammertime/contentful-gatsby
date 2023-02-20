@@ -4,7 +4,8 @@ import get from 'lodash/get'
 import { renderRichText } from 'gatsby-source-contentful/rich-text'
 import { documentToPlainTextString } from '@contentful/rich-text-plain-text-renderer'
 import { BLOCKS } from '@contentful/rich-text-types'
-import { GatsbyImage, getImage } from 'gatsby-plugin-image'
+
+import { GatsbyImage } from 'gatsby-plugin-image'
 import readingTime from 'reading-time'
 
 import Seo from '../components/seo'
@@ -23,20 +24,19 @@ class BlogPostTemplate extends React.Component {
     )
     const plainTextBody = documentToPlainTextString(JSON.parse(post.body.raw))
     const { minutes: timeToRead } = readingTime(plainTextBody)
-    
+
     const options = {
       renderNode: {
         [BLOCKS.EMBEDDED_ASSET]: (node) => {
-        const { gatsbyImage, description } = node.data.target
-        return (
-           <GatsbyImage
-              image={getImage(gatsbyImage)}
-              alt={description}
-           />
-         )
+          const { gatsbyImageData, description } = node.data.target
+          if (!gatsbyImageData) {
+            // asset is not an image
+            return null
+          }
+          return <GatsbyImage image={gatsbyImageData} />
         },
       },
-    };
+    }
 
     return (
       <Layout location={this.props.location}>
@@ -112,7 +112,6 @@ export const pageQuery = graphql`
       }
       body {
         raw
-        
       }
       tags
       description {

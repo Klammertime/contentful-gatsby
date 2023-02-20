@@ -1,17 +1,18 @@
 import React from 'react'
 import { Link, graphql } from 'gatsby'
+import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import get from 'lodash/get'
+import styled from 'styled-components'
 import { renderRichText } from 'gatsby-source-contentful/rich-text'
 import { documentToPlainTextString } from '@contentful/rich-text-plain-text-renderer'
 import { BLOCKS } from '@contentful/rich-text-types'
-import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 
 import Seo from '../components/seo'
 import Layout from '../components/layout'
-import Hero from '../components/hero'
 import Tags from '../components/tags'
+import PageHeader from '../components/page-header'
+
 import * as styles from './portfolio-post.module.css'
-import styled from 'styled-components'
 
 const StyledSection = styled.section`
   position: relative;
@@ -34,55 +35,6 @@ const MainGrid = styled.div`
   margin: 0 auto;
 `
 
-const Sidebar = styled.div`
-  grid-column: 10/13;
-  padding: 0 10px;
-  @media (max-width: 990px) {
-    padding: 0 20px;
-    grid-column: 1/13;
-    grid-row: 1;
-  }
-`
-
-const Heading = styled.h2`
-  grid-column: 1/2;
-  margin-bottom: 16px;
-  font-size: 32px;
-  line-height: 40px;
-  font-weight: 700;
-`
-const Description = styled.p`
-  color: #777;
-  font-size: 17px;
-  line-height: 24px;
-  margin-bottom: 24px;
-`
-
-const Item = styled.div`
-  flex-direction: column;
-  align-items: start;
-  display: flex;
-  padding: 20px 0;
-  flex: 0 auto;
-  font-size: 15px;
-  line-height: 24px;
-  grid-column: 1/2;
-  border-bottom: 1px solid #e4e4e4;
-`
-
-const ItemTitle = styled.p`
-  color: #151515;
-  font-weight: 700;
-  margin-right: 8px;
-  margin-bottom: 5px;
-  font-size: 14px;
-  line-height: 18px;
-`
-
-const ItemText = styled.p`
-  margin-bottom: 0;
-`
-
 const AlteredMainGrid = styled.div`
   width: 100%;
   perspective: 2000px;
@@ -91,7 +43,6 @@ const AlteredMainGrid = styled.div`
   grid-gap: 0 30px;
   position: sticky;
   top: 100px;
-  display: block;
   padding: 0;
   flex: 1;
   text-align: left;
@@ -108,14 +59,6 @@ const ImageCaptionHeading = styled.h3`
   font-size: 24px;
   line-height: 32px;
   font-weight: 700;
-`
-
-const StyledLink = styled.a`
-  font-weight: 500;
-  color: #f83f5a;
-  &:hover {
-    text-decoration: underline;
-  }
 `
 
 const StyledBlockquote = styled.blockquote`
@@ -139,109 +82,105 @@ const ProjectImagesWrapper = styled.div`
 `
 
 class PortfolioPostTemplate extends React.Component {
-    render() {
-      const post = get(this.props, 'data.contentfulPortfolioPost')
-      const previous = get(this.props, 'data.previous')
-      const next = get(this.props, 'data.next')
-      // const plainTextDescription = documentToPlainTextString(
-      //   JSON.parse(post.description.raw)
-      // )
+  render() {
+    const post = get(this.props, 'data.contentfulPortfolioPost')
+    const previous = get(this.props, 'data.previous')
+    const next = get(this.props, 'data.next')
+    // const plainTextDescription = documentToPlainTextString(
+    //   JSON.parse(post.description.raw)
+    // )
 
-      const options = {
-          renderNode: {
-              [BLOCKS.EMBEDDED_ASSET]: (node) => {
-                  const { gatsbyImage, description } = node.data.target
-                  return (
-                      <GatsbyImage
-                          image={getImage(gatsbyImage)}
-                          alt={description}
-                      />
-                  )
-              },
-          },
-      };
+    const options = {
+      renderNode: {
+        [BLOCKS.EMBEDDED_ASSET]: (node) => {
+          const { gatsbyImageData, description } = node.data.target
+          if (!gatsbyImageData) {
+            // asset is not an image
+            return null
+          }
+          return <GatsbyImage image={gatsbyImageData} />
+        },
+      },
+    }
 
-        return (
-            <Layout location={this.props.location}>
-                <Seo
-                    title={post.title}
-                    // description={plainTextDescription}
-                    image={`http:${post.heroImage.resize.src}`}
-                />
-                <Hero
-                    image={post.heroImage?.gatsbyImage}
-                    title={post.title}
-                />
-              <StyledSection>
-                <MainGrid>
-                  <ProjectImagesWrapper>
-
+    return (
+      <Layout location={this.props.location}>
+        <Seo
+          title={post.title}
+          // description={plainTextDescription}
+          image={`http:${post.heroImage.resize.src}`}
+        />
+        <PageHeader
+          header="header"
+          pageDescription="pageDescription"
+        />
+        <StyledSection>
+          <MainGrid>
+            <ProjectImagesWrapper>
               <GatsbyImage
-                image={post.image1?.gatsbyImage}
+                image={post.image1?.gatsbyImageData}
                 imgStyle={{
-                  display: "block",
-                  margin: "14px 0 24px 0"
+                  display: 'block',
+                  margin: '14px 0 24px 0',
                 }}
                 alt="project image 1"
               />
               <ImageCaptionHeading>Project</ImageCaptionHeading>
               <ImageCaption></ImageCaption>
               <GatsbyImage
-                image={post.image2?.gatsbyImage}
+                image={post.image2?.gatsbyImageData}
                 imgStyle={{
-                  display: "block",
-                  margin: "14px 0 24px 0"
+                  display: 'block',
+                  margin: '14px 0 24px 0',
                 }}
                 alt="project image 1"
               />
-                    <ImageCaptionHeading>Technology</ImageCaptionHeading>
+              <ImageCaptionHeading>Technology</ImageCaptionHeading>
 
-                    <GatsbyImage
-                image={post.image3?.gatsbyImage}
+              <GatsbyImage
+                image={post.image3?.gatsbyImageData}
                 imgStyle={{
-                  display: "block",
-                  margin: "14px 0 24px 0"
+                  display: 'block',
+                  margin: '14px 0 24px 0',
                 }}
                 alt="project image 1"
               />
-                    <ImageCaptionHeading>Result</ImageCaptionHeading>
-                  </ProjectImagesWrapper>
-                </MainGrid>
-                  </StyledSection>
-
-
-                  <div className={styles.container}>
-                    <div className={styles.article}>
-                        <div className={styles.body}>
-                          "body is here usually"
-                          {/*{post.body?.raw && renderRichText(post.body, options)}*/}
-                        </div>
-                        <Tags tags={post.tags} />
-                        {(previous || next) && (
-                            <nav>
-                                <ul className={styles.articleNavigation}>
-                                    {previous && (
-                                        <li>
-                                            <Link to={`/portfolio/${previous.slug}`} rel="prev">
-                                                ← {previous.title}
-                                            </Link>
-                                        </li>
-                                    )}
-                                    {next && (
-                                        <li>
-                                            <Link to={`/portfolio/${next.slug}`} rel="next">
-                                                {next.title} →
-                                            </Link>
-                                        </li>
-                                    )}
-                                </ul>
-                            </nav>
+              <ImageCaptionHeading>Result</ImageCaptionHeading>
+              <div className={styles.container}>
+                <div className={styles.article}>
+                  <div className={styles.body}>
+                    "body is here usually"
+                    {post.body?.raw && renderRichText(post.body, options)}
+                  </div>
+                  <Tags tags={post.tags} />
+                  {(previous || next) && (
+                    <nav>
+                      <ul className={styles.articleNavigation}>
+                        {previous && (
+                          <li>
+                            <Link to={`/portfolio/${previous.slug}`} rel="prev">
+                              ← {previous.title}
+                            </Link>
+                          </li>
                         )}
-                    </div>
+                        {next && (
+                          <li>
+                            <Link to={`/portfolio/${next.slug}`} rel="next">
+                              {next.title} →
+                            </Link>
+                          </li>
+                        )}
+                      </ul>
+                    </nav>
+                  )}
                 </div>
-            </Layout>
-        )
-    }
+              </div>
+            </ProjectImagesWrapper>
+          </MainGrid>
+        </StyledSection>
+      </Layout>
+    )
+  }
 }
 
 export default PortfolioPostTemplate
@@ -253,31 +192,43 @@ export const pageQuery = graphql`
     $nextPostSlug: String
   ) {
     contentfulPortfolioPost(slug: { eq: $slug }) {
+      role
+      client
       slug
       title
+      body {
+        raw
+        references {
+          ... on ContentfulAsset {
+            contentful_id
+            __typename
+            gatsbyImageData
+          }
+        }
+      }
       heroImage {
-        gatsbyImage(layout: FULL_WIDTH, placeholder: BLURRED, width: 1280)
+        gatsbyImageData(layout: FULL_WIDTH, placeholder: BLURRED, width: 1280)
         resize(height: 630, width: 1200) {
           src
         }
       }
       image1 {
-        gatsbyImage(layout: FULL_WIDTH, placeholder: BLURRED, width: 1280)
-          resize(height: 630, width: 1200) {
-            src
-          }
+        gatsbyImageData(layout: FULL_WIDTH, placeholder: BLURRED, width: 1280)
+        resize(height: 630, width: 1200) {
+          src
+        }
       }
       image2 {
-        gatsbyImage(layout: FULL_WIDTH, placeholder: BLURRED, width: 1280)
-          resize(height: 630, width: 1200) {
-            src
-          }
+        gatsbyImageData(layout: FULL_WIDTH, placeholder: BLURRED, width: 1280)
+        resize(height: 630, width: 1200) {
+          src
+        }
       }
       image3 {
-        gatsbyImage(layout: FULL_WIDTH, placeholder: BLURRED, width: 1280)
-          resize(height: 630, width: 1200) {
-            src
-          }
+        gatsbyImageData(layout: FULL_WIDTH, placeholder: BLURRED, width: 1280)
+        resize(height: 630, width: 1200) {
+          src
+        }
       }
       tags
     }

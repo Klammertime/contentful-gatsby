@@ -3,22 +3,20 @@ import { graphql } from 'gatsby'
 import get from 'lodash/get'
 
 import Layout from '../components/layout'
-import Hero from '../components/hero'
-import ArticlePreview from '../components/article-preview'
+import PortfolioPreview from '../components/portfolio-preview'
+import HomeHero from '../components/home-hero'
 
 class RootIndex extends React.Component {
   render() {
-    const posts = get(this, 'props.data.allContentfulBlogPost.nodes')
-    const [author] = get(this, 'props.data.allContentfulPerson.nodes')
+    const portfolioPosts = get(
+      this,
+      'props.data.allContentfulPortfolioPost.nodes'
+    )
 
     return (
       <Layout location={this.props.location}>
-        <Hero
-          image={author.heroImage.gatsbyImage}
-          title={author.name}
-          content={author.shortBio}
-        />
-        <ArticlePreview posts={posts} />
+        <HomeHero hero={this.props.data.contentfulHomepage.hero} description="description" heading="heading" />
+        <PortfolioPreview posts={portfolioPosts} />
       </Layout>
     )
   }
@@ -29,47 +27,30 @@ export default RootIndex
 export const pageQuery = graphql`
   query HomeQuery {
     contentfulHomepage {
-        title
-        pageHeader {
-          pageHeader
-        }
-        description {
-          description
-        }
-        header {
-          raw
-        }
-     }
-    allContentfulBlogPost(sort: { publishDate: DESC }) {
+      title
+      pageHeader {
+        pageHeader
+      }
+      description {
+        description
+      }
+      header {
+        raw
+      }
+      hero {
+        gatsbyImageData(layout: FULL_WIDTH, quality: 80, placeholder: DOMINANT_COLOR)
+      }
+    }
+    allContentfulPortfolioPost {
       nodes {
         title
         slug
-        publishDate(formatString: "MMMM Do, YYYY")
         tags
         heroImage {
-          gatsbyImage(
-            layout: FULL_WIDTH
-            placeholder: BLURRED
-            width: 424
-            height: 212
-          )
+          gatsbyImage(layout: CONSTRAINED, width: 370, height: 277, quality: 80, placeholder: DOMINANT_COLOR)
         }
-        description {
+        body {
           raw
-        }
-      }
-    }
-    allContentfulPerson(
-      filter: { contentful_id: { eq: "15jwOBqpxqSAOy2eOO4S0m" } }
-    ) {
-      nodes {
-        name
-        shortBio {
-          raw
-        }
-        title
-        heroImage: image {
-          gatsbyImage(layout: CONSTRAINED, placeholder: BLURRED, width: 1180)
         }
       }
     }
