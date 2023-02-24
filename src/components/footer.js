@@ -1,12 +1,10 @@
 import React from 'react'
-import Container from './container'
-
 import styled from 'styled-components'
 import { Link } from 'gatsby'
 import { useStaticQuery, graphql } from 'gatsby'
 import { SocialIcon } from 'react-social-icons'
 
-const FooterGrid = styled.nav`
+const FooterGrid = styled.footer`
   max-width: 100vw;
   margin: 0 auto;
   display: grid;
@@ -23,7 +21,7 @@ const FooterGrid = styled.nav`
   }
 `
 
-const FooterNav = styled.div`
+const FooterNav = styled.nav`
   display: flex;
   align-self: start;
   flex-direction: row;
@@ -37,6 +35,7 @@ const StyledLink = styled(Link)`
   font-size: 17px;
   line-height: 24px;
   margin-right: 3vw;
+  font-weight: 500;
   @media (max-width: 991px) {
     margin-right: 20px;
   }
@@ -53,10 +52,15 @@ const FooterLinks = styled.div`
 `
 
 const StyledFooterLinks = styled.div`
+  display: flex;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  align-items: center;
+  font-size: 13px;
+  line-height: 20px;
+  font-weight: 500;
   color: #fff;
-  font: normal 600 13px/10px Inter, sans-serif;
-  margin: 6px 0;
-  padding: 6px 0;
+  //font: normal 600 13px/10px Inter, sans-serif;
   @media (max-width: 991px) {
     flex-direction: row;
     margin-right: 20px;
@@ -66,6 +70,9 @@ const StyledFooterLinks = styled.div`
 const StyledHeader = styled.h3`
   margin: 0 0 12px 0;
   color: white;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 32px;
 `
 
 const StyledText = styled.div`
@@ -91,7 +98,6 @@ const Footer = () => {
   const { twitter, github, linkedin } = data.site.siteMetadata.social
 
   return (
-    // <Container as="footer">
     <FooterGrid>
       <FooterNav>
         <StyledLink to="/">Home</StyledLink>
@@ -112,7 +118,7 @@ const Footer = () => {
         <StyledFooterLinks>
           <SocialIcon
             bgColor="white"
-            style={{ height: 20, width: 20, marginRight: '6px' }}
+            style={{ height: 20, width: 20, marginRight: '12px' }}
             url={twitter}
             target="_blank"
             rel="noopener noreferrer"
@@ -122,7 +128,7 @@ const Footer = () => {
         <StyledFooterLinks>
           <SocialIcon
             bgColor="white"
-            style={{ height: 20, width: 20, marginRight: '6px' }}
+            style={{ height: 20, width: 20, marginRight: '12px' }}
             target="_blank"
             url={github}
             rel="noopener noreferrer"
@@ -132,7 +138,7 @@ const Footer = () => {
         <StyledFooterLinks>
           <SocialIcon
             bgColor="white"
-            style={{ height: 20, width: 20, marginRight: '6px' }}
+            style={{ height: 20, width: 20, marginRight: '12px' }}
             url={linkedin}
             target="_blank"
             rel="noopener noreferrer"
@@ -141,7 +147,6 @@ const Footer = () => {
         </StyledFooterLinks>
       </FooterLinks>
     </FooterGrid>
-    // </Container>
   )
 }
 

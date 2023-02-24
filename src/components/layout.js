@@ -1,12 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
-
 import './variables.css'
 import './global.css'
 import Seo from './seo'
-import Navigation from './navigation'
 import Nav from './nav'
 import Footer from './footer'
+import PageHero from './page-hero'
+import HomeHero from './home-hero'
 
 const Site = styled.div`
   background: white;
@@ -39,36 +39,49 @@ const SiteFooter = styled.footer`
 `
 
 const FooterBottom = styled.div`
-  background-color: rgba(0, 0, 0, 0.08);
   padding: 1.6vw 3vw;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  background-color: hsla(0, 0%, 0%, 0.08);
+  color: hsla(0, 0%, 100%, 0.5);
+  font-size: 11px;
+  line-height: 16px;
+
   @media (max-width: 991px) {
     padding: 5vw 3vw;
   }
 `
+const Layout = ({ location, children, header }) => {
+  const rootPath = `${__PATH_PREFIX__}/`
+  const pathname = location.pathname
+  const isRootPath = pathname === rootPath
+  console.log('pathname', pathname, 'location', location)
+  return (
+    <>
+      <Site>
+        <Seo />
+        <SiteHeader role="banner">
+          <Nav />
+          {isRootPath ? (
+            <HomeHero />
+          ) : (
+            // pass both pathname or whatever
 
-class Template extends React.Component {
-  render() {
-    const { children } = this.props
-
-    return (
-      <>
-        <Site>
-          <Seo />
-          <SiteHeader role="banner">
-            {/*<Navigation />*/}
-            <Nav />
-          </SiteHeader>
-          <SiteMain role="main">{children}</SiteMain>
-          <SiteFooter role="contentinfo">
-            <Footer />
-            <FooterBottom>
-              Handcrafted by © Audrey Klammer - {new Date().getFullYear()}
-            </FooterBottom>
-          </SiteFooter>
-        </Site>
-      </>
-    )
-  }
+            <PageHero header={header} />
+          )}
+        </SiteHeader>
+        <SiteMain role="main">{children}</SiteMain>
+        <SiteFooter role="contentinfo">
+          <Footer />
+          <FooterBottom>
+            Handcrafted by © Audrey Klammer - {new Date().getFullYear()}
+          </FooterBottom>
+        </SiteFooter>
+      </Site>
+    </>
+  )
+  // }
 }
 
-export default Template
+export default Layout

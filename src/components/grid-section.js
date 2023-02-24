@@ -15,9 +15,9 @@ const StyledSection = styled.section`
 
 const Grid = styled.div`
   grid: ${(props) =>
-  props.columns
-    ? 'auto auto / repeat(3, 1fr [col-start])'
-    : 'auto auto / repeat(12, 1fr [col-start])'};
+    props.columns
+      ? 'auto auto / repeat(3, 1fr [col-start])'
+      : 'auto auto / repeat(12, 1fr [col-start])'};
   width: 100%;
   perspective: 2000px;
   display: grid;

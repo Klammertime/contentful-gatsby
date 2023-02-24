@@ -4,7 +4,6 @@ import get from 'lodash/get'
 
 import Layout from '../components/layout'
 import PortfolioPreview from '../components/portfolio-preview'
-import HomeHero from '../components/home-hero'
 
 class RootIndex extends React.Component {
   render() {
@@ -15,7 +14,6 @@ class RootIndex extends React.Component {
 
     return (
       <Layout location={this.props.location}>
-        <HomeHero hero={this.props.data.contentfulHomepage.hero} description="description" heading="heading" />
         <PortfolioPreview posts={portfolioPosts} />
       </Layout>
     )
@@ -38,7 +36,16 @@ export const pageQuery = graphql`
         raw
       }
       hero {
-        gatsbyImageData(layout: FULL_WIDTH, quality: 80, placeholder: DOMINANT_COLOR)
+        gatsbyImageData(
+          layout: FULL_WIDTH
+          quality: 80
+          placeholder: DOMINANT_COLOR
+        )
+      }
+    }
+    contentfulAboutPage {
+      profilePic {
+        gatsbyImageData(layout: FULL_WIDTH, quality: 100)
       }
     }
     allContentfulPortfolioPost {
@@ -47,7 +54,13 @@ export const pageQuery = graphql`
         slug
         tags
         heroImage {
-          gatsbyImage(layout: CONSTRAINED, width: 370, height: 277, quality: 80, placeholder: DOMINANT_COLOR)
+          gatsbyImage(
+            layout: CONSTRAINED
+            width: 370
+            height: 277
+            quality: 80
+            placeholder: DOMINANT_COLOR
+          )
         }
         body {
           raw

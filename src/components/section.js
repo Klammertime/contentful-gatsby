@@ -23,12 +23,11 @@ const Label = styled.div`
   font: normal small-caps 600 12px/16px Inter, sans-serif;
 `
 
-const Section = ({ children, sectionLabel, sectionHeader, columns }) => {
+const Section = ({ children, sectionLabel }) => {
   return (
     <StyledSection>
-        {sectionLabel && <Label>{sectionLabel}</Label>}
-        {/*{sectionHeader && <Header>{sectionHeader}</Header>}*/}
-        {children}
+      {sectionLabel && <Label>{sectionLabel}</Label>}
+      {children}
     </StyledSection>
   )
 }

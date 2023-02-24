@@ -4,13 +4,11 @@ import get from 'lodash/get'
 import { renderRichText } from 'gatsby-source-contentful/rich-text'
 import { documentToPlainTextString } from '@contentful/rich-text-plain-text-renderer'
 import { BLOCKS } from '@contentful/rich-text-types'
-
 import { GatsbyImage } from 'gatsby-plugin-image'
 import readingTime from 'reading-time'
-
 import Seo from '../components/seo'
 import Layout from '../components/layout'
-import Hero from '../components/hero'
+import BlogPostHero from '../components/blog-post-hero'
 import Tags from '../components/tags'
 import * as styles from './blog-post.module.css'
 
@@ -28,24 +26,26 @@ class BlogPostTemplate extends React.Component {
     const options = {
       renderNode: {
         [BLOCKS.EMBEDDED_ASSET]: (node) => {
-          const { gatsbyImageData, description } = node.data.target
+          const { gatsbyImageData } = node.data.target
           if (!gatsbyImageData) {
             // asset is not an image
             return null
           }
-          return <GatsbyImage image={gatsbyImageData} />
+          return (
+            <GatsbyImage image={gatsbyImageData} alt="insert correct one" />
+          )
         },
       },
     }
 
     return (
-      <Layout location={this.props.location}>
+      <Layout header={post.title} location={this.props.location}>
         <Seo
           title={post.title}
           description={plainTextDescription}
           image={`http:${post.heroImage.resize.src}`}
         />
-        <Hero
+        <BlogPostHero
           image={post.heroImage?.gatsbyImage}
           title={post.title}
           content={post.description}

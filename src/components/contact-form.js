@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { navigate } from 'gatsby'
 import Seo from './seo'
 
-const FormHeader = styled.h3`
+const FormHeader = styled.h2`
   margin: 0 0 5px 0;
   grid-column: 1/13;
 `
@@ -70,7 +70,6 @@ const TextAreaLabel = styled(StyledLabel)`
 const Textarea = styled.textarea`
   width: 100%;
   margin-top: 10px;
-  width: 100%;
   border-radius: 6px;
   background-color: #f2f3f5;
   font-size: 15px;

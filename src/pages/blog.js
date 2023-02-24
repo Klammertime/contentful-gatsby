@@ -5,18 +5,13 @@ import get from 'lodash/get'
 import Seo from '../components/seo'
 import Layout from '../components/layout'
 import ArticlePreview from '../components/article-preview'
-import PageHeader from '../components/page-header'
 class BlogIndex extends React.Component {
   render() {
     const posts = get(this, 'props.data.allContentfulBlogPost.nodes')
 
     return (
-      <Layout location={this.props.location}>
+      <Layout header="Blog" location={this.props.location}>
         <Seo title="Blog" />
-        <PageHeader
-          header="Blog"
-          pageDescription="pageDescription"
-        />
         <ArticlePreview posts={posts} />
       </Layout>
     )

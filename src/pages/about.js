@@ -6,9 +6,7 @@ import Layout from '../components/layout'
 import Seo from '../components/seo'
 import Reviews from '../components/reviews'
 import GridSection from '../components/grid-section'
-
 import Career from '../components/career'
-import PageHeader from '../components/page-header'
 
 const AboutImgWrapper = styled.div`
   grid-row: 1/2;
@@ -80,14 +78,12 @@ const AboutPage = ({ location, data }) => {
       pageDescription={pageHeader.pageHeader}
     >
       <Seo title="about" />
-      <PageHeader
-        header="About"
-      />
       <GridSection>
         <AboutImgWrapper>
           <GatsbyImage
             image={data.contentfulAboutPage.profilePic?.gatsbyImageData}
-            alt="Audrey Klammer about me pic" />
+            alt="Audrey Klammer about me pic"
+          />
         </AboutImgWrapper>
         <AboutTextWrapper>
           <h2>{bioHeader.bioHeader}</h2>
@@ -101,8 +97,8 @@ const AboutPage = ({ location, data }) => {
         sectionHeader="My Current Skill Set"
       >
         <SkillsRow>
-          {data.contentfulAboutPage.skillLogos.map((val, index) => (
-            <SkillCircle>
+          {data.contentfulAboutPage.skillLogos.map((val) => (
+            <SkillCircle key={val.title}>
               <GatsbyImage
                 image={val.gatsbyImageData}
                 imgStyle={{

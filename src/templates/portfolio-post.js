@@ -1,17 +1,14 @@
 import React from 'react'
 import { Link, graphql } from 'gatsby'
-import { GatsbyImage, getImage } from 'gatsby-plugin-image'
+import { GatsbyImage } from 'gatsby-plugin-image'
 import get from 'lodash/get'
 import styled from 'styled-components'
 import { renderRichText } from 'gatsby-source-contentful/rich-text'
-import { documentToPlainTextString } from '@contentful/rich-text-plain-text-renderer'
+// import { documentToPlainTextString } from '@contentful/rich-text-plain-text-renderer'
 import { BLOCKS } from '@contentful/rich-text-types'
-
 import Seo from '../components/seo'
 import Layout from '../components/layout'
 import Tags from '../components/tags'
-import PageHeader from '../components/page-header'
-
 import * as styles from './portfolio-post.module.css'
 
 const StyledSection = styled.section`
@@ -35,18 +32,18 @@ const MainGrid = styled.div`
   margin: 0 auto;
 `
 
-const AlteredMainGrid = styled.div`
-  width: 100%;
-  perspective: 2000px;
-  display: grid;
-  grid: auto-flow auto / 1fr;
-  grid-gap: 0 30px;
-  position: sticky;
-  top: 100px;
-  padding: 0;
-  flex: 1;
-  text-align: left;
-`
+// const AlteredMainGrid = styled.div`
+//   width: 100%;
+//   perspective: 2000px;
+//   display: grid;
+//   grid: auto-flow auto / 1fr;
+//   grid-gap: 0 30px;
+//   position: sticky;
+//   top: 100px;
+//   padding: 0;
+//   flex: 1;
+//   text-align: left;
+// `
 
 const ImageCaption = styled.p`
   margin: 0 0 20px 0;
@@ -61,14 +58,14 @@ const ImageCaptionHeading = styled.h3`
   font-weight: 700;
 `
 
-const StyledBlockquote = styled.blockquote`
-  margin: 24px 0;
-  padding: 8px 30px;
-  border-left: 2px solid #f96a4c;
-  font-size: 17px;
-  line-height: 24px;
-  text-align: left;
-`
+// const StyledBlockquote = styled.blockquote`
+//   margin: 24px 0;
+//   padding: 8px 30px;
+//   border-left: 2px solid #f96a4c;
+//   font-size: 17px;
+//   line-height: 24px;
+//   text-align: left;
+// `
 
 const ProjectImagesWrapper = styled.div`
   display: block;
@@ -93,26 +90,22 @@ class PortfolioPostTemplate extends React.Component {
     const options = {
       renderNode: {
         [BLOCKS.EMBEDDED_ASSET]: (node) => {
-          const { gatsbyImageData, description } = node.data.target
+          const { gatsbyImageData } = node.data.target
           if (!gatsbyImageData) {
             // asset is not an image
             return null
           }
-          return <GatsbyImage image={gatsbyImageData} />
+          return <GatsbyImage image={gatsbyImageData} alt="get correct one" />
         },
       },
     }
 
     return (
-      <Layout location={this.props.location}>
+      <Layout header={post.title} location={this.props.location}>
         <Seo
           title={post.title}
           // description={plainTextDescription}
           image={`http:${post.heroImage.resize.src}`}
-        />
-        <PageHeader
-          header="header"
-          pageDescription="pageDescription"
         />
         <StyledSection>
           <MainGrid>

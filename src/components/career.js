@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 import GridSection from './grid-section'
-// import downloadFile from '../data/downloads/Audrey_Klammer_Resume.pdf'
 
 const Wrapper = styled.div`
   position: relative;
