@@ -56,7 +56,6 @@ const Layout = ({ location, children, header }) => {
   const rootPath = `${__PATH_PREFIX__}/`
   const pathname = location.pathname
   const isRootPath = pathname === rootPath
-  console.log('pathname', pathname, 'location', location)
   return (
     <>
       <Site>

@@ -8,21 +8,9 @@ import { renderRichText } from 'gatsby-source-contentful/rich-text'
 import { BLOCKS } from '@contentful/rich-text-types'
 import Seo from '../components/seo'
 import Layout from '../components/layout'
-import Tags from '../components/tags'
 import * as styles from './portfolio-post.module.css'
-
-const StyledSection = styled.section`
-  position: relative;
-  z-index: 3;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 100px 0;
-  width: 100%;
-  margin: 0 auto;
-  background-color: transparent;
-  max-width: 1200px;
-`
+import Section from '../components/section'
+import PortfolioNavigation from '../components/portfolio-navigation'
 
 const MainGrid = styled.div`
   width: 100%;
@@ -32,52 +20,39 @@ const MainGrid = styled.div`
   margin: 0 auto;
 `
 
-// const AlteredMainGrid = styled.div`
-//   width: 100%;
-//   perspective: 2000px;
-//   display: grid;
-//   grid: auto-flow auto / 1fr;
-//   grid-gap: 0 30px;
-//   position: sticky;
-//   top: 100px;
-//   padding: 0;
-//   flex: 1;
-//   text-align: left;
-// `
-
-const ImageCaption = styled.p`
-  margin: 0 0 20px 0;
-  font-size: 15px;
-  line-height: 24px;
-`
-
-const ImageCaptionHeading = styled.h3`
-  margin: 50px 0 16px 0;
-  font-size: 24px;
-  line-height: 32px;
-  font-weight: 700;
-`
-
-// const StyledBlockquote = styled.blockquote`
-//   margin: 24px 0;
-//   padding: 8px 30px;
-//   border-left: 2px solid #f96a4c;
-//   font-size: 17px;
-//   line-height: 24px;
-//   text-align: left;
-// `
-
 const ProjectImagesWrapper = styled.div`
   display: block;
-  grid-column: 1/9;
-  margin: 20px 0 14px 0;
-  padding: 0 10px;
+  grid-column: 1/8;
+  position: sticky;
+  top: 48px;
+  padding-top: 16px;
+  padding-right: 15px;
+  padding-bottom: 64px;
+  flex: 1;
+  text-align: left;
+
   @media (max-width: 990px) {
     padding: 0 20px;
     grid-column: 1/13;
   }
 `
 
+const InfoBoxWrapper = styled.div`
+  position: sticky;
+  top: 48px;
+  display: block;
+  margin-left: 8.33%;
+  padding-top: 16px;
+  padding-right: 15px;
+  padding-bottom: 64px;
+  flex: 1;
+  text-align: left;
+  grid-column: 9/13;
+  @media (max-width: 990px) {
+    padding: 0 20px;
+    grid-column: 1/13;
+  }
+`
 class PortfolioPostTemplate extends React.Component {
   render() {
     const post = get(this.props, 'data.contentfulPortfolioPost')
@@ -95,7 +70,17 @@ class PortfolioPostTemplate extends React.Component {
             // asset is not an image
             return null
           }
-          return <GatsbyImage image={gatsbyImageData} alt="get correct one" />
+          return (
+            <GatsbyImage
+              imgStyle={{
+                display: 'block',
+                'margin-bottom': '24px',
+              }}
+              image={gatsbyImageData}
+              alt="get correct one"
+              imgClassName={styles.imageEmbed}
+            />
+          )
         },
       },
     }
@@ -107,70 +92,76 @@ class PortfolioPostTemplate extends React.Component {
           // description={plainTextDescription}
           image={`http:${post.heroImage.resize.src}`}
         />
-        <StyledSection>
+        <Section>
           <MainGrid>
             <ProjectImagesWrapper>
-              <GatsbyImage
-                image={post.image1?.gatsbyImageData}
-                imgStyle={{
-                  display: 'block',
-                  margin: '14px 0 24px 0',
-                }}
-                alt="project image 1"
-              />
-              <ImageCaptionHeading>Project</ImageCaptionHeading>
-              <ImageCaption></ImageCaption>
-              <GatsbyImage
-                image={post.image2?.gatsbyImageData}
-                imgStyle={{
-                  display: 'block',
-                  margin: '14px 0 24px 0',
-                }}
-                alt="project image 1"
-              />
-              <ImageCaptionHeading>Technology</ImageCaptionHeading>
-
-              <GatsbyImage
-                image={post.image3?.gatsbyImageData}
-                imgStyle={{
-                  display: 'block',
-                  margin: '14px 0 24px 0',
-                }}
-                alt="project image 1"
-              />
-              <ImageCaptionHeading>Result</ImageCaptionHeading>
-              <div className={styles.container}>
-                <div className={styles.article}>
-                  <div className={styles.body}>
-                    "body is here usually"
-                    {post.body?.raw && renderRichText(post.body, options)}
-                  </div>
-                  <Tags tags={post.tags} />
-                  {(previous || next) && (
-                    <nav>
-                      <ul className={styles.articleNavigation}>
-                        {previous && (
-                          <li>
-                            <Link to={`/portfolio/${previous.slug}`} rel="prev">
-                              ← {previous.title}
-                            </Link>
-                          </li>
-                        )}
-                        {next && (
-                          <li>
-                            <Link to={`/portfolio/${next.slug}`} rel="next">
-                              {next.title} →
-                            </Link>
-                          </li>
-                        )}
-                      </ul>
-                    </nav>
-                  )}
+              <div className={styles.article}>
+                <div className={styles.body}>
+                  {post.body?.raw && renderRichText(post.body, options)}
                 </div>
               </div>
             </ProjectImagesWrapper>
+            <InfoBoxWrapper>
+              <div data-ix="fade-left" className={styles.workSidebar}>
+                <h2 className={styles.sectionHeader}>Framerio</h2>
+                <p className={styles.workDescription}>
+                  Writing result-oriented ad copy is difficult, as it must
+                  appeal to, entice, and convince consumers to take action.
+                  There is no magic formula.
+                </p>
+                <div className={styles.workDetails}>
+                  <div className={styles.workDetailsCell}>
+                    <div className={styles.workDetailsCellHeader}>Client:</div>
+                    <div>Webflow</div>
+                  </div>
+                  <div className={styles.workDetailsCell}>
+                    <div className={styles.workDetailsCellHeader}>
+                      Release Date:
+                    </div>
+                    <div>May 2017</div>
+                  </div>
+                  <div className={styles.workDetailsCell}>
+                    <div className={styles.workDetailsCellHeader}>
+                      Category:
+                    </div>
+                    <div>Mobile</div>
+                  </div>
+                  <div className={styles.workDetailsCell}>
+                    <div className={styles.workDetailsCellHeader}>Link:</div>
+                    <a href="https://elasticthemes.com">View It Live</a>
+                  </div>
+                </div>
+              </div>
+            </InfoBoxWrapper>
           </MainGrid>
-        </StyledSection>
+        </Section>
+        <Section noPaddingTop>
+          <div>
+            {(previous || next) && (
+              <nav>
+                <ul className={styles.articleNavigation}>
+                  {previous && (
+                    <li>
+                      <Link to={`/portfolio/${previous.slug}`} rel="prev">
+                        ← {previous.title}
+                      </Link>
+                    </li>
+                  )}
+                  {next && (
+                    <li>
+                      <Link to={`/portfolio/${next.slug}`} rel="next">
+                        {next.title} →
+                      </Link>
+                    </li>
+                  )}
+                </ul>
+              </nav>
+            )}
+          </div>
+        </Section>
+        <Section noPaddingTop>
+          <PortfolioNavigation next={next} previous={previous} />
+        </Section>
       </Layout>
     )
   }
@@ -189,41 +180,27 @@ export const pageQuery = graphql`
       client
       slug
       title
+      tags
       body {
         raw
         references {
           ... on ContentfulAsset {
             contentful_id
             __typename
-            gatsbyImageData
+            gatsbyImageData(
+              layout: FULL_WIDTH
+              placeholder: BLURRED
+              width: 1280
+            )
           }
         }
       }
       heroImage {
         gatsbyImageData(layout: FULL_WIDTH, placeholder: BLURRED, width: 1280)
-        resize(height: 630, width: 1200) {
+        resize(height: 1500) {
           src
         }
       }
-      image1 {
-        gatsbyImageData(layout: FULL_WIDTH, placeholder: BLURRED, width: 1280)
-        resize(height: 630, width: 1200) {
-          src
-        }
-      }
-      image2 {
-        gatsbyImageData(layout: FULL_WIDTH, placeholder: BLURRED, width: 1280)
-        resize(height: 630, width: 1200) {
-          src
-        }
-      }
-      image3 {
-        gatsbyImageData(layout: FULL_WIDTH, placeholder: BLURRED, width: 1280)
-        resize(height: 630, width: 1200) {
-          src
-        }
-      }
-      tags
     }
     previous: contentfulPortfolioPost(slug: { eq: $previousPostSlug }) {
       slug

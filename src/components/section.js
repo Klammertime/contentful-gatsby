@@ -4,30 +4,50 @@ import styled from 'styled-components'
 const StyledSection = styled.section`
   position: relative;
   z-index: 3;
+  padding-top: ${(props) =>
+    props.noPaddingTop || props.noPadding ? '0' : '128px'};
+  padding-bottom: ${(props) => (props.noPadding ? '0' : '128px')};
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 128px 5%;
+  background-color: var(--swatch_f4238f91);
+
+  //small
+  @media (max-width: var(--mq-small)) {
+    padding-top: 64px;
+    padding-bottom: 64px;
+  }
+
+  //medium
+  @media (max-width: var(--mq-medium)) {
+    padding: 80px 0;
+  }
+`
+
+const Wrapper = styled.div`
+  position: relative;
+  z-index: 2;
   width: 100%;
-  margin: 0 auto;
+  max-width: 1234px;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: 32px;
+  padding-left: 32px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   background-color: transparent;
+
+  @media (max-width: var(--mq-medium)) {
+    padding-right: 16px;
+    padding-left: 16px;
+  }
 `
 
-const Label = styled.div`
-  grid-row: 1/2;
-  border-radius: 4px;
-  color: #f96a4c;
-  letter-spacing: 0.8px;
-  grid-column-start: span 12;
-  margin: 0 auto;
-  font: normal small-caps 600 12px/16px Inter, sans-serif;
-`
-
-const Section = ({ children, sectionLabel }) => {
+const Section = ({ children, noPaddingTop, noPadding }) => {
   return (
-    <StyledSection>
-      {sectionLabel && <Label>{sectionLabel}</Label>}
-      {children}
+    <StyledSection noPaddingTop={noPaddingTop} noPadding={noPadding}>
+      <Wrapper>{children}</Wrapper>
     </StyledSection>
   )
 }

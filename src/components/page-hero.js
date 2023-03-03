@@ -1,7 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
+import Breadcrumbs from '../components/breadcrumbs'
 
-const Section = styled.section`
+const TopSection = styled.section`
   margin: 0 auto;
   position: relative;
   z-index: 1;
@@ -54,21 +55,20 @@ const Header = styled.h1`
   font-size: 3.7vw;
   font-weight: 700;
   line-height: 4.4vw;
+  @media (max-width: var(--mq-medium)) {
+    font-size: 5.6vw;
+    line-height: 7vw;
+  }
 
-  //.page-heading:medium {
-  //  font-size: 5.6vw;
-  //  line-height: 7vw;
-  //}
-  //
-  //.page-heading:tiny {
-  //  font-size: 10vw;
-  //  line-height: 12vw;
-  //}
-  //
-  //.page-heading:small {
-  //  font-size: 7vw;
-  //  line-height: 8vw;
-  //}
+  @media (max-width: var(--mq-small)) {
+    font-size: 7vw;
+    line-height: 8vw;
+  }
+
+  @media (max-width: var(--mq-tiny)) {
+    font-size: 10vw;
+    line-height: 12vw;
+  }
 
   @media (max-width: 940px) {
     font-size: 7vw;
@@ -78,14 +78,15 @@ const Header = styled.h1`
 const PageHero = ({ header = 'test' }) => {
   return (
     <>
-      <Section>
+      <TopSection>
         <Wrapper>
           <Header>{header}</Header>
         </Wrapper>
-      </Section>
+      </TopSection>
       <SectionAngle>
         <Angle />
       </SectionAngle>
+      <Breadcrumbs crumb={header} />
     </>
   )
 }

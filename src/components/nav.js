@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Link from './Link'
 import styled from 'styled-components'
+import * as styles from './nav.module.css'
 
 const Navigation = styled.nav`
   font-size: 16px;
@@ -68,6 +69,10 @@ const LogoWrapper = styled.span`
 
 const StyledLink = styled(Link)`
   color: #151515;
+  text-decoration: none;
+  letter-spacing: 1px;
+  position: relative;
+  transition: all 0.45s ease-Out;
   &:hover {
     color: #151515;
     text-decoration: none;
@@ -84,20 +89,6 @@ const StyledLink = styled(Link)`
     }
   }
 `
-//   .hover-line {
-//   position: absolute;
-//   left: 0;
-//   top: auto;
-//   right: 0;
-//   bottom: 0;
-//   width: 50%;
-//   height: 1px;
-//   background-color: #151515;
-// }
-//
-// .hover-line:medium {
-//   display: none;
-// }
 
 const StyledLinkLogo = styled(Link)`
   color: var(--color-orange);
@@ -133,56 +124,42 @@ const NavRight = styled.div`
   justify-content: flex-end;
   align-items: center;
 `
-//   .nav-right:medium {
-//   padding-right: 0px;
-// }
 
 const NavLinkContainer = styled.li`
   position: relative;
-  overflow: hidden;
   margin-right: 16px;
   margin-left: 16px;
   padding: 2px 0;
   font-size: 13px;
   line-height: 20px;
   font-weight: 600;
-  text-transform: uppercase;
   max-width: 100%;
   display: inline-block;
+  text-transform: uppercase;
+  text-decoration: none;
+  letter-spacing: 1.5px;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  cursor: pointer;
+`
+
+const Underline = styled.div`
+  width: 100%;
+  height: 1px;
+  margin-top: 8px;
+  align-self: flex-end;
+  left: -84px;
+  background-color: var(--swatch_a5267f7d);
+  position: absolute;
+  transition: all 0.3s ease-Out;
+  bottom: 0;
 `
 
 //   .nav-link.w--current {
 //   color: #0082f3;
 // }
 
-// .nav-link:medium {
-//   display: block;
-//   margin-right: 0;
-//   margin-left: 0;
-//   padding: 12px 36px;
-//   color: #151515;
-//   font-size: 17px;
-//   line-height: 24px;
-//   text-transform: none;
-// }
-
-// .nav-link:small {
-//   font-size: 15px;
-//   line-height: 20px;
-// }
-
-//   .nav-menu:medium {
-//   z-index: 10;
-//   width: 300px;
-//   padding-top: 88px;
-//   background-color: #fff;
-//   text-align: left;
-// }
-//
-// .nav-menu:small {
-//   width: 240px;
-//   padding-top: 64px;
-// }
 const Nav = () => {
   const [scrolling, setScrolling] = useState(false)
 
@@ -209,28 +186,43 @@ const Nav = () => {
             </StyledLinkLogo>
           </NavLeft>
           <NavMenu>
-            <NavLinkContainer>
+            <NavLinkContainer className={styles.button}>
+              <Underline className={styles.underline} />
+              <StyledLink to="/" activeClassName="active">
+                Home
+              </StyledLink>
+            </NavLinkContainer>
+            <NavLinkContainer className={styles.button}>
+              <Underline className={styles.underline} />
               <StyledLink to="/portfolio" activeClassName="active">
                 Portfolio
               </StyledLink>
             </NavLinkContainer>
-            <NavLinkContainer>
+            <NavLinkContainer className={styles.button}>
+              <Underline className={styles.underline} />
               <StyledLink to="/about" activeClassName="active">
                 About
               </StyledLink>
             </NavLinkContainer>
-            <NavLinkContainer>
+            <NavLinkContainer className={styles.button}>
+              <Underline className={styles.underline} />
               <StyledLink to="/blog" activeClassName="active">
                 Blog
               </StyledLink>
             </NavLinkContainer>
-            <NavLinkContainer>
+            <NavLinkContainer className={styles.button}>
+              <Underline className={styles.underline} />
               <StyledLink to="/contact" activeClassName="active">
                 Contact
               </StyledLink>
             </NavLinkContainer>
           </NavMenu>
-          <NavRight>right</NavRight>
+          <NavRight>
+            <div className={styles.button}>
+              <div className={styles.underline}></div>
+              <a href="#">Let's Go!</a>
+            </div>
+          </NavRight>
         </Navigation>
       </Scrolled>
     </>

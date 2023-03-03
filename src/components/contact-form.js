@@ -4,8 +4,11 @@ import { navigate } from 'gatsby'
 import Seo from './seo'
 
 const FormHeader = styled.h2`
-  margin: 0 0 5px 0;
-  grid-column: 1/13;
+  margin-top: 0;
+  margin-bottom: 12px;
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 700;
 `
 
 const FormDescription = styled.div`
@@ -40,7 +43,8 @@ const StyledForm = styled.form`
   display: grid;
   grid-gap: 24px 16px;
   grid: auto-flow auto / repeat(12, 1fr [col-start]);
-  padding-top: 50px;
+  grid-area: 1 / 5 / 2 / 13;
+  margin: 0;
   @media (max-width: 911px) {
     grid-gap: 0;
   }
@@ -81,18 +85,39 @@ const Textarea = styled.textarea`
 
 const SubmitButton = styled.button`
   border-style: none;
-  background-color: var(--orange);
-  display: flex;
-  height: 48px;
-  justify-content: center;
-  align-items: center;
   color: #fff;
-  font-weight: 700;
   cursor: pointer;
   width: 200px;
   justify-self: start;
+  display: flex;
+  height: 48px;
+  padding: 13px 24px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 24px;
+  background-color: var(--swatch_fcde4a6f);
+  transition-property: color, background-color, border-color;
+  transition-duration: 400ms, 400ms, 400ms;
+  transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    cubic-bezier(0.25, 0.46, 0.45, 0.94), cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  font-size: 15px;
+  line-height: 20px;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
 `
 
+const IntroLeft = styled.div`
+  position: relative;
+  z-index: 1;
+  display: flex;
+  margin-right: auto;
+  margin-left: 0;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  grid-area: span 1 / span 3 / span 1 / span 3;
+`
 function encode(data) {
   return Object.keys(data)
     .map((key) => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
@@ -123,8 +148,10 @@ const ContactForm = ({ formDescription, formHeader }) => {
   return (
     <>
       <Seo title="contact" />
-      <FormHeader>{formHeader}</FormHeader>
-      <FormDescription>{formDescription}</FormDescription>
+      <IntroLeft>
+        <FormHeader>{formHeader}</FormHeader>
+        <FormDescription>{formDescription}</FormDescription>
+      </IntroLeft>
       <StyledForm
         name="contact"
         method="post"

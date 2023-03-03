@@ -7,10 +7,7 @@ import PortfolioPreview from '../components/portfolio-preview'
 
 class RootIndex extends React.Component {
   render() {
-    const portfolioPosts = get(
-      this,
-      'props.data.allContentfulPortfolioPost.nodes'
-    )
+    const portfolioPosts = get(this, 'props.data.contentfulHomepage.workCards')
 
     return (
       <Layout location={this.props.location}>
@@ -29,38 +26,19 @@ export const pageQuery = graphql`
       pageHeader {
         pageHeader
       }
-      description {
-        description
-      }
-      header {
-        raw
-      }
-      hero {
-        gatsbyImageData(
-          layout: FULL_WIDTH
-          quality: 80
-          placeholder: DOMINANT_COLOR
-        )
-      }
-    }
-    contentfulAboutPage {
-      profilePic {
-        gatsbyImageData(layout: FULL_WIDTH, quality: 100)
-      }
-    }
-    allContentfulPortfolioPost {
-      nodes {
+      workCards {
         title
         slug
         tags
         heroImage {
           gatsbyImage(
             layout: CONSTRAINED
-            width: 370
-            height: 277
+            width: 750
+            height: 750
             quality: 80
             placeholder: DOMINANT_COLOR
           )
+          description
         }
         body {
           raw

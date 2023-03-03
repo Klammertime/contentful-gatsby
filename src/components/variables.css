@@ -55,6 +55,14 @@
   --extrabold: 800;
   --heavy: 900;
 
+  /* Media Queries */
+  --mq-tiny: 479px;
+  --mq-small: 767px;
+  --mq-medium: 991px;
+  --mq-large: 1280px;
+  --mq-xl: 1440px;
+  --mq-xxl: 1920px;
+
   /* font-size */
   --text-xs: 12px;
   --text-sm: 14px;
@@ -87,6 +95,21 @@
   --size-gutter: var(--space-2xl);
   --size-logo: var(--space-2xl);
   --size-max-width: 80rem;
+
+  --swatch_f4238f91: white;
+  --swatch_a5267f7d: hsla(0, 0%, 8.24%, 1);
+  --swatch_c450d3ea: hsla(219, 8.93%, 43.92%, 1);
+  --swatch_4295c52b: hsla(220, 9.47%, 62.75%, 1);
+  --swatch_9a189c98: hsla(215, 13.64%, 82.75%, 1);
+  --swatch_68d01675: hsla(213.333, 20%, 91.18%, 1);
+  --swatch_f44e9cf3: hsla(0, 0%, 100%, 0);
+  --swatch_401ecef8: hsla(216, 13.85%, 95.36%, 1);
+  --swatch_ae894233: hsla(30, 22.22%, 92.94%, 1);
+  --swatch_fcde4a6f: hsla(10.4046, 93.51%, 63.73%, 1);
+  --swatch_a23fde4b: hsla(270, 28.36%, 26.27%, 1);
+  --swatch_968df793: hsla(355, 89.72%, 61.07%, 1);
+  --swatch_3395e493: hsla(110, 52.36%, 59.42%, 1);
+
 }
 
 @media (min-width: 480px) {
@@ -103,3 +126,4 @@
     --text-prose: var(--text-lg);
   }
 }
+

@@ -1,0 +1,126 @@
+.work-nav-preview {
+    position: relative;
+    display: flex;
+    overflow: hidden;
+    width: 100px;
+    height: 100px;
+    justify-content: center;
+    align-items: center;
+    flex: 0 0 auto;
+    border-radius: 50%;
+    background-color: #e4e8ed;
+}
+
+.work-nav-hover {
+    position: absolute;
+    z-index: 3;
+    display: flex;
+    width: 48px;
+    height: 48px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background-color: #fff;
+    font-size: 20px;
+}
+
+.work-nav-info {
+    padding: 8px 24px;
+    flex: 1;
+}
+
+.work-nav-button {
+    position: relative;
+    display: flex;
+    width: 80px;
+    height: 80px;
+    padding: 12px;
+    justify-content: center;
+    align-items: center;
+    justify-self: center;
+    align-self: center;
+}
+
+.work-nav-link, .work-nav-link-right {
+    display: flex;
+    padding-right: 12px;
+    padding-left: 12px;
+    justify-content: flex-start;
+    align-items: center;
+    color: #151515;
+    justify-self: start;
+    align-self: center;
+}
+
+.work-nav-link-right{
+    justify-self: end;
+    align-self: center;
+    text-align: right;
+}
+
+.work-nav-text {
+    margin-bottom: 4px;
+    color: #979da9;
+    font-size: 13px;
+    line-height: 20px;
+}
+
+.work-nav-name {
+    font-size: 24px;
+    line-height: 32px;
+    font-weight: 700;
+    margin-top: 0;
+    margin-bottom: 4px;
+}
+
+.work-nav {
+    display: grid;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    grid-auto-columns: 1fr;
+    grid-column-gap: 0;
+    grid-row-gap: 16px;
+    grid-template-columns: 1fr minmax(80px, auto) 1fr;
+    grid-template-rows: auto;
+    border-top: 1px solid #e4e8ed;
+    border-bottom: 1px solid #e4e8ed;
+}
+
+.circle {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background-color: #f96a4c;
+}
+
+.circle-wave-1 {
+    position: absolute;
+    left: 8px;
+    top: 8px;
+    right: 8px;
+    bottom: 8px;
+    z-index: 2;
+    margin: auto;
+    border-radius: 50%;
+    background-color: #f96a4c;
+    opacity: 0.2;
+    display: block;
+}
+
+.circle-wave-2 {
+    position: absolute;
+    left: 4px;
+    top: 4px;
+    right: 4px;
+    bottom: 4px;
+    z-index: 1;
+    border-radius: 50%;
+    background-color: #f96a4c;
+    opacity: 0.1;
+    display: block;
+}
