@@ -8,6 +8,11 @@ import Footer from './footer'
 import PageHero from './page-hero'
 import HomeHero from './home-hero'
 
+const PageWrapper = styled.div`
+  position: relative;
+  width: 100%;
+`
+
 const Site = styled.div`
   background: white;
   min-height: 100vh;
@@ -18,6 +23,10 @@ const Site = styled.div`
       60em
     )
     1fr 2em;
+
+  @media screen and (max-width: 479px) {
+    grid-template-columns: 1fr;
+  }
 `
 
 const SiteHeader = styled.header`
@@ -35,11 +44,10 @@ const SiteFooter = styled.footer`
   grid-column: span 5;
   background-color: #433056;
   color: #fff;
-  padding: 0;
 `
 
 const FooterBottom = styled.div`
-  padding: 1.6vw 3vw;
+  padding: 17px 30px;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -49,7 +57,7 @@ const FooterBottom = styled.div`
   line-height: 16px;
 
   @media (max-width: 991px) {
-    padding: 5vw 3vw;
+    padding: 10px;
   }
 `
 const Layout = ({ location, children, header }) => {
@@ -57,7 +65,7 @@ const Layout = ({ location, children, header }) => {
   const pathname = location.pathname
   const isRootPath = pathname === rootPath
   return (
-    <>
+    <PageWrapper>
       <Site>
         <Seo />
         <SiteHeader role="banner">
@@ -78,7 +86,7 @@ const Layout = ({ location, children, header }) => {
           </FooterBottom>
         </SiteFooter>
       </Site>
-    </>
+    </PageWrapper>
   )
   // }
 }

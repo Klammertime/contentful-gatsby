@@ -1,39 +1,24 @@
 import React from 'react'
 import styled from 'styled-components'
 import GridSection from './grid-section'
-
-const Wrapper = styled.div`
-  position: relative;
-  z-index: 2;
-  width: 100%;
-  max-width: 1234px;
-  margin-right: auto;
-  margin-left: auto;
-  padding-right: 32px;
-  padding-left: 32px;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`
-
-const CareerBlock = styled.div`
-  display: grid;
-  grid-auto-columns: 1fr;
-  grid-column-gap: 16px;
-  grid-row-gap: 16px;
-  grid-template-areas: 'Date Timeline Job';
-  grid-template-columns: auto minmax(32px, auto) 1fr;
-  grid-template-rows: auto;
-`
+import Section from './section'
 
 const Date = styled.div`
   width: 120px;
-  padding-top: 6px;
-  padding-bottom: 6px;
+  padding: 6px 0;
   font-size: 13px;
-  line-height: 20px;
+  line-height: 1.5;
   text-align: right;
   justify-self: stretch;
+  grid-area: Date;
+  @media screen and (max-width: 479px) {
+    padding: 5px 0;
+    text-align: left;
+  }
+
+  @media screen and (max-width: 767px) {
+    width: 90px;
+  }
 `
 
 const Timeline = styled.div`
@@ -44,6 +29,7 @@ const Timeline = styled.div`
   flex-direction: column;
   align-items: center;
   background-color: #e4e8ed;
+  grid-area: Timeline;
 `
 
 const TimelineDot = styled.div`
@@ -55,9 +41,7 @@ const TimelineDot = styled.div`
   z-index: 2;
   width: 8px;
   height: 8px;
-  margin-top: 12px;
-  margin-right: 0;
-  margin-left: 0;
+  margin: 12px 0 0 0;
   border-radius: 50%;
   background-color: #f96a4c;
   box-shadow: 0 0 0 6px rgba(249, 106, 76, 0.2), 0 0 0 12px #fff;
@@ -65,13 +49,13 @@ const TimelineDot = styled.div`
 
 const Job = styled.div`
   padding-bottom: 48px;
+  grid-area: Job;
 `
 
 const JobHeading = styled.h3`
-  margin-bottom: 8px;
-  margin-top: 0;
+  margin: 0 0 8px 0;
   font-size: 24px;
-  line-height: 32px;
+  line-height: 1.3;
   font-weight: 700;
 `
 
@@ -79,14 +63,20 @@ const JobDescription = styled.div`
   margin-bottom: 12px;
   color: #666d7a;
   font-size: 13px;
-  line-height: 20px;
+  line-height: 1.5;
+  @media screen and (max-width: 991px) {
+    padding-right: 10%;
+  }
+  @media screen and (max-width: 767px) {
+    & > ul {
+      padding-left: 1em;
+    }
+  }
 `
 
 const TagBadge = styled.div`
   display: inline-block;
-  margin-top: 6px;
-  margin-right: 6px;
-  margin-bottom: 6px;
+  margin: 6px 6px 6px 0;
   padding: 2px 11px;
   border-radius: 32px;
   background-color: #f2f3f5;
@@ -94,15 +84,13 @@ const TagBadge = styled.div`
     color 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
   color: #151515;
   font-size: 11px;
-  line-height: 20px;
+  line-height: 1.2;
   font-weight: 600;
   text-transform: uppercase;
 `
 
 const JobBadge = styled(TagBadge)`
-  margin-top: 6px;
-  margin-right: 0;
-  margin-bottom: 0;
+  margin: 6px 0;
   cursor: default;
 `
 
@@ -112,20 +100,50 @@ const SectionLeft = styled.div`
   grid-column-start: span 4;
   grid-column-end: span 4;
   align-self: start;
+  @media screen and (max-width: 991px) {
+    grid-column: 1/11;
+    grid-row-start: 1;
+    margin-bottom: 30px;
+  }
 `
 
 const SectionRight = styled.div`
-  grid-row-start: 1;
-  grid-row-end: 2;
-  grid-column-start: 6;
-  grid-column-end: 13;
+  grid-row: 1/2;
+  grid-column: 6/13;
+  @media screen and (max-width: 991px) {
+    grid-column-start: 2;
+    grid-row-start: 2;
+  }
+`
+
+const CareerBlock = styled.div`
+  display: grid;
+  grid-auto-columns: 1fr;
+  grid-column-gap: 16px;
+  grid-row-gap: 16px;
+  grid-template-areas: 'Date Timeline Job';
+  grid-template-columns: auto minmax(32px, auto) 1fr;
+  grid-template-rows: auto;
+
+  @media screen and (max-width: 479px) {
+    grid-row-gap: 8px;
+    grid-template-areas:
+      'Timeline Date Date'
+      'Timeline Job Job';
+    grid-template-rows: auto auto;
+  }
+
+  @media screen and (max-width: 767px) {
+    padding-left: 8px;
+    grid-column-gap: 32px;
+  }
 `
 
 const StyledHeader = styled.h2`
   margin-top: 0;
   margin-bottom: 16px;
   font-size: 36px;
-  line-height: 48px;
+  line-height: 1.3;
   font-weight: 700;
 `
 const StyledText = styled.div`
@@ -138,7 +156,7 @@ const DownloadButton = styled.a`
   background-color: #f83f5a;
   transition: background-color 200ms ease;
   font-size: 15px;
-  line-height: 24px;
+  line-height: 1.6;
   font-weight: 700;
   margin-top: 16px;
   display: inline-block;
@@ -147,6 +165,7 @@ const DownloadButton = styled.a`
   text-decoration: none;
   cursor: pointer;
   border-radius: 0;
+
   &:hover {
     background-color: #ec2f4b;
   }
@@ -154,7 +173,7 @@ const DownloadButton = styled.a`
 
 const Career = ({ jobHistoryJson, resume }) => {
   return (
-    <Wrapper>
+    <Section color="white">
       <GridSection>
         <SectionLeft>
           <StyledHeader>Work History</StyledHeader>
@@ -191,7 +210,7 @@ const Career = ({ jobHistoryJson, resume }) => {
           ))}
         </SectionRight>
       </GridSection>
-    </Wrapper>
+    </Section>
   )
 }
 

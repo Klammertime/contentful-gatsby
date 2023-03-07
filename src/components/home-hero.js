@@ -2,27 +2,25 @@ import React from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
 import { GatsbyImage } from 'gatsby-plugin-image'
 import styled, { keyframes } from 'styled-components'
-import * as styles from './home-hero.module.css'
 
 const DynamicTextWrapper = styled.div`
   position: relative;
   z-index: 1;
   overflow: hidden;
   height: 48px;
-  @media (max-width: var(--mq-tiny)) {
+  @media screen and (max-width: 479px) {
     padding-right: 0;
     padding-left: 0;
   }
-  @media (max-width: var(--mq-small)) {
+  @media screen and (max-width: 767px) {
     margin-top: -4px;
   }
-  @media (max-width: var(--mq-medium)) {
+  @media screen and (max-width: 991px) {
     margin-bottom: 12px;
   }
 `
 const slide = keyframes`
   from {
-    /*transform: translateY(100%);*/
     transform: translate3d(0px, 0%, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg);
     transform-style: preserve-3d;
   }
@@ -38,29 +36,23 @@ const DynamicTextLine = styled.div`
   transition-timing-function: ease;
   color: var(--swatch_fcde4a6f);
   height: 100%;
-  /*animation: 3s ease-in 1s 2 reverse both paused slidein;*/
-
-  /*transform: translateY(100%);*/
   animation: ${slide} 3s ease-in 1s 2 reverse;
 `
 
 const HeroV1Section = styled.section`
   position: relative;
   overflow: hidden;
-  padding-top: 12vw;
-  padding-bottom: 9vw;
+  padding: 12vw 0 9vw 0;
   background-color: #f1ede9;
-  @media (max-width: var(--mq-tiny)) {
-    margin-bottom: -32px;
-    padding-top: 32vw;
-    padding-bottom: 26vw;
+  @media screen and (max-width: 991px) {
+    padding: 20vw 0 12vw 0;
   }
-  @media (max-width: var(--mq-small)) {
+  @media screen and (max-width: 767px) {
     padding-bottom: 10vw;
   }
-  @media (max-width: var(--mq-medium)) {
-    padding-top: 20vw;
-    padding-bottom: 12vw;
+  @media screen and (max-width: 479px) {
+    margin-bottom: -32px;
+    padding: 32vw 0 26vw 0;
   }
 `
 
@@ -69,15 +61,13 @@ const Wrapper = styled.div`
   z-index: 2;
   width: 100%;
   max-width: 1234px;
-  margin-right: auto;
-  margin-left: auto;
-  padding-right: 32px;
-  padding-left: 32px;
+  margin: 0 auto;
+  padding: 0 32px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: transparent;
-  @media (max-width: var(--mq-medium)) {
+  @media screen and (max-width: 991px) {
     padding-right: 16px;
     padding-left: 16px;
   }
@@ -85,11 +75,11 @@ const Wrapper = styled.div`
 const Hero = styled.div`
   display: flex;
   align-items: stretch;
-  @media (max-width: var(--mq-medium)) {
+  @media screen and (max-width: 991px) {
     padding-right: 2%;
     padding-left: 2%;
   }
-  @media (max-width: var(--mq-tiny)) {
+  @media screen and (max-width: 479px) {
     padding-right: 0;
     padding-left: 0;
     flex-direction: column;
@@ -106,28 +96,35 @@ const HeroPhoto = styled.div`
   flex-basis: auto;
   border-radius: 50%;
   object-fit: cover;
-  @media (max-width: var(--mq-tiny)) {
+  @media screen and (max-width: 479px) {
     width: 40vw;
     height: 40vw;
   }
-  @media (max-width: var(--mq-small)) {
+
+  @media screen and (max-width: 767px) {
     width: 24vw;
     height: 24vw;
   }
-  @media (max-width: var(--mq-medium)) {
+
+  @media screen and (max-width: 991px) {
     width: 24vw;
     height: 24vw;
     max-height: none;
     max-width: none;
   }
 `
-const HeroText = styled.h1`
+const HeroH1 = styled.h1`
   box-sizing: border-box;
   font-size: 36px;
   font-weight: 700;
   line-height: 48px;
   margin: 0;
   padding: 0;
+
+  @media screen and (max-width: 991px) {
+    font-size: 26px;
+    line-height: 36px;
+  }
 `
 
 const HeroInfo = styled.div`
@@ -139,14 +136,14 @@ const HeroInfo = styled.div`
   font-size: 36px;
   line-height: 48px;
   font-weight: 700;
-  @media (max-width: var(--mq-tiny)) {
+  @media screen and (max-width: 479px) {
     padding-top: 16px;
     padding-left: 0;
   }
-  @media (max-width: var(--mq-small)) {
+  @media screen and (max-width: 767px) {
     padding-top: 0;
   }
-  @media (max-width: var(--mq-medium)) {
+  @media screen and (max-width: 991px) {
     padding-top: 32px;
     padding-left: 5%;
     font-size: 26px;
@@ -164,7 +161,7 @@ const HeroAngle = styled.div`
   margin-left: auto;
   background-color: #fff;
   transform: translate(0px, 13vw) rotate(9deg);
-  @media (max-width: var(--mq-tiny)) {
+  @media screen and (max-width: 479px) {
     display: none;
   }
 `
@@ -188,25 +185,22 @@ const HeroSection = () => {
     }
   `)
   return (
-    <HeroV1Section>
+    <HeroV1Section className="hero-v1-section">
       <Wrapper>
-        <Hero>
-          <HeroPhoto>
+        <Hero className="hero-v1">
+          <HeroPhoto className="hero-v1-photo">
             <GatsbyImage
               image={data.contentfulHomepage.hero?.gatsbyImageData}
               alt="hi"
-              className={styles.heroPhoto}
+              imgStyle={{ borderRadius: '50%' }}
             />
           </HeroPhoto>
 
-          {/*<img src="images/oswaldo-ibanez-avatar.jpg" sizes="(max-width: 479px) 40vw, 24vw"*/}
-          {/*                          srcSet="images/oswaldo-ibanez-avatar-p-500.jpeg 500w, images/oswaldo-ibanez-avatar.jpg 1000w"*/}
-          {/*                          alt="" className={styles.heroV1Photo}/>*/}
           <HeroInfo>
-            <HeroText>
+            <HeroH1 className="hero-v1-text">
               {data.contentfulHomepage.pageHeader.pageHeader}{' '}
-            </HeroText>
-            <DynamicTextWrapper>
+            </HeroH1>
+            <DynamicTextWrapper className="dynamic-text-wrapper">
               <DynamicTextLine>beautiful websites</DynamicTextLine>
               <DynamicTextLine>mobile apps</DynamicTextLine>
               <DynamicTextLine>icons and illustrations</DynamicTextLine>

@@ -31,10 +31,10 @@ export const pageQuery = graphql`
         slug
         tags
         heroImage {
-          gatsbyImage(
+          gatsbyImageData(
             layout: CONSTRAINED
-            width: 750
-            height: 750
+            height: 1280
+            width: 1280
             quality: 80
             placeholder: DOMINANT_COLOR
           )

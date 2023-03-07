@@ -27,7 +27,7 @@ const ContactPage = ({ location, data }) => {
       pageDescription={pageHeader.pageHeader}
     >
       <Seo title="contact" />
-      <Section>
+      <Section color="white">
         <ContactWrapper>
           <ContactForm
             formDescription={formDescription.formDescription}

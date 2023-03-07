@@ -1,11 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Link } from 'gatsby'
-import { useStaticQuery, graphql } from 'gatsby'
+import { graphql, Link, useStaticQuery } from 'gatsby'
 import { SocialIcon } from 'react-social-icons'
 
 const FooterGrid = styled.footer`
-  max-width: 100vw;
+  max-width: 100%;
   margin: 0 auto;
   display: grid;
   padding: 3vw;
@@ -25,8 +24,14 @@ const FooterNav = styled.nav`
   display: flex;
   align-self: start;
   flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
   @media (max-width: 991px) {
     margin-right: 20px;
+  }
+  @media (max-width: 479px) {
+    margin-right: 0;
   }
 `
 
@@ -34,10 +39,17 @@ const StyledLink = styled(Link)`
   color: #fff;
   font-size: 17px;
   line-height: 24px;
-  margin-right: 3vw;
   font-weight: 500;
+  overflow: hidden;
+  margin: 8px 3vw 8px 0;
+  padding: 3px 0;
+  max-width: 100%;
+  display: inline-block;
   @media (max-width: 991px) {
     margin-right: 20px;
+  }
+  @media (max-width: 767px) {
+    margin-right: 28px;
   }
 `
 
@@ -53,14 +65,12 @@ const FooterLinks = styled.div`
 
 const StyledFooterLinks = styled.div`
   display: flex;
-  padding-top: 6px;
-  padding-bottom: 6px;
+  padding: 6px 0;
   align-items: center;
   font-size: 13px;
   line-height: 20px;
   font-weight: 500;
   color: #fff;
-  //font: normal 600 13px/10px Inter, sans-serif;
   @media (max-width: 991px) {
     flex-direction: row;
     margin-right: 20px;
@@ -75,9 +85,13 @@ const StyledHeader = styled.h3`
   line-height: 32px;
 `
 
-const StyledText = styled.div`
+const FooterContactText = styled.div`
   padding: 0;
   margin-bottom: 12px;
+`
+
+const FooterContact = styled.div`
+  padding: 8px 0;
 `
 
 const Footer = () => {
@@ -100,19 +114,29 @@ const Footer = () => {
   return (
     <FooterGrid>
       <FooterNav>
-        <StyledLink to="/">Home</StyledLink>
-        <StyledLink to="/portfolio">Portfolio</StyledLink>
-        <StyledLink to="/about">About</StyledLink>
-        <StyledLink to="/blog">Blog</StyledLink>
-        <StyledLink to="/contact">Contact</StyledLink>
+        <StyledLink className="footer-nav-link" to="/">
+          Home
+        </StyledLink>
+        <StyledLink className="footer-nav-link" to="/portfolio">
+          Portfolio
+        </StyledLink>
+        <StyledLink className="footer-nav-link" to="/about">
+          About
+        </StyledLink>
+        <StyledLink className="footer-nav-link" to="/blog">
+          Blog
+        </StyledLink>
+        <StyledLink className="footer-nav-link" to="/contact">
+          Contact
+        </StyledLink>
       </FooterNav>
 
-      <div>
+      <FooterContact>
         <StyledHeader> Let's work together</StyledHeader>
-        <StyledText>
+        <FooterContactText>
           Have a project in mind? Don’t hesitate to contact me.
-        </StyledText>
-      </div>
+        </FooterContactText>
+      </FooterContact>
 
       <FooterLinks>
         <StyledFooterLinks>

@@ -13,7 +13,16 @@ const CardGrid = styled.div`
   grid-auto-columns: 1fr;
   gap: 80px;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: auto;
+  grid-template-rows: 1fr 1fr;
+
+  @media screen and (max-width: 991px) {
+    grid-column-gap: 32px;
+    grid-row-gap: 60px;
+  }
+
+  @media screen and (max-width: 479px) {
+    grid-template-columns: 1fr;
+  }
 `
 
 class PortfolioIndex extends React.Component {
@@ -24,10 +33,15 @@ class PortfolioIndex extends React.Component {
       <Layout header="Portfolio" location={this.props.location}>
         <Seo title="Portfolio" />
 
-        <Section>
+        <Section color="white">
           <CardGrid>
             {posts.map((val) => (
-              <Card card1={val} />
+              <Card
+                workCardDescription={
+                  val.workCardDescription.workCardDescription
+                }
+                card1={val}
+              />
             ))}
           </CardGrid>
 
@@ -44,14 +58,20 @@ export const pageQuery = graphql`
   query PortfolioIndexQuery {
     allContentfulPortfolioPost {
       nodes {
-        title
-        slug
-        tags
         workCardDescription {
           workCardDescription
         }
+        title
+        slug
+        tags
         heroImage {
-          gatsbyImage(placeholder: BLURRED, width: 545, height: 545)
+          gatsbyImageData(
+            placeholder: BLURRED
+            layout: FULL_WIDTH
+            height: 1280
+            width: 1280
+            cropFocus: CENTER
+          )
         }
       }
     }

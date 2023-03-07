@@ -1,18 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const StyledSection = styled.section`
-  position: relative;
-  z-index: 3;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 128px 5%;
-  width: 100%;
-  margin: 0 auto;
-  background-color: transparent;
-`
-
 const Grid = styled.div`
   grid: ${(props) =>
     props.columns
@@ -25,6 +13,12 @@ const Grid = styled.div`
   @media (max-width: 640px) {
     grid-gap: 0;
     grid: auto auto / 1fr;
+  }
+
+  @media screen and (max-width: 479px) {
+    grid-column-gap: 0;
+    grid-row-gap: 48px;
+    grid-template-columns: 1fr;
   }
 `
 
@@ -50,13 +44,11 @@ const Label = styled.div`
 
 const GridSection = ({ children, sectionLabel, sectionHeader, columns }) => {
   return (
-    <StyledSection>
-      <Grid columns={columns}>
-        {sectionLabel && <Label>{sectionLabel}</Label>}
-        {sectionHeader && <Header>{sectionHeader}</Header>}
-        {children}
-      </Grid>
-    </StyledSection>
+    <Grid columns={columns}>
+      {sectionLabel && <Label>{sectionLabel}</Label>}
+      {sectionHeader && <Header>{sectionHeader}</Header>}
+      {children}
+    </Grid>
   )
 }
 export default GridSection

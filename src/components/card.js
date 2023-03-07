@@ -1,8 +1,8 @@
+import React from 'react'
 import { Link } from 'gatsby'
 import { GatsbyImage } from 'gatsby-plugin-image'
-import Tags from './tags'
-import React from 'react'
 import styled from 'styled-components'
+import Tags from './tags'
 
 const CardDescription = styled.p`
   margin-top: -4px;
@@ -12,37 +12,44 @@ const CardDescription = styled.p`
 `
 
 const CardWrapper = styled.div`
-  position: relative;
   display: flex;
-  width: 100%;
   flex-direction: column;
+  align-items: stretch;
 `
 
 const Meta = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: stretch;
 `
 
 const Title = styled.h4`
-  margin-top: 5%;
-  margin-bottom: 12px;
+  margin: 20px 0 12px 0;
   font-weight: 700;
   font-size: 20px;
   line-height: 28px;
 `
-const Card = ({ card1 }) => {
+const Card = ({ card1, workCardDescription }) => {
   return (
     <CardWrapper>
       <Link to={`/portfolio/${card1.slug}`}>
-        <GatsbyImage alt="" image={card1.heroImage.gatsbyImage} />
+        <GatsbyImage
+          objectFit="cover"
+          image={card1.heroImage.gatsbyImageData}
+          alt="title"
+        />
       </Link>
       <Title>{card1.title}</Title>
-      <CardDescription>
-        {card1.workCardDescription.workCardDescription}
-      </CardDescription>
-      <Meta>
-        <Tags tags={card1.tags} />
-      </Meta>
+      {workCardDescription && (
+        <CardDescription>{workCardDescription}</CardDescription>
+      )}
+      {card1.tags ? (
+        <Meta>
+          <Tags tags={card1.tags} />
+        </Meta>
+      ) : (
+        <Meta></Meta>
+      )}
     </CardWrapper>
   )
 }

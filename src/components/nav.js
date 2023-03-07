@@ -1,22 +1,20 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Link from './Link'
 import styled from 'styled-components'
 import * as styles from './nav.module.css'
 
 const Navigation = styled.nav`
-  font-size: 16px;
-  line-height: 18px;
-  list-style: none;
-  position: relative;
-  justify-content: center;
   display: grid;
   width: 100%;
   grid-auto-columns: 1fr;
-  gap: 0 16px;
+  grid-column-gap: 16px;
+  grid-row-gap: 0;
   grid-template-columns: 1fr auto 1fr;
   grid-template-rows: auto;
-  @media (max-width: 640px) {
-    grid-template-columns: repeat(4, auto);
+
+  @media screen and (max-width: 991px) {
+    grid-auto-columns: 1fr;
+    grid-template-columns: auto auto;
   }
 `
 
@@ -26,6 +24,7 @@ const NavLeft = styled.div`
   align-items: center;
 `
 
+// same as navbar
 const NotScrolled = styled.div`
   backdrop-filter: opacity(1);
   will-change: width, height, background;
@@ -38,8 +37,10 @@ const NotScrolled = styled.div`
   padding: 15px 0;
   z-index: 100;
   top: 0;
-  @media (max-width: 640px) {
-    padding: 10px 0;
+
+  @media screen and (max-width: 479px) {
+    z-index: 100;
+    max-width: 479px;
   }
 `
 
@@ -73,20 +74,17 @@ const StyledLink = styled(Link)`
   letter-spacing: 1px;
   position: relative;
   transition: all 0.45s ease-Out;
+
   &:hover {
     color: #151515;
     text-decoration: none;
     outline: 0;
   }
+
   &:active {
     outline: 0;
     text-decoration: none;
     background-color: transparent;
-  }
-  @media (max-width: 640px) {
-    &:nth-child(4) {
-      display: none;
-    }
   }
 `
 
@@ -103,12 +101,6 @@ const StyledLinkLogo = styled(Link)`
   flex-shrink: 0;
   flex-basis: auto;
   position: relative;
-
-  @media (max-width: 640px) {
-    &:nth-child(4) {
-      display: none;
-    }
-  }
 `
 
 const NavMenu = styled.ul`
@@ -116,22 +108,38 @@ const NavMenu = styled.ul`
   justify-content: center;
   align-items: center;
   position: relative;
+
+  @media screen and (max-width: 991px) {
+    display: none;
+  }
+
+  @media screen and (max-width: 767px) {
+    width: 240px;
+    padding-top: 64px;
+  }
 `
+
+// @media screen and (max-width: 991px)
+// .w-nav[data-collapse="medium"] .w-nav-menu {
+//   display: none;
+// }
 
 const NavRight = styled.div`
   display: flex;
   padding-right: 12px;
   justify-content: flex-end;
   align-items: center;
+  @media screen and (max-width: 991px) {
+    padding-right: 0;
+  }
 `
 
 const NavLinkContainer = styled.li`
   position: relative;
-  margin-right: 16px;
-  margin-left: 16px;
+  margin: 0 16px;
   padding: 2px 0;
   font-size: 13px;
-  line-height: 20px;
+  line-height: 1.5;
   font-weight: 600;
   max-width: 100%;
   display: inline-block;
@@ -142,6 +150,20 @@ const NavLinkContainer = styled.li`
   justify-content: center;
   overflow: hidden;
   cursor: pointer;
+  @media screen and (max-width: 991px) {
+    display: block;
+    margin: 0;
+    padding: 12px 36px;
+    color: #151515;
+    font-size: 17px;
+    line-height: 1.4;
+    text-transform: none;
+  }
+
+  @media screen and (max-width: 767px) {
+    font-size: 15px;
+    line-height: 1.3;
+  }
 `
 
 const Underline = styled.div`
@@ -156,8 +178,10 @@ const Underline = styled.div`
   bottom: 0;
 `
 
+const Button = styled.button``
 //   .nav-link.w--current {
-//   color: #0082f3;
+//   color: #0082f
+//   3;
 // }
 
 const Nav = () => {
@@ -217,12 +241,12 @@ const Nav = () => {
               </StyledLink>
             </NavLinkContainer>
           </NavMenu>
-          <NavRight>
-            <div className={styles.button}>
-              <div className={styles.underline}></div>
-              <a href="#">Let's Go!</a>
-            </div>
-          </NavRight>
+          {/*<NavRight>*/}
+          {/*  <div className={styles.button}>*/}
+          {/*    <div className={styles.underline}></div>*/}
+          {/*    <a href="#">Let's Go!</a>*/}
+          {/*  </div>*/}
+          {/*</NavRight>*/}
         </Navigation>
       </Scrolled>
     </>

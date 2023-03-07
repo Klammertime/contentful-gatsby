@@ -7,11 +7,16 @@ import Seo from '../components/seo'
 import Reviews from '../components/reviews'
 import GridSection from '../components/grid-section'
 import Career from '../components/career'
+import Section from '../components/section'
 
 const AboutImgWrapper = styled.div`
   grid-row: 1/2;
   grid-column: 1/6;
-  @media (max-width: 990px) {
+  @media screen and (max-width: 479px) {
+    grid-row: 1/2;
+    grid-column: 2/12;
+  }
+  @media (max-width: 991px) {
     grid-row: 1/2;
     grid-column: 3/11;
   }
@@ -24,9 +29,13 @@ const AboutTextWrapper = styled.div`
   display: grid;
   grid: auto-flow auto / 1fr;
   grid-row-gap: 18px;
-  @media (max-width: 990px) {
+  @media screen and (max-width: 479px) {
     grid-row: 2/3;
     grid-column: 2/12;
+  }
+  @media screen and (max-width: 991px) {
+    grid-row: 2/3;
+    grid-column: 3/11;
   }
 `
 
@@ -78,20 +87,22 @@ const AboutPage = ({ location, data }) => {
       pageDescription={pageHeader.pageHeader}
     >
       <Seo title="about" />
-      <GridSection>
-        <AboutImgWrapper>
-          <GatsbyImage
-            image={data.contentfulAboutPage.profilePic?.gatsbyImageData}
-            alt="Audrey Klammer about me pic"
-          />
-        </AboutImgWrapper>
-        <AboutTextWrapper>
-          <h2>{bioHeader.bioHeader}</h2>
-          <p>{bioText.bioText}</p>
-          <StyledBlockquote>{quote.quote}</StyledBlockquote>
-          {/*- {author}*/}
-        </AboutTextWrapper>
-      </GridSection>
+      <Section color="white">
+        <GridSection>
+          <AboutImgWrapper>
+            <GatsbyImage
+              image={data.contentfulAboutPage.profilePic?.gatsbyImageData}
+              alt="Audrey Klammer about me pic"
+            />
+          </AboutImgWrapper>
+          <AboutTextWrapper>
+            <h2>{bioHeader.bioHeader}</h2>
+            <p>{bioText.bioText}</p>
+            <StyledBlockquote>{quote.quote}</StyledBlockquote>
+            {/*- {author}*/}
+          </AboutTextWrapper>
+        </GridSection>
+      </Section>
       <GridSection
         sectionLabel="PROFESSIONAL"
         sectionHeader="My Current Skill Set"

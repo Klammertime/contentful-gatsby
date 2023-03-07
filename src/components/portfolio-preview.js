@@ -10,13 +10,13 @@ const PortfolioPreview = ({ posts }) => {
   const [card1, card2, card3] = posts
 
   return (
-    <Section>
+    <Section color="white">
       <div className={styles.dynamicWorks}>
         <div className={styles.workGrid1}>
           <div className={styles.dynamicWorksIntro}>
-            <div className={styles.dynamicWorksText}>Recent Works</div>
+            <h2 className={styles.dynamicWorksText}>Recent Works</h2>
             <Link to="/portfolio" className={styles.sideLink}>
-              <span className={styles.sideLinkText}>Show All</span>{' '}
+              Show All
             </Link>
           </div>
           <Card card1={card1} />

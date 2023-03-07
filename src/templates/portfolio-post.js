@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, graphql } from 'gatsby'
+import { graphql } from 'gatsby'
 import { GatsbyImage } from 'gatsby-plugin-image'
 import get from 'lodash/get'
 import styled from 'styled-components'
@@ -18,6 +18,7 @@ const MainGrid = styled.div`
   display: grid;
   grid: auto-flow auto / repeat(12, 1fr [col-start]);
   margin: 0 auto;
+  padding-top: 32px;
 `
 
 const ProjectImagesWrapper = styled.div`
@@ -25,15 +26,14 @@ const ProjectImagesWrapper = styled.div`
   grid-column: 1/8;
   position: sticky;
   top: 48px;
-  padding-top: 16px;
-  padding-right: 15px;
-  padding-bottom: 64px;
+  padding: 16px 15px 64px 0;
   flex: 1;
   text-align: left;
 
   @media (max-width: 990px) {
-    padding: 0 20px;
+    padding: 0;
     grid-column: 1/13;
+    position: static;
   }
 `
 
@@ -42,17 +42,23 @@ const InfoBoxWrapper = styled.div`
   top: 48px;
   display: block;
   margin-left: 8.33%;
-  padding-top: 16px;
-  padding-right: 15px;
-  padding-bottom: 64px;
+  padding: 16px 15px 64px 0;
   flex: 1;
   text-align: left;
   grid-column: 9/13;
-  @media (max-width: 990px) {
-    padding: 0 20px;
+  @media screen and (max-width: 990px) {
+    padding: 0;
+    grid-column: 2/12;
+    position: static;
+    grid-row-start: 1;
+    margin: 0 auto;
+  }
+
+  @media screen and (max-width: 767px) {
     grid-column: 1/13;
   }
 `
+
 class PortfolioPostTemplate extends React.Component {
   render() {
     const post = get(this.props, 'data.contentfulPortfolioPost')
@@ -90,9 +96,8 @@ class PortfolioPostTemplate extends React.Component {
         <Seo
           title={post.title}
           // description={plainTextDescription}
-          image={`http:${post.heroImage.resize.src}`}
         />
-        <Section>
+        <Section color="white" noPaddingTop>
           <MainGrid>
             <ProjectImagesWrapper>
               <div className={styles.article}>
@@ -135,33 +140,13 @@ class PortfolioPostTemplate extends React.Component {
             </InfoBoxWrapper>
           </MainGrid>
         </Section>
-        <Section noPaddingTop>
-          <div>
-            {(previous || next) && (
-              <nav>
-                <ul className={styles.articleNavigation}>
-                  {previous && (
-                    <li>
-                      <Link to={`/portfolio/${previous.slug}`} rel="prev">
-                        ← {previous.title}
-                      </Link>
-                    </li>
-                  )}
-                  {next && (
-                    <li>
-                      <Link to={`/portfolio/${next.slug}`} rel="next">
-                        {next.title} →
-                      </Link>
-                    </li>
-                  )}
-                </ul>
-              </nav>
-            )}
-          </div>
-        </Section>
-        <Section noPaddingTop>
-          <PortfolioNavigation next={next} previous={previous} />
-        </Section>
+
+        <PortfolioNavigation
+          nextImg={next?.heroImage.gatsbyImageData}
+          prevImg={previous?.heroImage.gatsbyImageData}
+          next={next}
+          previous={previous}
+        />
       </Layout>
     )
   }
@@ -191,24 +176,38 @@ export const pageQuery = graphql`
               layout: FULL_WIDTH
               placeholder: BLURRED
               width: 1280
+              height: 1280
             )
           }
         }
       }
       heroImage {
-        gatsbyImageData(layout: FULL_WIDTH, placeholder: BLURRED, width: 1280)
-        resize(height: 1500) {
-          src
-        }
+        gatsbyImageData(layout: FIXED, placeholder: BLURRED, width: 1280)
       }
     }
     previous: contentfulPortfolioPost(slug: { eq: $previousPostSlug }) {
       slug
       title
+      heroImage {
+        gatsbyImageData(
+          layout: FIXED
+          placeholder: BLURRED
+          height: 100
+          width: 100
+        )
+      }
     }
     next: contentfulPortfolioPost(slug: { eq: $nextPostSlug }) {
       slug
       title
+      heroImage {
+        gatsbyImageData(
+          layout: FIXED
+          placeholder: BLURRED
+          height: 100
+          width: 100
+        )
+      }
     }
   }
 `

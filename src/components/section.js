@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 const StyledSection = styled.section`
+  display: flex;
   position: relative;
   z-index: 3;
   padding-top: ${(props) =>
@@ -10,17 +11,22 @@ const StyledSection = styled.section`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: var(--swatch_f4238f91);
+  background-color: ${(props) => (props.color ? props.color : '#f1ede9')};
+
+  //background-color: var(--swatch_f4238f91);
 
   //small
-  @media (max-width: var(--mq-small)) {
-    padding-top: 64px;
-    padding-bottom: 64px;
+  @media screen and (max-width: 767px) {
+    padding-top: ${(props) =>
+      props.noPaddingTop || props.noPadding ? '0' : '64px'};
+    padding-bottom: ${(props) => (props.noPadding ? '0' : '64px')};
   }
 
   //medium
-  @media (max-width: var(--mq-medium)) {
-    padding: 80px 0;
+  @media screen and (max-width: 991px) {
+    padding-top: ${(props) =>
+      props.noPaddingTop || props.noPadding ? '0' : '80px'};
+    padding-bottom: ${(props) => (props.noPadding ? '0' : '80px')};
   }
 `
 
@@ -38,15 +44,19 @@ const Wrapper = styled.div`
   align-items: center;
   background-color: transparent;
 
-  @media (max-width: var(--mq-medium)) {
+  @media screen and (max-width: 991px) {
     padding-right: 16px;
     padding-left: 16px;
   }
 `
 
-const Section = ({ children, noPaddingTop, noPadding }) => {
+const Section = ({ children, noPaddingTop, noPadding, color }) => {
   return (
-    <StyledSection noPaddingTop={noPaddingTop} noPadding={noPadding}>
+    <StyledSection
+      color={color}
+      noPaddingTop={noPaddingTop}
+      noPadding={noPadding}
+    >
       <Wrapper>{children}</Wrapper>
     </StyledSection>
   )
