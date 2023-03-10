@@ -14,13 +14,11 @@ const CardDescription = styled.p`
 const CardWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: stretch;
 `
 
 const Meta = styled.div`
   display: flex;
   justify-content: space-between;
-  align-items: stretch;
 `
 
 const Title = styled.h4`

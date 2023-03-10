@@ -1,17 +1,16 @@
 .article-list {
+  display: grid;
+  grid-gap: var(--space-3xl);
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   margin: 0;
   padding: 0;
   list-style: none;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  grid-gap: var(--space-3xl);
 }
 
 .title {
   display: inline-block;
-  font-size: var(--text-lg);
-  margin-bottom: var(--space-xs);
   margin-top: var(--space-lg);
+  font-size: var(--text-lg);
   border-bottom: 1.5px solid transparent;
 }
 

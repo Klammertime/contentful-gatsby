@@ -9,7 +9,6 @@ const Breadcrumbs = ({ crumb, slug }) => {
         <div className={styles.breadcrumbs}>
           <a href="/" className={styles.breadcrumbsLink}>
             <div>Home</div>
-            <div className={styles.hoverLine}></div>
           </a>
           <div className={styles.breadcrumbDivider}></div>
           <div className={styles.breadcrumbLinkCurrentPage}>

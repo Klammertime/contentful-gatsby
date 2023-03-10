@@ -2,15 +2,16 @@ import React, { useEffect, useState } from 'react'
 import Link from './Link'
 import styled from 'styled-components'
 import * as styles from './nav.module.css'
+import BurgerMenu from './burger-menu'
 
 const Navigation = styled.nav`
   display: grid;
-  width: 100%;
   grid-auto-columns: 1fr;
-  grid-column-gap: 16px;
   grid-row-gap: 0;
-  grid-template-columns: 1fr auto 1fr;
+  grid-column-gap: 16px;
   grid-template-rows: auto;
+  grid-template-columns: 1fr auto 1fr;
+  width: 100%;
 
   @media screen and (max-width: 991px) {
     grid-auto-columns: 1fr;
@@ -20,23 +21,23 @@ const Navigation = styled.nav`
 
 const NavLeft = styled.div`
   display: flex;
-  justify-content: flex-start;
   align-items: center;
+  justify-content: flex-start;
 `
 
 // same as navbar
 const NotScrolled = styled.div`
+  position: fixed;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 80px;
+  padding: 15px 0;
   backdrop-filter: opacity(1);
   will-change: width, height, background;
-  height: 80px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: fixed;
-  width: 100%;
-  padding: 15px 0;
-  z-index: 100;
-  top: 0;
 
   @media screen and (max-width: 479px) {
     z-index: 100;
@@ -45,34 +46,34 @@ const NotScrolled = styled.div`
 `
 
 const Scrolled = styled(NotScrolled)`
-  backdrop-filter: opacity(0);
-  transition: 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80px;
   background-color: ${(props) =>
     props.bg ? 'rgba(255, 255, 255, 1)' : 'rgba(255, 255, 255, 0)'};
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  backdrop-filter: opacity(0);
+  transition: 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
   will-change: width, height, background;
-  height: 80px;
 `
 
 const LogoWrapper = styled.span`
+  display: flex;
   align-items: center;
-  border-radius: 50%;
-  background-color: #f2f3f5;
   justify-content: center;
   width: 35px;
   height: 35px;
-  display: flex;
   color: #f83f5a;
   font-weight: 700;
+  background-color: #f2f3f5;
+  border-radius: 50%;
 `
 
 const StyledLink = styled(Link)`
-  color: #151515;
-  text-decoration: none;
-  letter-spacing: 1px;
   position: relative;
+  color: #151515;
+  letter-spacing: 1px;
+  text-decoration: none;
   transition: all 0.45s ease-Out;
 
   &:hover {
@@ -82,53 +83,42 @@ const StyledLink = styled(Link)`
   }
 
   &:active {
-    outline: 0;
     text-decoration: none;
     background-color: transparent;
+    outline: 0;
   }
 `
 
 const StyledLinkLogo = styled(Link)`
+  position: relative;
+  display: flex;
+  flex-basis: auto;
+  flex-grow: 0;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100%;
+  padding: 12px 16px;
   color: var(--color-orange);
   font-weight: 700;
   text-decoration: none;
-  display: flex;
-  height: 100%;
-  padding: 12px 16px;
-  justify-content: flex-start;
-  align-items: center;
-  flex-grow: 0;
-  flex-shrink: 0;
-  flex-basis: auto;
-  position: relative;
 `
 
 const NavMenu = styled.ul`
-  display: flex;
-  justify-content: center;
-  align-items: center;
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   @media screen and (max-width: 991px) {
     display: none;
   }
-
-  @media screen and (max-width: 767px) {
-    width: 240px;
-    padding-top: 64px;
-  }
 `
-
-// @media screen and (max-width: 991px)
-// .w-nav[data-collapse="medium"] .w-nav-menu {
-//   display: none;
-// }
 
 const NavRight = styled.div`
   display: flex;
-  padding-right: 12px;
-  justify-content: flex-end;
   align-items: center;
+  padding-right: 12px;
   @media screen and (max-width: 991px) {
     padding-right: 0;
   }
@@ -136,19 +126,19 @@ const NavRight = styled.div`
 
 const NavLinkContainer = styled.li`
   position: relative;
-  margin: 0 16px;
-  padding: 2px 0;
-  font-size: 13px;
-  line-height: 1.5;
-  font-weight: 600;
-  max-width: 100%;
   display: inline-block;
-  text-transform: uppercase;
-  text-decoration: none;
-  letter-spacing: 1.5px;
   align-items: center;
   justify-content: center;
+  max-width: 100%;
+  margin: 0 16px;
+  padding: 2px 0;
   overflow: hidden;
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 1.5;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  text-decoration: none;
   cursor: pointer;
   @media screen and (max-width: 991px) {
     display: block;
@@ -167,22 +157,16 @@ const NavLinkContainer = styled.li`
 `
 
 const Underline = styled.div`
+  position: absolute;
+  bottom: 0;
+  left: -84px;
+  align-self: flex-end;
   width: 100%;
   height: 1px;
   margin-top: 8px;
-  align-self: flex-end;
-  left: -84px;
   background-color: var(--swatch_a5267f7d);
-  position: absolute;
   transition: all 0.3s ease-Out;
-  bottom: 0;
 `
-
-const Button = styled.button``
-//   .nav-link.w--current {
-//   color: #0082f
-//   3;
-// }
 
 const Nav = () => {
   const [scrolling, setScrolling] = useState(false)
@@ -241,12 +225,11 @@ const Nav = () => {
               </StyledLink>
             </NavLinkContainer>
           </NavMenu>
-          {/*<NavRight>*/}
-          {/*  <div className={styles.button}>*/}
-          {/*    <div className={styles.underline}></div>*/}
-          {/*    <a href="#">Let's Go!</a>*/}
-          {/*  </div>*/}
-          {/*</NavRight>*/}
+          <NavRight>
+            <div className={styles.button}>
+              <BurgerMenu />
+            </div>
+          </NavRight>
         </Navigation>
       </Scrolled>
     </>

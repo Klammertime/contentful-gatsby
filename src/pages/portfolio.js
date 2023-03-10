@@ -1,23 +1,23 @@
 import React from 'react'
 import { graphql } from 'gatsby'
 import get from 'lodash/get'
+import styled from 'styled-components'
+
 import Seo from '../components/seo'
 import Layout from '../components/layout'
 import Card from '../components/card'
 import Section from '../components/section'
-import styled from 'styled-components'
-import LazyAnimation from '../components/animation-test'
 
 const CardGrid = styled.div`
   display: grid;
   grid-auto-columns: 1fr;
-  gap: 80px;
-  grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
 
   @media screen and (max-width: 991px) {
-    grid-column-gap: 32px;
     grid-row-gap: 60px;
+    grid-column-gap: 32px;
   }
 
   @media screen and (max-width: 479px) {
@@ -35,8 +35,9 @@ class PortfolioIndex extends React.Component {
 
         <Section color="white">
           <CardGrid>
-            {posts.map((val) => (
+            {posts.map((val, index) => (
               <Card
+                key={`${val.workCardDescription.workCardDescription}-${index}`}
                 workCardDescription={
                   val.workCardDescription.workCardDescription
                 }
@@ -44,8 +45,6 @@ class PortfolioIndex extends React.Component {
               />
             ))}
           </CardGrid>
-
-          <LazyAnimation />
         </Section>
       </Layout>
     )

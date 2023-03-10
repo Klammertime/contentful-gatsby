@@ -1,19 +1,19 @@
 @font-face {
-  font-family: 'Inter var';
   font-weight: 100 900;
-  font-display: swap;
+  font-family: 'Inter var';
   font-style: normal;
-  font-named-instance: 'Regular';
   src: url('/fonts/Inter-roman.var.woff2?v=3.19') format('woff2');
+  font-display: swap;
+  font-named-instance: 'Regular';
 }
 
 @font-face {
-  font-family: 'Inter var';
   font-weight: 100 900;
-  font-display: swap;
+  font-family: 'Inter var';
   font-style: italic;
-  font-named-instance: 'Italic';
   src: url('/fonts/Inter-italic.var.woff2?v=3.19') format('woff2');
+  font-display: swap;
+  font-named-instance: 'Italic';
 }
 
 html {
@@ -25,13 +25,13 @@ html * {
 }
 
 body {
-  background: var(--background);
-  color: var(--text-color);
-  font-family: var(--font-sans);
-  font-size: 16px;
-  font-weight: var(--body);
-  line-height: var(--default);
   margin: 0;
+  color: var(--text-color);
+  font-weight: var(--body);
+  font-size: 16px;
+  font-family: var(--font-sans);
+  line-height: var(--default);
+  background: var(--background);
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
 }
@@ -51,12 +51,28 @@ h6 {
   line-height: var(--dense);
 }
 
+h2 {
+  margin-top: 0;
+  margin-bottom: var(--space-lg);
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 48px;
+}
+
+h3 {
+  margin-top: 0;
+  margin-bottom: var(--text-md);
+  font-size: var(--text-2xl);
+  line-height: 32px;
+}
+
 a {
   color: currentColor;
   text-decoration: none;
 }
 
-a:hover {
+a:hover,
+a:focus {
   color: var(--primary);
 }
 
@@ -67,32 +83,32 @@ a.active {
 tt,
 code,
 kbd {
-  background: var(--black-fade-5);
-  padding-bottom: 0.2em;
   padding-top: 0.2em;
+  padding-bottom: 0.2em;
+  background: var(--black-fade-5);
 }
 
 tt,
 code,
 kbd {
-  font-family: var(--font-monospace);
   font-size: 90%;
+  font-family: var(--font-monospace);
 }
 
 tt,
 code {
+  padding: 0.2em 0;
+  font-weight: var(--medium);
   background-color: var(--black-fade-5);
   border-radius: var(--radius-sm);
-  font-weight: var(--medium);
-  padding: 0.2em 0;
 }
 
 code:before,
 code:after,
 tt:before,
 tt:after {
-  content: ' ';
   letter-spacing: -0.2em;
+  content: ' ';
 }
 
 pre,

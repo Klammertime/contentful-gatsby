@@ -22,13 +22,13 @@ const AboutImgWrapper = styled.div`
   }
 `
 const AboutTextWrapper = styled.div`
-  grid-column: 7/12;
-  grid-row: 1/2;
-  align-self: center;
-  justify-self: start;
   display: grid;
   grid: auto-flow auto / 1fr;
+  grid-row: 1/2;
   grid-row-gap: 18px;
+  grid-column: 7/12;
+  align-self: center;
+  justify-self: start;
   @media screen and (max-width: 479px) {
     grid-row: 2/3;
     grid-column: 2/12;
@@ -42,10 +42,10 @@ const AboutTextWrapper = styled.div`
 const StyledBlockquote = styled.blockquote`
   margin: 24px 0;
   padding: 8px 30px;
-  border-left: 2px solid #f96a4c;
   font-size: 17px;
   line-height: 24px;
   text-align: left;
+  border-left: 2px solid #f96a4c;
 `
 
 const SkillText = styled.div`
@@ -56,26 +56,26 @@ const SkillText = styled.div`
 const SkillCircle = styled.div`
   position: relative;
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   width: 120px;
   height: 120px;
   margin: 10px;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50%;
-  background-color: #f2f3f5;
   text-align: center;
+  background-color: #f2f3f5;
+  border-radius: 50%;
   cursor: pointer;
-  flex-direction: column;
 `
 
 const SkillsRow = styled.div`
   display: flex;
-  margin: -10px auto 0 auto;
-  justify-content: center;
   flex-wrap: wrap;
-  align-items: center;
   grid-row: 3/4;
   grid-column-start: span 12;
+  align-items: center;
+  justify-content: center;
+  margin: -10px auto 0 auto;
 `
 const AboutPage = ({ location, data }) => {
   const { pageHeader, bioText, bioHeader, quote } = data.contentfulAboutPage

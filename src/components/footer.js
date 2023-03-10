@@ -4,29 +4,29 @@ import { graphql, Link, useStaticQuery } from 'gatsby'
 import { SocialIcon } from 'react-social-icons'
 
 const FooterGrid = styled.footer`
+  display: grid;
+  grid-auto-columns: 1fr;
+  grid-row-gap: 16px;
+  grid-column-gap: 8vw;
+  grid-template-columns: 1fr auto auto;
   max-width: 100%;
   margin: 0 auto;
-  display: grid;
   padding: 3vw;
-  grid-template-columns: 1fr auto auto;
-  grid-auto-columns: 1fr;
-  grid-column-gap: 8vw;
-  grid-row-gap: 16px;
   @media (max-width: 991px) {
-    grid-template-columns: 1fr;
-    padding: 4vw;
     grid-row-gap: 40px;
     grid-template-rows: auto auto auto;
+    grid-template-columns: 1fr;
+    padding: 4vw;
   }
 `
 
 const FooterNav = styled.nav`
   display: flex;
-  align-self: start;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: flex-start;
   align-items: center;
+  align-self: start;
+  justify-content: flex-start;
   @media (max-width: 991px) {
     margin-right: 20px;
   }
@@ -36,15 +36,15 @@ const FooterNav = styled.nav`
 `
 
 const StyledLink = styled(Link)`
-  color: #fff;
-  font-size: 17px;
-  line-height: 24px;
-  font-weight: 500;
-  overflow: hidden;
+  display: inline-block;
+  max-width: 100%;
   margin: 8px 3vw 8px 0;
   padding: 3px 0;
-  max-width: 100%;
-  display: inline-block;
+  overflow: hidden;
+  color: #fff;
+  font-weight: 500;
+  font-size: 17px;
+  line-height: 24px;
   @media (max-width: 991px) {
     margin-right: 20px;
   }
@@ -55,9 +55,9 @@ const StyledLink = styled(Link)`
 
 const FooterLinks = styled.div`
   display: flex;
-  padding-right: 4vw;
   flex-direction: column;
   align-self: start;
+  padding-right: 4vw;
   @media (max-width: 991px) {
     flex-direction: row;
   }
@@ -65,12 +65,12 @@ const FooterLinks = styled.div`
 
 const StyledFooterLinks = styled.div`
   display: flex;
-  padding: 6px 0;
   align-items: center;
+  padding: 6px 0;
+  color: #fff;
+  font-weight: 500;
   font-size: 13px;
   line-height: 20px;
-  font-weight: 500;
-  color: #fff;
   @media (max-width: 991px) {
     flex-direction: row;
     margin-right: 20px;
@@ -86,8 +86,8 @@ const StyledHeader = styled.h3`
 `
 
 const FooterContactText = styled.div`
-  padding: 0;
   margin-bottom: 12px;
+  padding: 0;
 `
 
 const FooterContact = styled.div`

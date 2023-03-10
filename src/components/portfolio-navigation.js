@@ -48,7 +48,6 @@ const PortfolioNavigation = ({ previous, next, nextImg, prevImg }) => {
           )}
         </nav>
       )}
-      {/*</div>*/}
     </Section>
   )
 }

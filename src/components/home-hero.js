@@ -6,8 +6,8 @@ import styled, { keyframes } from 'styled-components'
 const DynamicTextWrapper = styled.div`
   position: relative;
   z-index: 1;
-  overflow: hidden;
   height: 48px;
+  overflow: hidden;
   @media screen and (max-width: 479px) {
     padding-right: 0;
     padding-left: 0;
@@ -31,18 +31,18 @@ const slide = keyframes`
 `
 
 const DynamicTextLine = styled.div`
-  transition-property: opacity;
-  transition-duration: 200ms;
-  transition-timing-function: ease;
-  color: var(--swatch_fcde4a6f);
   height: 100%;
+  color: var(--swatch_fcde4a6f);
+  transition-timing-function: ease;
+  transition-duration: 200ms;
+  transition-property: opacity;
   animation: ${slide} 3s ease-in 1s 2 reverse;
 `
 
 const HeroV1Section = styled.section`
   position: relative;
-  overflow: hidden;
   padding: 12vw 0 9vw 0;
+  overflow: hidden;
   background-color: #f1ede9;
   @media screen and (max-width: 991px) {
     padding: 20vw 0 12vw 0;
@@ -59,13 +59,13 @@ const HeroV1Section = styled.section`
 const Wrapper = styled.div`
   position: relative;
   z-index: 2;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   max-width: 1234px;
   margin: 0 auto;
   padding: 0 32px;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   background-color: transparent;
   @media screen and (max-width: 991px) {
     padding-right: 16px;
@@ -80,22 +80,22 @@ const Hero = styled.div`
     padding-left: 2%;
   }
   @media screen and (max-width: 479px) {
-    padding-right: 0;
-    padding-left: 0;
     flex-direction: column;
     align-items: flex-start;
+    padding-right: 0;
+    padding-left: 0;
   }
 `
 const HeroPhoto = styled.div`
-  width: 300px;
-  height: 300px;
-  max-height: 24vw;
-  max-width: 24vw;
+  flex-basis: auto;
   flex-grow: 0;
   flex-shrink: 0;
-  flex-basis: auto;
-  border-radius: 50%;
+  width: 300px;
+  max-width: 24vw;
+  height: 300px;
+  max-height: 24vw;
   object-fit: cover;
+  border-radius: 50%;
   @media screen and (max-width: 479px) {
     width: 40vw;
     height: 40vw;
@@ -108,18 +108,18 @@ const HeroPhoto = styled.div`
 
   @media screen and (max-width: 991px) {
     width: 24vw;
+    max-width: none;
     height: 24vw;
     max-height: none;
-    max-width: none;
   }
 `
 const HeroH1 = styled.h1`
   box-sizing: border-box;
-  font-size: 36px;
-  font-weight: 700;
-  line-height: 48px;
   margin: 0;
   padding: 0;
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 48px;
 
   @media screen and (max-width: 991px) {
     font-size: 26px;
@@ -128,14 +128,14 @@ const HeroH1 = styled.h1`
 `
 
 const HeroInfo = styled.div`
-  padding-top: 60px;
-  padding-left: 8%;
+  flex-basis: 0;
   flex-grow: 1;
   flex-shrink: 1;
-  flex-basis: 0;
+  padding-top: 60px;
+  padding-left: 8%;
+  font-weight: 700;
   font-size: 36px;
   line-height: 48px;
-  font-weight: 700;
   @media screen and (max-width: 479px) {
     padding-top: 16px;
     padding-left: 0;
@@ -152,8 +152,8 @@ const HeroInfo = styled.div`
 `
 const HeroAngle = styled.div`
   position: absolute;
-  left: -10vw;
   bottom: -5vw;
+  left: -10vw;
   z-index: 1;
   width: 120vw;
   height: 28vw;

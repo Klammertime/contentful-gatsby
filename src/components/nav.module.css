@@ -1,9 +1,15 @@
-
 /* Button Styles */
 
-
-
-.button:hover .underline {
-    left: 0;
+.button {
+  display: none;
 }
 
+@media screen and (max-width: 991px) {
+  .button {
+    display: block;
+  }
+}
+
+.button:hover .underline {
+  left: 0;
+}

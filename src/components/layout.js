@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import './variables.css'
 import './global.css'
+import './normalize.css'
 import Seo from './seo'
 import Nav from './nav'
 import Footer from './footer'
@@ -14,8 +15,6 @@ const PageWrapper = styled.div`
 `
 
 const Site = styled.div`
-  background: white;
-  min-height: 100vh;
   display: grid;
   grid:
     auto-flow minmax(4em, auto) 1fr minmax(1em, auto) / 2em 1fr minmax(
@@ -23,6 +22,8 @@ const Site = styled.div`
       60em
     )
     1fr 2em;
+  min-height: 100vh;
+  background: white;
 
   @media screen and (max-width: 479px) {
     grid-template-columns: 1fr;
@@ -30,31 +31,31 @@ const Site = styled.div`
 `
 
 const SiteHeader = styled.header`
-  color: black;
-  grid-column: span 5;
   grid-row: 1;
+  grid-column: span 5;
+  color: black;
 `
 
 const SiteMain = styled.main`
-  background: white;
   grid-column: span 5;
+  background: white;
 `
 
 const SiteFooter = styled.footer`
   grid-column: span 5;
-  background-color: #433056;
   color: #fff;
+  background-color: #433056;
 `
 
 const FooterBottom = styled.div`
-  padding: 17px 30px;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  background-color: hsla(0, 0%, 0%, 0.08);
+  padding: 17px 30px;
   color: hsla(0, 0%, 100%, 0.5);
   font-size: 11px;
   line-height: 16px;
+  background-color: hsla(0, 0%, 0%, 0.08);
 
   @media (max-width: 991px) {
     padding: 10px;
@@ -74,7 +75,6 @@ const Layout = ({ location, children, header }) => {
             <HomeHero />
           ) : (
             // pass both pathname or whatever
-
             <PageHero header={header} />
           )}
         </SiteHeader>
@@ -88,7 +88,6 @@ const Layout = ({ location, children, header }) => {
       </Site>
     </PageWrapper>
   )
-  // }
 }
 
 export default Layout

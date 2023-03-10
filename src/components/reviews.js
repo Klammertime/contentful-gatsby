@@ -3,17 +3,14 @@ import styled from 'styled-components'
 import GridSection from '../components/grid-section'
 
 const ReviewContainer = styled.div`
-  overflow: hidden;
-  width: 100%;
-  max-width: 970px;
-  margin: 0 auto;
-  border-radius: 24px;
-  background-color: #f1ede9;
-  grid-column: 2/12;
   display: grid;
   grid: auto-flow 1fr 30px / 1fr;
-  padding: 50px 40px 35px 40px;
   grid-gap: 20px 30px;
+  grid-column: 2/12;
+  max-width: 970px;
+  padding: 50px 40px 35px 40px;
+  background-color: #f1ede9;
+  border-radius: 24px;
   @media (max-width: 991px) {
     grid-column: 1/13;
     margin: 0 auto 40px auto;
@@ -21,15 +18,14 @@ const ReviewContainer = styled.div`
 `
 
 const ReviewText = styled.div`
-  font: normal 500 1.3rem/1.6 Inter, sans-serif;
   @media (max-width: 991px) {
     font-size: 15px;
     line-height: 24px;
   }
 `
 const ReviewInfo = styled.div`
-  letter-spacing: -0.025em;
   font-weight: 600;
+  letter-spacing: -0.025em;
 `
 
 const Reviews = ({ reviewsList }) => {

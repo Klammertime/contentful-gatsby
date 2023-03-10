@@ -34,5 +34,27 @@ module.exports = {
       },
     },
     'gatsby-plugin-styled-components',
+    'postcss-styled-components',
+    {
+      resolve: 'stylelint-color-format',
+      rules: {
+        'color-format/format': {
+          format: 'rgb',
+        },
+      },
+    },
+    {
+      resolve: 'stylelint-css-modules',
+      rules: {
+        'css-modules/composed-class-names': true,
+        'css-modules/css-variables': [true, {}],
+      },
+    },
+    {
+      resolve: 'stylelint-declaration-block-no-ignored-properties',
+      rules: {
+        'plugin/declaration-block-no-ignored-properties': true,
+      },
+    },
   ],
 }

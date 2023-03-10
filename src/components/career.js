@@ -4,13 +4,13 @@ import GridSection from './grid-section'
 import Section from './section'
 
 const Date = styled.div`
+  grid-area: Date;
+  justify-self: stretch;
   width: 120px;
   padding: 6px 0;
   font-size: 13px;
   line-height: 1.5;
   text-align: right;
-  justify-self: stretch;
-  grid-area: Date;
   @media screen and (max-width: 479px) {
     padding: 5px 0;
     text-align: left;
@@ -22,41 +22,41 @@ const Date = styled.div`
 `
 
 const Timeline = styled.div`
-  justify-self: center;
   position: relative;
   display: flex;
-  width: 2px;
   flex-direction: column;
-  align-items: center;
-  background-color: #e4e8ed;
   grid-area: Timeline;
+  align-items: center;
+  justify-self: center;
+  width: 2px;
+  background-color: #e4e8ed;
 `
 
 const TimelineDot = styled.div`
   position: absolute;
-  left: auto;
   top: 0;
   right: auto;
   bottom: auto;
+  left: auto;
   z-index: 2;
   width: 8px;
   height: 8px;
   margin: 12px 0 0 0;
-  border-radius: 50%;
   background-color: #f96a4c;
+  border-radius: 50%;
   box-shadow: 0 0 0 6px rgba(249, 106, 76, 0.2), 0 0 0 12px #fff;
 `
 
 const Job = styled.div`
-  padding-bottom: 48px;
   grid-area: Job;
+  padding-bottom: 48px;
 `
 
 const JobHeading = styled.h3`
   margin: 0 0 8px 0;
+  font-weight: 700;
   font-size: 24px;
   line-height: 1.3;
-  font-weight: 700;
 `
 
 const JobDescription = styled.div`
@@ -78,15 +78,15 @@ const TagBadge = styled.div`
   display: inline-block;
   margin: 6px 6px 6px 0;
   padding: 2px 11px;
-  border-radius: 32px;
-  background-color: #f2f3f5;
-  transition: background-color 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94),
-    color 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
   color: #151515;
+  font-weight: 600;
   font-size: 11px;
   line-height: 1.2;
-  font-weight: 600;
   text-transform: uppercase;
+  background-color: #f2f3f5;
+  border-radius: 32px;
+  transition: background-color 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    color 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
 `
 
 const JobBadge = styled(TagBadge)`
@@ -101,8 +101,8 @@ const SectionLeft = styled.div`
   grid-column-end: span 4;
   align-self: start;
   @media screen and (max-width: 991px) {
-    grid-column: 1/11;
     grid-row-start: 1;
+    grid-column: 1/11;
     margin-bottom: 30px;
   }
 `
@@ -111,19 +111,19 @@ const SectionRight = styled.div`
   grid-row: 1/2;
   grid-column: 6/13;
   @media screen and (max-width: 991px) {
-    grid-column-start: 2;
     grid-row-start: 2;
+    grid-column-start: 2;
   }
 `
 
 const CareerBlock = styled.div`
   display: grid;
   grid-auto-columns: 1fr;
-  grid-column-gap: 16px;
   grid-row-gap: 16px;
+  grid-column-gap: 16px;
   grid-template-areas: 'Date Timeline Job';
-  grid-template-columns: auto minmax(32px, auto) 1fr;
   grid-template-rows: auto;
+  grid-template-columns: auto minmax(32px, auto) 1fr;
 
   @media screen and (max-width: 479px) {
     grid-row-gap: 8px;
@@ -134,37 +134,37 @@ const CareerBlock = styled.div`
   }
 
   @media screen and (max-width: 767px) {
-    padding-left: 8px;
     grid-column-gap: 32px;
+    padding-left: 8px;
   }
 `
 
 const StyledHeader = styled.h2`
   margin-top: 0;
   margin-bottom: 16px;
+  font-weight: 700;
   font-size: 36px;
   line-height: 1.3;
-  font-weight: 700;
 `
 const StyledText = styled.div`
   color: #666d7a;
 `
 
 const DownloadButton = styled.a`
+  display: inline-block;
   height: 48px;
+  margin-top: 16px;
   padding: 11px 24px;
-  background-color: #f83f5a;
-  transition: background-color 200ms ease;
+  color: white;
+  font-weight: 700;
   font-size: 15px;
   line-height: 1.6;
-  font-weight: 700;
-  margin-top: 16px;
-  display: inline-block;
-  color: white;
-  border: 0;
   text-decoration: none;
-  cursor: pointer;
+  background-color: #f83f5a;
+  border: 0;
   border-radius: 0;
+  cursor: pointer;
+  transition: background-color 200ms ease;
 
   &:hover {
     background-color: #ec2f4b;

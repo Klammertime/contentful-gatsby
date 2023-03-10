@@ -2,15 +2,15 @@ import React from 'react'
 import styled from 'styled-components'
 
 const StyledSection = styled.section`
-  margin: 0 auto;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  z-index: 1;
-  background-color: white;
   position: relative;
+  z-index: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
   padding: 100px 20px;
+  text-align: center;
+  background-color: white;
 `
 
 const Header = styled.h2`
@@ -22,11 +22,11 @@ const Header = styled.h2`
 `
 
 const Divider = styled.div`
+  display: block;
   width: 70px;
   height: 3px;
-  background-color: var(--color-orange);
-  display: block;
   margin: 20px auto;
+  background-color: var(--color-orange);
 `
 
 const Description = styled.p`

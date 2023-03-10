@@ -1,8 +1,85 @@
 import React from 'react'
 import { Link } from 'gatsby'
-import * as styles from './portfolio-preview.module.css'
+import styled from 'styled-components'
 import Section from './section'
 import Card from './card'
+
+const WorkGrid1 = styled.div`
+  display: grid;
+  grid-auto-columns: 1fr;
+  grid-row-gap: 112px;
+  grid-column-gap: 0;
+  grid-template-rows: auto auto auto;
+  grid-template-columns: 1fr;
+  max-width: 570px;
+  @media screen and (max-width: 991px) {
+    grid-row-gap: 64px;
+  }
+  @media screen and (max-width: 767px) {
+    grid-row-gap: 48px;
+    max-width: none;
+    margin-bottom: 48px;
+  }
+`
+
+const WorkGrid2 = styled.div`
+  display: grid;
+  flex-basis: 0;
+  flex-grow: 1;
+  flex-shrink: 1;
+  grid-auto-columns: 1fr;
+  grid-row-gap: 112px;
+  grid-column-gap: 0;
+  grid-template-rows: auto auto;
+  grid-template-columns: 1fr;
+  margin-left: 11%;
+  padding-top: 8px;
+
+  @media screen and (max-width: 991px) {
+    grid-row-gap: 64px;
+    margin-left: 64px;
+  }
+
+  @media screen and (max-width: 767px) {
+    grid-row-gap: 48px;
+    margin-left: 0;
+  }
+`
+
+const StyledHeader = styled.h2`
+  margin: 0 24px 0 0;
+`
+const DynamicWorks = styled.div`
+  display: flex;
+  margin-top: -8px;
+
+  @media screen and (max-width: 767px) {
+    flex-direction: column;
+    padding-right: 25%;
+  }
+
+  @media screen and (max-width: 479px) {
+    padding-right: 0;
+  }
+`
+
+const DynamicWorksIntro = styled.div`
+  z-index: 1;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  text-align: left;
+`
+
+const SideLink = styled(Link)`
+  padding: 7px 16px 8px;
+  color: var(--swatch_a5267f7d);
+  font-weight: 600;
+  font-size: 13px;
+  border-left-color: var(--swatch_68d01675);
+  border-left-width: 1px;
+  border-left-style: solid;
+`
 
 const PortfolioPreview = ({ posts }) => {
   if (!posts) return null
@@ -11,22 +88,20 @@ const PortfolioPreview = ({ posts }) => {
 
   return (
     <Section color="white">
-      <div className={styles.dynamicWorks}>
-        <div className={styles.workGrid1}>
-          <div className={styles.dynamicWorksIntro}>
-            <h2 className={styles.dynamicWorksText}>Recent Works</h2>
-            <Link to="/portfolio" className={styles.sideLink}>
-              Show All
-            </Link>
-          </div>
+      <DynamicWorks>
+        <WorkGrid1>
+          <DynamicWorksIntro>
+            <StyledHeader>Recent Works</StyledHeader>
+            <SideLink to="/portfolio">Show All</SideLink>
+          </DynamicWorksIntro>
           <Card card1={card1} />
-        </div>
+        </WorkGrid1>
 
-        <div className={styles.workGrid2}>
+        <WorkGrid2>
           <Card card1={card2} />
           <Card card1={card3} />
-        </div>
-      </div>
+        </WorkGrid2>
+      </DynamicWorks>
     </Section>
   )
 }

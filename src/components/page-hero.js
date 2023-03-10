@@ -4,23 +4,23 @@ import Breadcrumbs from '../components/breadcrumbs'
 import Section from './section'
 
 const TopSection = styled(Section)`
-  margin: 0 auto;
   z-index: 1;
   min-height: 26vw;
+  margin: 0 auto;
 `
 
 const SectionAngle = styled.div`
   position: relative;
   z-index: 5;
-  overflow: hidden;
   height: 5vw;
   margin-top: -5vw;
+  overflow: hidden;
 `
 
 const Angle = styled.div`
   position: absolute;
-  left: -10vw;
   bottom: -5vw;
+  left: -10vw;
   width: 120vw;
   height: 20vw;
   background-color: #fff;
@@ -28,10 +28,10 @@ const Angle = styled.div`
 `
 
 const Header = styled.h1`
-  margin-bottom: 0;
   margin-top: 0;
-  font-size: 3.7vw;
+  margin-bottom: 0;
   font-weight: 700;
+  font-size: 3.7vw;
   line-height: 4.4vw;
 
   @media screen and (max-width: 991px) {

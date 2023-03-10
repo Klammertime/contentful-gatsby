@@ -8,54 +8,79 @@ import { renderRichText } from 'gatsby-source-contentful/rich-text'
 import { BLOCKS } from '@contentful/rich-text-types'
 import Seo from '../components/seo'
 import Layout from '../components/layout'
-import * as styles from './portfolio-post.module.css'
 import Section from '../components/section'
 import PortfolioNavigation from '../components/portfolio-navigation'
+import * as styles from './portfolio-post.module.css'
 
 const MainGrid = styled.div`
-  width: 100%;
-  perspective: 2000px;
   display: grid;
   grid: auto-flow auto / repeat(12, 1fr [col-start]);
-  margin: 0 auto;
   padding-top: 32px;
+  perspective: 2000px;
 `
 
 const ProjectImagesWrapper = styled.div`
-  display: block;
-  grid-column: 1/8;
-  position: sticky;
-  top: 48px;
-  padding: 16px 15px 64px 0;
+  position: relative;
+  top: 8px;
   flex: 1;
+  grid-column: 1/8;
   text-align: left;
-
   @media (max-width: 990px) {
-    padding: 0;
-    grid-column: 1/13;
     position: static;
+    grid-column: 1/13;
+    padding: 0;
   }
 `
 
 const InfoBoxWrapper = styled.div`
-  position: sticky;
-  top: 48px;
-  display: block;
-  margin-left: 8.33%;
-  padding: 16px 15px 64px 0;
   flex: 1;
-  text-align: left;
   grid-column: 9/13;
   @media screen and (max-width: 990px) {
-    padding: 0;
-    grid-column: 2/12;
-    position: static;
     grid-row-start: 1;
-    margin: 0 auto;
+    grid-column: 2/12;
   }
-
   @media screen and (max-width: 767px) {
     grid-column: 1/13;
+  }
+`
+
+const WorkDescription = styled.p`
+  color: #777;
+  font-size: 15px;
+  line-height: 24px;
+`
+
+const WorkDetails = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 40px;
+`
+
+const WorkDetailsCellHeader = styled.div`
+  margin-right: 8px;
+  color: #777;
+`
+
+const WorkDetailsCell = styled.div`
+  display: flex;
+  flex: 0 auto;
+  padding: 12px 0;
+  font-size: 15px;
+  line-height: 24px;
+  border-bottom: 1px solid #e4e4e4;
+`
+
+const WorkSidebar = styled.div`
+  position: sticky;
+  top: 80px;
+  flex: 1;
+  padding-top: 16px;
+  @media screen and (max-width: 990px) {
+    margin-right: 0;
+    padding: 0;
+  }
+  @media screen and (max-width: 767px) {
+    position: static;
   }
 `
 
@@ -80,11 +105,10 @@ class PortfolioPostTemplate extends React.Component {
             <GatsbyImage
               imgStyle={{
                 display: 'block',
-                'margin-bottom': '24px',
+                margin: '5px 0 32px 0',
               }}
               image={gatsbyImageData}
               alt="get correct one"
-              imgClassName={styles.imageEmbed}
             />
           )
         },
@@ -101,42 +125,37 @@ class PortfolioPostTemplate extends React.Component {
           <MainGrid>
             <ProjectImagesWrapper>
               <div className={styles.article}>
-                <div className={styles.body}>
-                  {post.body?.raw && renderRichText(post.body, options)}
-                </div>
+                {post.body?.raw && renderRichText(post.body, options)}
               </div>
             </ProjectImagesWrapper>
             <InfoBoxWrapper>
-              <div data-ix="fade-left" className={styles.workSidebar}>
-                <h2 className={styles.sectionHeader}>Framerio</h2>
-                <p className={styles.workDescription}>
+              <WorkSidebar>
+                <h2>Framerio</h2>
+                <WorkDescription>
                   Writing result-oriented ad copy is difficult, as it must
                   appeal to, entice, and convince consumers to take action.
                   There is no magic formula.
-                </p>
-                <div className={styles.workDetails}>
-                  <div className={styles.workDetailsCell}>
-                    <div className={styles.workDetailsCellHeader}>Client:</div>
-                    <div>Webflow</div>
-                  </div>
-                  <div className={styles.workDetailsCell}>
-                    <div className={styles.workDetailsCellHeader}>
-                      Release Date:
-                    </div>
-                    <div>May 2017</div>
-                  </div>
-                  <div className={styles.workDetailsCell}>
-                    <div className={styles.workDetailsCellHeader}>
-                      Category:
-                    </div>
-                    <div>Mobile</div>
-                  </div>
-                  <div className={styles.workDetailsCell}>
-                    <div className={styles.workDetailsCellHeader}>Link:</div>
+                </WorkDescription>
+
+                <WorkDetails>
+                  <WorkDetailsCell>
+                    <WorkDetailsCellHeader>Client:</WorkDetailsCellHeader>
+                    <span>Webflow</span>
+                  </WorkDetailsCell>
+                  <WorkDetailsCell>
+                    <WorkDetailsCellHeader>Release Date:</WorkDetailsCellHeader>
+                    <span>May 2017</span>
+                  </WorkDetailsCell>
+                  <WorkDetailsCell>
+                    <WorkDetailsCellHeader>Category:</WorkDetailsCellHeader>
+                    <span>Mobile</span>
+                  </WorkDetailsCell>
+                  <WorkDetailsCell>
+                    <WorkDetailsCellHeader>Link:</WorkDetailsCellHeader>
                     <a href="https://elasticthemes.com">View It Live</a>
-                  </div>
-                </div>
-              </div>
+                  </WorkDetailsCell>
+                </WorkDetails>
+              </WorkSidebar>
             </InfoBoxWrapper>
           </MainGrid>
         </Section>
