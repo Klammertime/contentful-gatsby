@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
-import Breadcrumbs from '../components/breadcrumbs'
-import Section from './section'
+import Breadcrumbs from '../ui/breadcrumbs'
+import Section from '../ui/section'
 
 const TopSection = styled(Section)`
   z-index: 1;
@@ -28,32 +28,28 @@ const Angle = styled.div`
 `
 
 const Header = styled.h1`
-  margin-top: 0;
-  margin-bottom: 0;
+  margin: 0;
   font-weight: 700;
   font-size: 3.7vw;
-  line-height: 4.4vw;
+  line-height: 1.2;
 
   @media screen and (max-width: 991px) {
     font-size: 5.6vw;
-    line-height: 7vw;
   }
 
   @media screen and (max-width: 767px) {
     font-size: 7vw;
-    line-height: 8vw;
   }
 
   @media screen and (max-width: 479px) {
     font-size: 10vw;
-    line-height: 12vw;
   }
 `
 
 const PageHero = ({ header = 'test' }) => {
   return (
     <>
-      <TopSection>
+      <TopSection color="beige">
         <Header>{header}</Header>
       </TopSection>
       <SectionAngle>

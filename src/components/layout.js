@@ -1,13 +1,14 @@
+import { graphql, useStaticQuery } from 'gatsby'
 import React from 'react'
 import styled from 'styled-components'
-import './variables.css'
-import './global.css'
-import './normalize.css'
-import Seo from './seo'
-import Nav from './nav'
+import '../global.css'
+import '../normalize.css'
+import '../variables.css'
 import Footer from './footer'
-import PageHero from './page-hero'
-import HomeHero from './home-hero'
+import HomeHero from './hero/home-hero'
+import PageHero from './hero/page-hero'
+import Nav from './nav/nav'
+import Seo from './seo'
 
 const PageWrapper = styled.div`
   position: relative;
@@ -43,8 +44,7 @@ const SiteMain = styled.main`
 
 const SiteFooter = styled.footer`
   grid-column: span 5;
-  color: #fff;
-  background-color: #433056;
+  background-color: var(--purple);
 `
 
 const FooterBottom = styled.div`
@@ -62,6 +62,27 @@ const FooterBottom = styled.div`
   }
 `
 const Layout = ({ location, children, header }) => {
+  const data = useStaticQuery(graphql`
+    query {
+      allContentfulNavNavListJsonNode {
+        nodes {
+          page
+          label
+        }
+      }
+      site {
+        siteMetadata {
+          social {
+            label
+            url
+          }
+        }
+      }
+    }
+  `)
+
+  const mainNavLinks = data.allContentfulNavNavListJsonNode.nodes
+  const socialLinks = data.site.siteMetadata.social
   const rootPath = `${__PATH_PREFIX__}/`
   const pathname = location.pathname
   const isRootPath = pathname === rootPath
@@ -70,7 +91,7 @@ const Layout = ({ location, children, header }) => {
       <Site>
         <Seo />
         <SiteHeader role="banner">
-          <Nav />
+          <Nav navLinks={mainNavLinks} />
           {isRootPath ? (
             <HomeHero />
           ) : (
@@ -80,9 +101,9 @@ const Layout = ({ location, children, header }) => {
         </SiteHeader>
         <SiteMain role="main">{children}</SiteMain>
         <SiteFooter role="contentinfo">
-          <Footer />
+          <Footer socialLinks={socialLinks} navLinks={mainNavLinks} />
           <FooterBottom>
-            Handcrafted by © Audrey Klammer - {new Date().getFullYear()}
+            Developed by © Audrey Klammer - {new Date().getFullYear()}
           </FooterBottom>
         </SiteFooter>
       </Site>

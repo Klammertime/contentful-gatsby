@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import Link from './Link'
 import styled from 'styled-components'
-import * as styles from './nav.module.css'
+import Link from '../ui/link'
 import BurgerMenu from './burger-menu'
 
 const Navigation = styled.nav`
@@ -37,7 +36,7 @@ const NotScrolled = styled.div`
   height: 80px;
   padding: 15px 0;
   backdrop-filter: opacity(1);
-  will-change: width, height, background;
+  will-change: height, background;
 
   @media screen and (max-width: 479px) {
     z-index: 100;
@@ -46,15 +45,10 @@ const NotScrolled = styled.div`
 `
 
 const Scrolled = styled(NotScrolled)`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 80px;
   background-color: ${(props) =>
     props.bg ? 'rgba(255, 255, 255, 1)' : 'rgba(255, 255, 255, 0)'};
   backdrop-filter: opacity(0);
   transition: 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
-  will-change: width, height, background;
 `
 
 const LogoWrapper = styled.span`
@@ -65,19 +59,19 @@ const LogoWrapper = styled.span`
   height: 35px;
   color: #f83f5a;
   font-weight: 700;
-  background-color: #f2f3f5;
+  background-color: var(--tag-grey);
   border-radius: 50%;
 `
 
 const StyledLink = styled(Link)`
   position: relative;
-  color: #151515;
+  color: var(--black);
   letter-spacing: 1px;
   text-decoration: none;
   transition: all 0.45s ease-Out;
 
   &:hover {
-    color: #151515;
+    color: var(--primary);
     text-decoration: none;
     outline: 0;
   }
@@ -88,19 +82,16 @@ const StyledLink = styled(Link)`
     outline: 0;
   }
 `
-
 const StyledLinkLogo = styled(Link)`
   position: relative;
   display: flex;
-  flex-basis: auto;
-  flex-grow: 0;
-  flex-shrink: 0;
+  flex: 0 0 auto;
   align-items: center;
   justify-content: flex-start;
   height: 100%;
   padding: 12px 16px;
   color: var(--color-orange);
-  font-weight: 700;
+  font-weight: var(--bold);
   text-decoration: none;
 `
 
@@ -122,6 +113,17 @@ const NavRight = styled.div`
   @media screen and (max-width: 991px) {
     padding-right: 0;
   }
+
+  .button {
+    display: none;
+    @media screen and (max-width: 991px) {
+      display: block;
+    }
+  }
+
+  .button:hover .underline {
+    left: 0;
+  }
 `
 
 const NavLinkContainer = styled.li`
@@ -133,8 +135,8 @@ const NavLinkContainer = styled.li`
   margin: 0 16px;
   padding: 2px 0;
   overflow: hidden;
-  font-weight: 600;
-  font-size: 13px;
+  font-weight: var(--semibold);
+  font-size: var(--text-xs);
   line-height: 1.5;
   letter-spacing: 1.5px;
   text-transform: uppercase;
@@ -144,7 +146,7 @@ const NavLinkContainer = styled.li`
     display: block;
     margin: 0;
     padding: 12px 36px;
-    color: #151515;
+    color: var(--black);
     font-size: 17px;
     line-height: 1.4;
     text-transform: none;
@@ -164,11 +166,11 @@ const Underline = styled.div`
   width: 100%;
   height: 1px;
   margin-top: 8px;
-  background-color: var(--swatch_a5267f7d);
+  background-color: var(--black);
   transition: all 0.3s ease-Out;
 `
 
-const Nav = () => {
+const Nav = ({ navLinks }) => {
   const [scrolling, setScrolling] = useState(false)
 
   useEffect(() => {
@@ -185,54 +187,30 @@ const Nav = () => {
   }, [scrolling])
 
   return (
-    <>
-      <Scrolled bg={scrolling}>
-        <Navigation role="navigation" aria-label="Main">
-          <NavLeft>
-            <StyledLinkLogo to={'/'}>
-              <LogoWrapper>Ǡ</LogoWrapper>
-            </StyledLinkLogo>
-          </NavLeft>
-          <NavMenu>
-            <NavLinkContainer className={styles.button}>
-              <Underline className={styles.underline} />
-              <StyledLink to="/" activeClassName="active">
-                Home
+    <Scrolled bg={scrolling}>
+      <Navigation role="navigation" aria-label="Main">
+        <NavLeft>
+          <StyledLinkLogo to={'/'}>
+            <LogoWrapper>Ǡ</LogoWrapper>
+          </StyledLinkLogo>
+        </NavLeft>
+        <NavMenu>
+          {navLinks.map((nav) => (
+            <NavLinkContainer className="button">
+              <Underline className="underline" />
+              <StyledLink to={nav.page} activeClassName="active">
+                {nav.label}
               </StyledLink>
             </NavLinkContainer>
-            <NavLinkContainer className={styles.button}>
-              <Underline className={styles.underline} />
-              <StyledLink to="/portfolio" activeClassName="active">
-                Portfolio
-              </StyledLink>
-            </NavLinkContainer>
-            <NavLinkContainer className={styles.button}>
-              <Underline className={styles.underline} />
-              <StyledLink to="/about" activeClassName="active">
-                About
-              </StyledLink>
-            </NavLinkContainer>
-            <NavLinkContainer className={styles.button}>
-              <Underline className={styles.underline} />
-              <StyledLink to="/blog" activeClassName="active">
-                Blog
-              </StyledLink>
-            </NavLinkContainer>
-            <NavLinkContainer className={styles.button}>
-              <Underline className={styles.underline} />
-              <StyledLink to="/contact" activeClassName="active">
-                Contact
-              </StyledLink>
-            </NavLinkContainer>
-          </NavMenu>
-          <NavRight>
-            <div className={styles.button}>
-              <BurgerMenu />
-            </div>
-          </NavRight>
-        </Navigation>
-      </Scrolled>
-    </>
+          ))}
+        </NavMenu>
+        <NavRight>
+          <div className="button">
+            <BurgerMenu navLinks={navLinks} />
+          </div>
+        </NavRight>
+      </Navigation>
+    </Scrolled>
   )
 }
 

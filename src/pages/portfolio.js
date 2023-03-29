@@ -1,12 +1,11 @@
-import React from 'react'
 import { graphql } from 'gatsby'
 import get from 'lodash/get'
+import React from 'react'
 import styled from 'styled-components'
-
-import Seo from '../components/seo'
 import Layout from '../components/layout'
-import Card from '../components/card'
-import Section from '../components/section'
+import PortfolioCard from '../components/portfolio/portfolio-card'
+import Seo from '../components/seo'
+import Section from '../components/ui/section'
 
 const CardGrid = styled.div`
   display: grid;
@@ -33,10 +32,10 @@ class PortfolioIndex extends React.Component {
       <Layout header="Portfolio" location={this.props.location}>
         <Seo title="Portfolio" />
 
-        <Section color="white">
+        <Section>
           <CardGrid>
             {posts.map((val, index) => (
-              <Card
+              <PortfolioCard
                 key={`${val.workCardDescription.workCardDescription}-${index}`}
                 workCardDescription={
                   val.workCardDescription.workCardDescription
@@ -66,7 +65,7 @@ export const pageQuery = graphql`
         heroImage {
           gatsbyImageData(
             placeholder: BLURRED
-            layout: FULL_WIDTH
+            layout: CONSTRAINED
             height: 1280
             width: 1280
             cropFocus: CENTER

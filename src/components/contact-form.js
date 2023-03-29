@@ -1,13 +1,8 @@
+import { navigate } from 'gatsby'
 import React from 'react'
 import styled from 'styled-components'
-import { navigate } from 'gatsby'
 import Seo from './seo'
-
-const FormHeader = styled.h2`
-  margin: 0 0 12px 0;
-  font-size: 24px;
-  line-height: 32px;
-`
+import Button from './ui/button'
 
 const FormDescription = styled.div`
   grid-column: 1/13;
@@ -81,30 +76,6 @@ const Textarea = styled.textarea`
   border-radius: 6px;
 `
 
-const SubmitButton = styled.button`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  justify-self: start;
-  width: 200px;
-  height: 48px;
-  padding: 13px 24px;
-  color: #fff;
-  font-weight: 700;
-  font-size: 15px;
-  line-height: 20px;
-  text-align: center;
-  text-decoration: none;
-  background-color: var(--swatch_fcde4a6f);
-  border-style: none;
-  border-radius: 24px;
-  cursor: pointer;
-  transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94),
-    cubic-bezier(0.25, 0.46, 0.45, 0.94), cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  transition-duration: 400ms, 400ms, 400ms;
-  transition-property: color, background-color, border-color;
-`
-
 const IntroLeft = styled.div`
   position: relative;
   z-index: 1;
@@ -148,7 +119,6 @@ const ContactForm = ({ formDescription, formHeader }) => {
     <>
       <Seo title="contact" />
       <IntroLeft>
-        <FormHeader>{formHeader}</FormHeader>
         <FormDescription>{formDescription}</FormDescription>
       </IntroLeft>
       <StyledForm
@@ -195,8 +165,8 @@ const ContactForm = ({ formDescription, formHeader }) => {
             placeholder="How can I help you?"
             onChange={handleChange}
           />
+          <Button type="submit">Submit Message</Button>
         </TextAreaLabel>
-        <SubmitButton type="submit">Send</SubmitButton>
       </StyledForm>
     </>
   )

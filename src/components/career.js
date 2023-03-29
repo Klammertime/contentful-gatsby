@@ -1,7 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
-import GridSection from './grid-section'
-import Section from './section'
+import { useAboutData } from '../hooks/use-about-data'
+import Button from './ui/button'
+import GridSection from './ui/grid-section'
+import Section from './ui/section'
+import Tags from './ui/tags'
+import Text from './ui/text'
 
 const Date = styled.div`
   grid-area: Date;
@@ -29,7 +33,7 @@ const Timeline = styled.div`
   align-items: center;
   justify-self: center;
   width: 2px;
-  background-color: #e4e8ed;
+  background-color: var(--border);
 `
 
 const TimelineDot = styled.div`
@@ -42,7 +46,7 @@ const TimelineDot = styled.div`
   width: 8px;
   height: 8px;
   margin: 12px 0 0 0;
-  background-color: #f96a4c;
+  background-color: var(--primary);
   border-radius: 50%;
   box-shadow: 0 0 0 6px rgba(249, 106, 76, 0.2), 0 0 0 12px #fff;
 `
@@ -61,9 +65,14 @@ const JobHeading = styled.h3`
 
 const JobDescription = styled.div`
   margin-bottom: 12px;
-  color: #666d7a;
+  color: var(--grey);
   font-size: 13px;
   line-height: 1.5;
+
+  & > ul {
+    padding-left: 1em;
+  }
+
   @media screen and (max-width: 991px) {
     padding-right: 10%;
   }
@@ -72,26 +81,6 @@ const JobDescription = styled.div`
       padding-left: 1em;
     }
   }
-`
-
-const TagBadge = styled.div`
-  display: inline-block;
-  margin: 6px 6px 6px 0;
-  padding: 2px 11px;
-  color: #151515;
-  font-weight: 600;
-  font-size: 11px;
-  line-height: 1.2;
-  text-transform: uppercase;
-  background-color: #f2f3f5;
-  border-radius: 32px;
-  transition: background-color 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94),
-    color 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
-`
-
-const JobBadge = styled(TagBadge)`
-  margin: 6px 0;
-  cursor: default;
 `
 
 const SectionLeft = styled.div`
@@ -137,77 +126,55 @@ const CareerBlock = styled.div`
     grid-column-gap: 32px;
     padding-left: 8px;
   }
-`
 
-const StyledHeader = styled.h2`
-  margin-top: 0;
-  margin-bottom: 16px;
-  font-weight: 700;
-  font-size: 36px;
-  line-height: 1.3;
-`
-const StyledText = styled.div`
-  color: #666d7a;
-`
-
-const DownloadButton = styled.a`
-  display: inline-block;
-  height: 48px;
-  margin-top: 16px;
-  padding: 11px 24px;
-  color: white;
-  font-weight: 700;
-  font-size: 15px;
-  line-height: 1.6;
-  text-decoration: none;
-  background-color: #f83f5a;
-  border: 0;
-  border-radius: 0;
-  cursor: pointer;
-  transition: background-color 200ms ease;
-
-  &:hover {
-    background-color: #ec2f4b;
+  &:last-of-type {
+    .timeline {
+      background-color: white;
+    }
   }
 `
 
-const Career = ({ jobHistoryJson, resume }) => {
+const Career = () => {
+  const { fullResumeContent } = useAboutData()
   return (
-    <Section color="white">
+    <Section noPaddingTop color="white">
       <GridSection>
         <SectionLeft>
-          <StyledHeader>Work History</StyledHeader>
-          <StyledText>
-            Versatile front end engineer with user experience knowledge and
-            design sensibility, drawing from years of experience working
-            directly with customers in marketing.
-          </StyledText>
-          <DownloadButton href={resume} download>
+          <Text margin="0 0 16px 0" asType="h2" variant="large">
+            {fullResumeContent.resumeSubhead}
+          </Text>
+          <Text color="grey" variant="textGrey" asType="p">
+            {fullResumeContent.resumeSummary.resumeSummary}
+          </Text>
+          <Button href={fullResumeContent.resumePdf?.file?.url} download>
             Download Resume
-          </DownloadButton>
+          </Button>
         </SectionLeft>
         <SectionRight>
-          {jobHistoryJson.map((job, index) => (
-            <CareerBlock key={`${job.company}${index}`}>
-              <Date>{job.date}</Date>
-              <Timeline>
-                <TimelineDot></TimelineDot>
-              </Timeline>
-              <Job>
-                <JobHeading>
-                  {job.company} - {job.city}
-                </JobHeading>
-                <JobDescription>
-                  <ul>
-                    {job.bullets.map((bullet, index) => (
-                      <li key={`${job.jobTitle}${index}`}>{bullet}</li>
-                    ))}
-                  </ul>
-                </JobDescription>
-                <JobBadge>{job.jobTitle}</JobBadge>
-              </Job>
-            </CareerBlock>
-          ))}
+          {fullResumeContent.fullCareerHistory.map((job, index) => {
+            const { company, date, city, jobTitle } = job
+            return (
+              <CareerBlock key={`${company}${index}`}>
+                <Date>{date}</Date>
+                <Timeline className="timeline">
+                  <TimelineDot />
+                </Timeline>
+                <Job>
+                  <JobHeading>
+                    {company} - {city}
+                  </JobHeading>
+                  <JobDescription>
+                    <ul>
+                      {job.bullets.map((bullet, index) => (
+                        <li key={`${job.jobTitle}${index}`}>{bullet}</li>
+                      ))}
+                    </ul>
+                  </JobDescription>
+                  <Tags tags={jobTitle}></Tags>
+                </Job>
+              </CareerBlock>
+            )
+          })}
         </SectionRight>
       </GridSection>
     </Section>

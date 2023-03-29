@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, graphql } from 'gatsby'
+import { graphql, Link } from 'gatsby'
 import get from 'lodash/get'
 import { renderRichText } from 'gatsby-source-contentful/rich-text'
 import { documentToPlainTextString } from '@contentful/rich-text-plain-text-renderer'
@@ -8,8 +8,8 @@ import { GatsbyImage } from 'gatsby-plugin-image'
 import readingTime from 'reading-time'
 import Seo from '../components/seo'
 import Layout from '../components/layout'
-import BlogPostHero from '../components/blog-post-hero'
-import Tags from '../components/tags'
+// import BlogPostHero from '../components/blog-post-hero'
+import Tags from '../components/ui/tags'
 import * as styles from './blog-post.module.css'
 
 class BlogPostTemplate extends React.Component {
@@ -45,11 +45,11 @@ class BlogPostTemplate extends React.Component {
           description={plainTextDescription}
           image={`http:${post.heroImage.resize.src}`}
         />
-        <BlogPostHero
-          image={post.heroImage?.gatsbyImage}
-          title={post.title}
-          content={post.description}
-        />
+        {/*<BlogPostHero*/}
+        {/*  image={post.heroImage?.gatsbyImage}*/}
+        {/*  title={post.title}*/}
+        {/*  content={post.description}*/}
+        {/*/>*/}
         <div className={styles.container}>
           <span className={styles.meta}>
             {post.author?.name} &middot;{' '}

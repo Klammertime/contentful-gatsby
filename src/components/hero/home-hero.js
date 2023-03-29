@@ -1,6 +1,6 @@
-import React from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
 import { GatsbyImage } from 'gatsby-plugin-image'
+import React from 'react'
 import styled, { keyframes } from 'styled-components'
 
 const DynamicTextWrapper = styled.div`
@@ -9,8 +9,7 @@ const DynamicTextWrapper = styled.div`
   height: 48px;
   overflow: hidden;
   @media screen and (max-width: 479px) {
-    padding-right: 0;
-    padding-left: 0;
+    padding: 0;
   }
   @media screen and (max-width: 767px) {
     margin-top: -4px;
@@ -32,10 +31,8 @@ const slide = keyframes`
 
 const DynamicTextLine = styled.div`
   height: 100%;
-  color: var(--swatch_fcde4a6f);
-  transition-timing-function: ease;
-  transition-duration: 200ms;
-  transition-property: opacity;
+  color: var(--primary);
+  transition: opacity 200ms ease;
   animation: ${slide} 3s ease-in 1s 2 reverse;
 `
 
@@ -43,7 +40,7 @@ const HeroV1Section = styled.section`
   position: relative;
   padding: 12vw 0 9vw 0;
   overflow: hidden;
-  background-color: #f1ede9;
+  background-color: var(--beige);
   @media screen and (max-width: 991px) {
     padding: 20vw 0 12vw 0;
   }
@@ -76,20 +73,17 @@ const Hero = styled.div`
   display: flex;
   align-items: stretch;
   @media screen and (max-width: 991px) {
-    padding-right: 2%;
-    padding-left: 2%;
+    padding: 0 2%;
   }
   @media screen and (max-width: 479px) {
     flex-direction: column;
     align-items: flex-start;
-    padding-right: 0;
-    padding-left: 0;
+    padding: 0;
   }
 `
 const HeroPhoto = styled.div`
-  flex-basis: auto;
-  flex-grow: 0;
-  flex-shrink: 0;
+  /* Three values: flex-grow | flex-shrink | flex-basis */
+  flex: 0 0 auto;
   width: 300px;
   max-width: 24vw;
   height: 300px;
@@ -128,9 +122,7 @@ const HeroH1 = styled.h1`
 `
 
 const HeroInfo = styled.div`
-  flex-basis: 0;
-  flex-grow: 1;
-  flex-shrink: 1;
+  flex: 1 1 0;
   padding-top: 60px;
   padding-left: 8%;
   font-weight: 700;
@@ -157,8 +149,7 @@ const HeroAngle = styled.div`
   z-index: 1;
   width: 120vw;
   height: 28vw;
-  margin-right: auto;
-  margin-left: auto;
+  margin: 0 auto;
   background-color: #fff;
   transform: translate(0px, 13vw) rotate(9deg);
   @media screen and (max-width: 479px) {
@@ -170,6 +161,7 @@ const HeroSection = () => {
   const data = useStaticQuery(graphql`
     query {
       contentfulHomepage {
+        dynamicTextList
         title
         pageHeader {
           pageHeader
@@ -184,27 +176,25 @@ const HeroSection = () => {
       }
     }
   `)
+  const { dynamicTextList, pageHeader, hero } = data.contentfulHomepage
   return (
     <HeroV1Section className="hero-v1-section">
       <Wrapper>
         <Hero className="hero-v1">
           <HeroPhoto className="hero-v1-photo">
             <GatsbyImage
-              image={data.contentfulHomepage.hero?.gatsbyImageData}
+              image={hero?.gatsbyImageData}
               alt="hi"
               imgStyle={{ borderRadius: '50%' }}
             />
           </HeroPhoto>
 
           <HeroInfo>
-            <HeroH1 className="hero-v1-text">
-              {data.contentfulHomepage.pageHeader.pageHeader}{' '}
-            </HeroH1>
+            <HeroH1 className="hero-v1-text">{pageHeader.pageHeader}</HeroH1>
             <DynamicTextWrapper className="dynamic-text-wrapper">
-              <DynamicTextLine>beautiful websites</DynamicTextLine>
-              <DynamicTextLine>mobile apps</DynamicTextLine>
-              <DynamicTextLine>icons and illustrations</DynamicTextLine>
-              <DynamicTextLine>beautiful websites</DynamicTextLine>
+              {dynamicTextList.map((val, index) => (
+                <DynamicTextLine key={index}>{val}</DynamicTextLine>
+              ))}
             </DynamicTextWrapper>
           </HeroInfo>
         </Hero>

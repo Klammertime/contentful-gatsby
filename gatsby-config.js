@@ -1,3 +1,5 @@
+// const siteConfig = require("./config.js");
+
 require('dotenv').config({
   path: `.env.${process.env.NODE_ENV}`,
 })
@@ -14,11 +16,20 @@ module.exports = {
     heading: `My name is Audrey Klammer. I'm a UI Engineer based in San Francisco.`,
     description: `change`,
     siteUrl: `https://audreyklammer.com`,
-    social: {
-      twitter: `https://twitter.com/Klammertime`,
-      github: `https://github.com/Klammertime`,
-      linkedin: `https://www.linkedin.com/in/audreyklammer/`,
-    },
+    social: [
+      {
+        label: `Twitter`,
+        url: `https://twitter.com/Klammertime`,
+      },
+      {
+        label: `Github`,
+        url: `https://github.com/Klammertime`,
+      },
+      {
+        label: `LinkedIn`,
+        url: `https://www.linkedin.com/in/audreyklammer/`,
+      },
+    ],
   },
   plugins: [
     'gatsby-transformer-sharp',
@@ -54,6 +65,13 @@ module.exports = {
       resolve: 'stylelint-declaration-block-no-ignored-properties',
       rules: {
         'plugin/declaration-block-no-ignored-properties': true,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `${__dirname}/src/images`,
+        name: `images`,
       },
     },
   ],

@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import Layout from '../components/layout'
 import Seo from '../components/seo'
 import ContactForm from '../components/contact-form'
-import Section from '../components/section'
+import Section from '../components/ui/section'
 
 const ContactWrapper = styled.div`
   position: relative;
@@ -27,7 +27,7 @@ const ContactPage = ({ location, data }) => {
       pageDescription={pageHeader.pageHeader}
     >
       <Seo title="contact" />
-      <Section color="white">
+      <Section>
         <ContactWrapper>
           <ContactForm
             formDescription={formDescription.formDescription}

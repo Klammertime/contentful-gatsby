@@ -1,18 +1,18 @@
-import React from 'react'
 import { graphql } from 'gatsby'
-import get from 'lodash/get'
+import React from 'react'
+import Layout from '../components/layout'
 
 import Seo from '../components/seo'
-import Layout from '../components/layout'
-import ArticlePreview from '../components/article-preview'
+
+// import ArticlePreview from '../components/article-preview'
 class BlogIndex extends React.Component {
   render() {
-    const posts = get(this, 'props.data.allContentfulBlogPost.nodes')
+    // const posts = get(this, 'props.data.allContentfulBlogPost.nodes')
 
     return (
       <Layout header="Blog" location={this.props.location}>
         <Seo title="Blog" />
-        <ArticlePreview posts={posts} />
+        {/*<ArticlePreview posts={posts} />*/}
       </Layout>
     )
   }

@@ -1,16 +1,17 @@
-import React from 'react'
+import { BLOCKS, MARKS } from '@contentful/rich-text-types'
 import { graphql } from 'gatsby'
 import { GatsbyImage } from 'gatsby-plugin-image'
-import get from 'lodash/get'
-import styled from 'styled-components'
 import { renderRichText } from 'gatsby-source-contentful/rich-text'
-// import { documentToPlainTextString } from '@contentful/rich-text-plain-text-renderer'
-import { BLOCKS } from '@contentful/rich-text-types'
-import Seo from '../components/seo'
+import get from 'lodash/get'
+import React from 'react'
+import styled from 'styled-components'
 import Layout from '../components/layout'
-import Section from '../components/section'
-import PortfolioNavigation from '../components/portfolio-navigation'
-import * as styles from './portfolio-post.module.css'
+import PortfolioNavigation from '../components/portfolio/portfolio-navigation'
+import Seo from '../components/seo'
+import PortfolioSlider from '../components/slider/portfolio-slider'
+import Link from '../components/ui/link'
+import Section from '../components/ui/section'
+import Text from '../components/ui/text'
 
 const MainGrid = styled.div`
   display: grid;
@@ -19,11 +20,11 @@ const MainGrid = styled.div`
   perspective: 2000px;
 `
 
-const ProjectImagesWrapper = styled.div`
+const ProjectWrapper = styled.div`
   position: relative;
   top: 8px;
   flex: 1;
-  grid-column: 1/8;
+  grid-column: 1/9;
   text-align: left;
   @media (max-width: 990px) {
     position: static;
@@ -33,8 +34,10 @@ const ProjectImagesWrapper = styled.div`
 `
 
 const InfoBoxWrapper = styled.div`
+  grid-row-start: 1;
+  //grid-column: 1/13;
   flex: 1;
-  grid-column: 9/13;
+  grid-column: 10/13;
   @media screen and (max-width: 990px) {
     grid-row-start: 1;
     grid-column: 2/12;
@@ -67,7 +70,7 @@ const WorkDetailsCell = styled.div`
   padding: 12px 0;
   font-size: 15px;
   line-height: 24px;
-  border-bottom: 1px solid #e4e4e4;
+  border-bottom: 1px solid var(--border);
 `
 
 const WorkSidebar = styled.div`
@@ -89,14 +92,37 @@ class PortfolioPostTemplate extends React.Component {
     const post = get(this.props, 'data.contentfulPortfolioPost')
     const previous = get(this.props, 'data.previous')
     const next = get(this.props, 'data.next')
-    // const plainTextDescription = documentToPlainTextString(
-    //   JSON.parse(post.description.raw)
-    // )
 
+    const Bold = ({ children }) => <span className="bold"> {children}</span>
+    const ParagraphText = ({ children }) => (
+      <Text margin="0 0 24px 0" variant="body" asType="p">
+        {children}
+      </Text>
+    )
+
+    const Heading2 = ({ children }) => (
+      <Text margin="0 0 16px 0" variant="large" asType="h2">
+        {children}
+      </Text>
+    )
+
+    const Heading3 = ({ children }) => (
+      <Text margin="20px 0 12px 0" variant="medium" asType="h3">
+        {children}
+      </Text>
+    )
     const options = {
+      renderMark: {
+        [MARKS.BOLD]: (text) => <Bold>{text}</Bold>,
+      },
       renderNode: {
+        [BLOCKS.HEADING_2]: (node, children) => <Heading2>{children}</Heading2>,
+        [BLOCKS.HEADING_3]: (node, children) => <Heading3>{children}</Heading3>,
+        [BLOCKS.PARAGRAPH]: (node, children) => (
+          <ParagraphText>{children}</ParagraphText>
+        ),
         [BLOCKS.EMBEDDED_ASSET]: (node) => {
-          const { gatsbyImageData } = node.data.target
+          const { gatsbyImageData } = node?.data?.target
           if (!gatsbyImageData) {
             // asset is not an image
             return null
@@ -116,53 +142,69 @@ class PortfolioPostTemplate extends React.Component {
     }
 
     return (
-      <Layout header={post.title} location={this.props.location}>
-        <Seo
-          title={post.title}
-          // description={plainTextDescription}
-        />
+      <Layout header={post?.title} location={this.props.location}>
+        <Seo title={post?.title} />
+        <Section color="offWhite" noPaddingTop>
+          {post?.portfolioImages && (
+            <PortfolioSlider slideContent={post?.portfolioImages} />
+          )}
+        </Section>
         <Section color="white" noPaddingTop>
           <MainGrid>
-            <ProjectImagesWrapper>
-              <div className={styles.article}>
-                {post.body?.raw && renderRichText(post.body, options)}
-              </div>
-            </ProjectImagesWrapper>
+            <ProjectWrapper>
+              {post.body?.raw && renderRichText(post.body, options)}
+            </ProjectWrapper>
             <InfoBoxWrapper>
               <WorkSidebar>
-                <h2>Framerio</h2>
-                <WorkDescription>
-                  Writing result-oriented ad copy is difficult, as it must
-                  appeal to, entice, and convince consumers to take action.
-                  There is no magic formula.
-                </WorkDescription>
+                {post?.title && (
+                  <Text asType="h2" variant="large">
+                    {post.title}
+                  </Text>
+                )}
+                {post?.workDescription?.workDescription && (
+                  <WorkDescription>
+                    {post?.workDescription?.workDescription}
+                  </WorkDescription>
+                )}
 
                 <WorkDetails>
-                  <WorkDetailsCell>
-                    <WorkDetailsCellHeader>Client:</WorkDetailsCellHeader>
-                    <span>Webflow</span>
-                  </WorkDetailsCell>
-                  <WorkDetailsCell>
-                    <WorkDetailsCellHeader>Release Date:</WorkDetailsCellHeader>
-                    <span>May 2017</span>
-                  </WorkDetailsCell>
-                  <WorkDetailsCell>
-                    <WorkDetailsCellHeader>Category:</WorkDetailsCellHeader>
-                    <span>Mobile</span>
-                  </WorkDetailsCell>
-                  <WorkDetailsCell>
-                    <WorkDetailsCellHeader>Link:</WorkDetailsCellHeader>
-                    <a href="https://elasticthemes.com">View It Live</a>
-                  </WorkDetailsCell>
+                  {post?.title && (
+                    <WorkDetailsCell>
+                      <WorkDetailsCellHeader>Client:</WorkDetailsCellHeader>
+                      <span> {post?.title}</span>
+                    </WorkDetailsCell>
+                  )}
+                  {post?.releaseDate && (
+                    <WorkDetailsCell>
+                      <WorkDetailsCellHeader>
+                        Release Date:
+                      </WorkDetailsCellHeader>
+                      <span></span>
+                    </WorkDetailsCell>
+                  )}
+                  {post?.role && (
+                    <WorkDetailsCell>
+                      <WorkDetailsCellHeader>Role:</WorkDetailsCellHeader>
+                      <span>{post?.role}</span>
+                    </WorkDetailsCell>
+                  )}
+                  {post?.seeItLive?.url && (
+                    <WorkDetailsCell>
+                      <WorkDetailsCellHeader>Link:</WorkDetailsCellHeader>
+                      <Link to={post?.seeItLive?.url}>View It Live</Link>
+                    </WorkDetailsCell>
+                  )}
                 </WorkDetails>
               </WorkSidebar>
             </InfoBoxWrapper>
           </MainGrid>
         </Section>
-
+        {post?.portfolioImages && (
+          <PortfolioSlider slideContent={post?.portfolioImages} />
+        )}
         <PortfolioNavigation
-          nextImg={next?.heroImage.gatsbyImageData}
-          prevImg={previous?.heroImage.gatsbyImageData}
+          nextImg={next?.heroImage?.gatsbyImageData}
+          prevImg={previous?.heroImage?.gatsbyImageData}
           next={next}
           previous={previous}
         />
@@ -180,8 +222,29 @@ export const pageQuery = graphql`
     $nextPostSlug: String
   ) {
     contentfulPortfolioPost(slug: { eq: $slug }) {
+      workCardDescription {
+        workCardDescription
+      }
+      workDescription {
+        workDescription
+      }
+      seeItLive {
+        linkText
+        title
+        url
+      }
       role
       client
+      inTheNews {
+        id
+        summary {
+          summary
+        }
+        quote {
+          id
+          quote
+        }
+      }
       slug
       title
       tags
@@ -194,14 +257,28 @@ export const pageQuery = graphql`
             gatsbyImageData(
               layout: FULL_WIDTH
               placeholder: BLURRED
-              width: 1280
-              height: 1280
+              quality: 100
             )
           }
         }
       }
+      portfolioImages {
+        portfolioId
+        portfolioImage {
+          gatsbyImageData(
+            height: 1280
+            width: 1280
+            cropFocus: TOP
+            layout: FULL_WIDTH
+            placeholder: BLURRED
+            quality: 100
+          )
+        }
+      }
+
       heroImage {
-        gatsbyImageData(layout: FIXED, placeholder: BLURRED, width: 1280)
+        description
+        gatsbyImageData(layout: FULL_WIDTH, placeholder: BLURRED, quality: 100)
       }
     }
     previous: contentfulPortfolioPost(slug: { eq: $previousPostSlug }) {
@@ -211,8 +288,8 @@ export const pageQuery = graphql`
         gatsbyImageData(
           layout: FIXED
           placeholder: BLURRED
-          height: 100
-          width: 100
+          height: 150
+          width: 150
         )
       }
     }
@@ -223,8 +300,8 @@ export const pageQuery = graphql`
         gatsbyImageData(
           layout: FIXED
           placeholder: BLURRED
-          height: 100
-          width: 100
+          height: 150
+          width: 150
         )
       }
     }

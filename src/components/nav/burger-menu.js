@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react'
 import { slide as Menu } from 'react-burger-menu'
+import Link from '../ui/link'
 
 let styles = {
   bmBurgerButton: {
@@ -93,7 +94,7 @@ const MyProvider = (props) => {
 // }
 
 // create a navigation component that wraps the burger menu
-const Navigation = () => {
+const Navigation = ({ navLinks }) => {
   const ctx = useContext(MyContext)
 
   return (
@@ -104,32 +105,27 @@ const Navigation = () => {
       isOpen={ctx.isMenuOpen}
       onStateChange={(state) => ctx.stateChangeHandler(state)}
     >
-      <a id="home" className="menu-item" href="/">
-        Home
-      </a>
-      <a id="about" className="menu-item" href="/about">
-        About
-      </a>
-      <a id="portfolio" className="menu-item" href="/portfolio">
-        Portfolio
-      </a>
-      <a id="blog" className="menu-item" href="/blog">
-        Blog
-      </a>
-      <a id="contact" className="menu-item" href="/contact">
-        Contact
-      </a>
+      {navLinks.map((nav) => (
+        <Link
+          id={nav.label}
+          to={nav.page}
+          className="menu-item"
+          activeClassName="active"
+        >
+          {nav.label}
+        </Link>
+      ))}
     </Menu>
   )
 }
 
 // default export here
-const BurgerMenu = () => {
+const BurgerMenu = ({ navLinks }) => {
   return (
     <MyProvider>
       <div>
         {/*<Button />*/}
-        <Navigation />
+        <Navigation navLinks={navLinks} />
       </div>
     </MyProvider>
   )

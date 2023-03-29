@@ -1,26 +1,32 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const Tag = styled.div`
+const Tag = styled.span`
   display: inline-block;
-  margin: 6px 6px 6px 0;
   padding: 2px 11px;
-  color: var(--swatch_a5267f7d);
-  font-weight: 600;
+  background-color: var(--tag-grey);
+  border-radius: 32px;
+  color: var(---black);
+  margin: 6px 0 0 0;
   font-size: 11px;
   line-height: 20px;
+  font-weight: 600;
   text-transform: uppercase;
-  background-color: var(--swatch_401ecef8);
-  border-radius: 32px;
+  cursor: default;
   transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94),
     cubic-bezier(0.25, 0.46, 0.45, 0.94);
   transition-duration: 200ms, 200ms;
   transition-property: background-color, color;
+
+  &:hover {
+    background-color: var(--primary);
+    color: var(--white);
+  }
 `
 
-const TagContainer = styled.small`
+const TagContainer = styled.div`
   display: flex;
-  gap: var(--space-md);
+  gap: 6px;
 `
 
 const Tags = ({ tags }) =>
