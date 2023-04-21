@@ -64,7 +64,7 @@ public
 .cache
 
 # Contentful config file
-.contentful.json
+.contentful.json.local
 
 # Local Netlify folder
 .netlify

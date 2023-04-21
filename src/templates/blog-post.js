@@ -1,16 +1,15 @@
 import React from 'react'
-import { Link, graphql } from 'gatsby'
+import { graphql, Link } from 'gatsby'
 import get from 'lodash/get'
 import { renderRichText } from 'gatsby-source-contentful/rich-text'
 import { documentToPlainTextString } from '@contentful/rich-text-plain-text-renderer'
 import { BLOCKS } from '@contentful/rich-text-types'
-import { GatsbyImage, getImage } from 'gatsby-plugin-image'
+import { GatsbyImage } from 'gatsby-plugin-image'
 import readingTime from 'reading-time'
-
 import Seo from '../components/seo'
 import Layout from '../components/layout'
-import Hero from '../components/hero'
-import Tags from '../components/tags'
+// import BlogPostHero from '../components/blog-post-hero'
+import Tags from '../components/ui/tags'
 import * as styles from './blog-post.module.css'
 
 class BlogPostTemplate extends React.Component {
@@ -23,33 +22,34 @@ class BlogPostTemplate extends React.Component {
     )
     const plainTextBody = documentToPlainTextString(JSON.parse(post.body.raw))
     const { minutes: timeToRead } = readingTime(plainTextBody)
-    
+
     const options = {
       renderNode: {
         [BLOCKS.EMBEDDED_ASSET]: (node) => {
-        const { gatsbyImage, description } = node.data.target
-        return (
-           <GatsbyImage
-              image={getImage(gatsbyImage)}
-              alt={description}
-           />
-         )
+          const { gatsbyImageData } = node.data.target
+          if (!gatsbyImageData) {
+            // asset is not an image
+            return null
+          }
+          return (
+            <GatsbyImage image={gatsbyImageData} alt="insert correct one" />
+          )
         },
       },
-    };
+    }
 
     return (
-      <Layout location={this.props.location}>
+      <Layout header={post.title} location={this.props.location}>
         <Seo
           title={post.title}
           description={plainTextDescription}
           image={`http:${post.heroImage.resize.src}`}
         />
-        <Hero
-          image={post.heroImage?.gatsbyImage}
-          title={post.title}
-          content={post.description}
-        />
+        {/*<BlogPostHero*/}
+        {/*  image={post.heroImage?.gatsbyImage}*/}
+        {/*  title={post.title}*/}
+        {/*  content={post.description}*/}
+        {/*/>*/}
         <div className={styles.container}>
           <span className={styles.meta}>
             {post.author?.name} &middot;{' '}
@@ -112,7 +112,6 @@ export const pageQuery = graphql`
       }
       body {
         raw
-        
       }
       tags
       description {

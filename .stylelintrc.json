@@ -1,0 +1,14 @@
+{
+  "extends": [
+    "stylelint-config-rational-order",
+    "stylelint-declaration-block-no-ignored-properties"
+  ],
+  "overrides": [
+    {
+      "files": [
+        "*.js"
+      ],
+      "customSyntax": "postcss-styled-components"
+    }
+  ]
+}
