@@ -12,6 +12,9 @@ const List = styled.section`
   padding-right: 8px;
   padding-left: 8px;
   column-count: 2;
+  @media (max-width: 991px) {
+    column-count: 1;
+  }
 `
 const TestimonialsPage = ({ location }) => {
   const { collectionItems } = useTestimonialData()

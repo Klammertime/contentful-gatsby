@@ -108,6 +108,9 @@ const InfoBox = styled.div`
 `
 const SliderWrapper = styled.div`
   padding-top: 60px;
+  @media screen and (max-width: 767px) {
+    display: none;
+  }
 `
 
 const TestimonialsContainer = styled.div`
@@ -116,6 +119,19 @@ const TestimonialsContainer = styled.div`
   padding-right: 8px;
   padding-left: 8px;
   column-count: 2;
+  @media screen and (max-width: 990px) {
+    column-count: 1;
+  }
+`
+
+const Col = styled.div`
+  display: grid;
+  grid-template-columns: ${(props) =>
+    props.isEven ? '1fr 1fr' : '1fr 1fr 1fr'};
+
+  grid-template-rows: auto;
+  grid-gap: 30px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 `
 
 class PortfolioPostTemplate extends React.Component {
@@ -130,14 +146,6 @@ class PortfolioPostTemplate extends React.Component {
       </Text>
     )
 
-    const Col = styled.div`
-      display: grid;
-      grid-template-columns: ${(props) =>
-        props.isEven ? '1fr 1fr' : '1fr 1fr 1fr'};
-
-      grid-template-rows: auto;
-      grid-gap: 30px;
-    `
     const BulletText = ({ children }) => <ul>{children}</ul>
     const Heading2 = ({ children }) => (
       <Text margin="0 0 16px 0" variant="large" asType="h2">
@@ -208,7 +216,7 @@ class PortfolioPostTemplate extends React.Component {
 
             <InfoBoxWrapper>
               <InfoBox>
-                <h2 className="sectionHeader">{post?.client}</h2>
+                <h2 className="sectionHeader"> {post?.title}</h2>
                 {post?.workCardDescription?.workCardDescription && (
                   <p className="workCardDescription">
                     {post?.workCardDescription?.workCardDescription}
@@ -221,7 +229,7 @@ class PortfolioPostTemplate extends React.Component {
                         <Text variant="textGrey">Client:</Text>
                       </div>
                       <Text color="black" variant="textGrey">
-                        {post?.title}
+                        {post?.client}
                       </Text>
                     </div>
                   )}

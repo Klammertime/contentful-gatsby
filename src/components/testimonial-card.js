@@ -6,7 +6,7 @@ import styled from 'styled-components'
 
 const TestimonialWrapper = styled.div`
   display: inline-block;
-  max-width: 570px;
+  max-width: 100%;
 
   .testimonial {
     margin: 15px 8px;
@@ -73,13 +73,9 @@ const Author = styled.div`
 const QuoteText = styled.div`
   margin-top: 32px;
   margin-bottom: 16px;
-
-  .testimonial-text {
-    margin-bottom: 16px;
-    color: #4d5464;
-    font-size: 16px;
-    line-height: 28px;
-  }
+  color: #4d5464;
+  font-size: 16px;
+  line-height: 28px;
 
   &:before {
     display: table;

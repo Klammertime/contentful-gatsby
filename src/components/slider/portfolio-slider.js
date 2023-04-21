@@ -16,6 +16,13 @@ const StyledWrapper = styled.div`
   text-align: center;
   clear: both;
   background-color: #fff;
+  @media screen and (max-width: 767px) {
+    height: 100%;
+  }
+
+  @media screen and (max-width: 1024px) {
+    width: 90%;
+  }
 
   .screen-mask {
     min-height: 420px;
@@ -53,7 +60,7 @@ const StyledWrapper = styled.div`
     margin: auto;
     cursor: pointer;
     overflow: hidden;
-    color: #fff;
+    //color: #fff;
     font-size: 40px;
     user-select: none;
   }
@@ -73,12 +80,33 @@ const StyledWrapper = styled.div`
     z-index: 3;
     right: auto;
     left: -88px;
+    @media screen and (max-width: 767px) {
+      left: 0;
+    }
+    @media screen and (max-width: 1024px) {
+      left: -5%;
+    }
+    @media screen and (max-width: 1185px) {
+      left: -33px;
+    }
   }
 
   .next {
     left: auto;
     right: -88px;
+
+    @media screen and (max-width: 767px) {
+      right: 0;
+    }
+    @media screen and (max-width: 1024px) {
+      right: -5%;
+    }
+    @media screen and (max-width: 1185px) {
+      right: -33px;
+    }
+
   }
+
 
   @media (min-width: 800px) {
     .prev,
@@ -117,60 +145,65 @@ const StyledWrapper = styled.div`
   article.activeSlide {
     opacity: 1;
     transform: translateX(0);
-  }
 
-  article.lastSlide {
-    transform: translateX(-100%);
-  }
 
-  article.nextSlide {
-    transform: translateX(100%);
-  }
+    article.lastSlide {
+      transform: translateX(-100%);
+    }
 
-  .item-img {
-    border: 0;
-    vertical-align: middle;
-    display: inline-block;
-    height: 100%;
-    margin: 0;
-    max-width: none;
-    padding: 0;
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    object-fit: cover;
-  }
+    article.nextSlide {
+      transform: translateX(100%);
+    }
 
-  .slider-nav {
-    height: 40px;
-    padding-top: 13px;
-    opacity: 0.4;
-    font-size: 6px;
-    color: #fff;
-    position: absolute;
-    z-index: 2;
-    inset: auto 0 0 0;
-    margin: auto;
-    text-align: center;
-    -webkit-tap-highlight-color: transparent;
-  }
+    .item-img {
+      border: 0;
+      vertical-align: middle;
+      display: inline-block;
+      height: 100%;
+      margin: 0;
+      max-width: none;
+      padding: 0;
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      object-fit: cover;
+      @media screen and (max-width: 479px) {
+        height: auto;
+      }
 
-  .activeImg,
-  .nonActiveImg {
-    position: relative;
-    display: inline-block;
-    width: 1em;
-    height: 1em;
-    cursor: pointer;
-    margin: 0 3px 0.5em 3px;
-    transition: background-color 0.1s, color 0.1s;
-    background-color: rgba(34, 34, 34, 0.4);
-    border-radius: 100%;
-  }
+    }
 
-  .activeImg {
-    background-color: #222;
-  }
+    .slider-nav {
+      height: 40px;
+      padding-top: 13px;
+      opacity: 0.4;
+      font-size: 6px;
+      color: #fff;
+      position: absolute;
+      z-index: 2;
+      inset: auto 0 0 0;
+      margin: auto;
+      text-align: center;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .activeImg,
+    .nonActiveImg {
+      position: relative;
+      display: inline-block;
+      width: 1em;
+      height: 1em;
+      cursor: pointer;
+      margin: 0 3px 0.5em 3px;
+      transition: background-color 0.1s, color 0.1s;
+      background-color: rgba(34, 34, 34, 0.4);
+      border-radius: 100%;
+    }
+
+    .activeImg {
+      background-color: #222;
+
+    }
 `
 
 function PortfolioSlider({ slideContent }) {
