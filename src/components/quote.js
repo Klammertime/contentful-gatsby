@@ -1,7 +1,6 @@
-import { GatsbyImage } from 'gatsby-plugin-image'
 import React from 'react'
 import styled from 'styled-components'
-import Text from '../ui/text'
+import Text from './ui/text'
 
 const QuoteWrapper = styled.div`
   .dynamic-testimonial {
@@ -27,12 +26,6 @@ const QuoteWrapper = styled.div`
     }
   }
 
-
-  .dynamic-review-author {
-    margin-right: 6px;
-    color: var(--black);
-    font-weight: 700;
-  }
 
   .dynamic-review-job-title {
     font-weight: 500;
@@ -64,25 +57,29 @@ const QuoteWrapper = styled.div`
         margin-bottom: 16px;
       }
     }
-
-
 `
 
-const Quote = ({ text, avatar, author, jobTitle }) => {
+const Quote = ({ testimonialQuote }) => {
   return (
     <QuoteWrapper>
       <div className="dynamic-testimonial">
-        {avatar && <GatsbyImage alt="avatar" image={avatar} />}
         <div className="dynamic-review">
-          <Text variant="dynamicText">
-            "I think{' '}
-            <span className="text-highlighted">Webflow is the future</span> of
-            website design and front-end, and Elastic Themes helps to shape that
-            future today by&nbsp;creating some great&nbsp;templates."
-          </Text>
+          {testimonialQuote?.blurbQuote?.blurbQuote && (
+            <Text variant="dynamicText">
+              {testimonialQuote?.blurbQuote?.blurbQuote}
+            </Text>
+          )}
           <div className="dynamic-review-info">
-            <div className="dynamic-review-author">Denis Pakhaliuk</div>
-            <div className="dynamic-review-job-title">— CEO of Ramotion</div>
+            {testimonialQuote?.name && (
+              <div className="dynamic-review-author">
+                {testimonialQuote?.name}
+              </div>
+            )}
+            {testimonialQuote?.title && (
+              <div className="dynamic-review-job-title">
+                {testimonialQuote?.title}
+              </div>
+            )}
           </div>
         </div>
       </div>

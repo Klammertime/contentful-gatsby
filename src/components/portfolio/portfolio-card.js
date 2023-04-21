@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import Tags from '../ui/tags'
 import Text from '../ui/text'
 
-const CardDescription = styled.p`
+const CardDescription = styled.div`
   margin-top: -4px;
 `
 
@@ -20,7 +20,6 @@ const Meta = styled.div`
 `
 const PortfolioCard = ({ card1 }) => {
   const { slug, heroImage, title, tags } = card1
-  const { workCardDescription } = card1.workCardDescription
   return (
     <CardWrapper>
       <Link to={`/portfolio/${slug}`}>
@@ -33,10 +32,10 @@ const PortfolioCard = ({ card1 }) => {
       <Text margin="20px 0 12px 0" asType="h2" variant="small">
         {title}
       </Text>
-      {workCardDescription && (
+      {card1?.workCardDescription?.workCardDescription && (
         <CardDescription>
           <Text variant="textGrey" asType="p">
-            {workCardDescription}
+            {card1?.workCardDescription?.workCardDescription}
           </Text>
         </CardDescription>
       )}

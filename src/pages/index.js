@@ -4,7 +4,7 @@ import React from 'react'
 import styled from 'styled-components'
 import Layout from '../components/layout'
 import PortfolioCard from '../components/portfolio/portfolio-card'
-import Quote from '../components/quote/quote'
+import Quote from '../components/quote'
 import Section from '../components/ui/section'
 import Text from '../components/ui/text'
 
@@ -129,7 +129,6 @@ export const pageQuery = graphql`
         workCardDescription {
           workCardDescription
         }
-        tags
         heroImage {
           gatsbyImageData(
             layout: CONSTRAINED

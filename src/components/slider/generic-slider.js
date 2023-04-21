@@ -1,39 +1,34 @@
 import React, { useEffect, useState } from 'react'
-import { FaQuoteRight } from 'react-icons/fa'
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi'
 import styled from 'styled-components'
+import TestimonialCard from '../testimonial-card'
 
 const StyledSection = styled.div`
-  width: 90vw;
-  margin: 5rem auto;
-  max-width: var(--max-width);
-
-  @media screen and (min-width: 992px) {
-    width: 95vw;
-  }
-
   .icon {
-    font-size: 3rem;
     margin-top: 1rem;
     color: var(--light-grey);
+    font-size: 3rem;
   }
 
   .prev,
   .next {
     position: absolute;
-    top: 200px;
-    transform: translateY(-50%);
-    background: var(--light-grey);
-    color: var(--white);
-    width: 1.25rem;
-    height: 1.25rem;
-    display: grid;
-    place-items: center;
-    border-color: transparent;
+    top: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 3.5rem;
+    height: 3.5rem;
+    color: #101828;
     font-size: 1rem;
-    border-radius: var(--radius);
+    background: var(--light-grey);
+    background-color: transparent;
+    border: 1px solid #d0d5dd;
+    border-radius: 6px;
+    transform: translateY(-50%);
     cursor: pointer;
     transition: all 0.3s linear;
+    place-items: center;
   }
 
   .prev:hover,
@@ -52,13 +47,10 @@ const StyledSection = styled.div`
   @media (min-width: 800px) {
     .text {
       max-width: 45em;
-    }
-
-    .prev,
-    .next {
-      width: 2rem;
-      height: 2rem;
-      font-size: 1.5rem;
+      font-weight: 700;
+      font-size: 1.875rem;
+      font-family: Spacegrotesk, sans-serif;
+      line-height: 1.5;
     }
   }
 
@@ -66,19 +58,19 @@ const StyledSection = styled.div`
     position: absolute;
     top: 0;
     left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     width: 100%;
     height: 100%;
     opacity: 0;
     transition: all 0.3s linear;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
   }
 
   article.activeSlide {
-    opacity: 1;
     transform: translateX(0);
+    opacity: 1;
   }
 
   article.lastSlide {
@@ -90,32 +82,43 @@ const StyledSection = styled.div`
   }
 
   .title {
-    text-transform: capitalize;
     margin-bottom: 0.75rem;
     color: var(--grey);
+    text-transform: capitalize;
   }
 
   .section-center {
-    margin: 4rem auto 0 auto;
-    width: 80vw;
-    height: 450px;
-    max-width: 800px;
-    text-align: center;
     position: relative;
     display: flex;
+    width: 100%;
+    height: 60vh;
+    margin: 4rem auto 0 auto;
     overflow: hidden;
+    text-align: center;
   }
 
   .person-img {
-    border-radius: 50%;
-    margin-bottom: 1rem;
     width: 150px;
     height: 150px;
+    margin-bottom: 1rem;
     object-fit: cover;
     border: 4px solid var(--light-grey);
+    border-radius: 50%;
     box-shadow: var(--dark-shadow);
   }
 `
+
+const TestimonialContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 48rem;
+  height: 100%;
+  margin: 0 auto;
+  text-align: center;
+`
+
 const data = [
   {
     id: 1,
@@ -142,7 +145,7 @@ const data = [
     name: 'peter smith',
     title: 'product designer',
     quote:
-      'Drinking vinegar polaroid street art echo park, actually semiotics next level butcher master cleanse hammock flexitarian ethical paleo.',
+      'Drinking vinegar polaroid street art echo park, actually semioticsDrinking vinegar polaroid street art echo park, actually semioticsDrinking vinegar polaroid street art echo park, actually semioticsDrinking vinegar polaroid street art echo park, actually semiotics next level butcher master cleanse hammock flexitarian ethical paleo.',
   },
   {
     id: 4,
@@ -155,12 +158,12 @@ const data = [
   },
 ]
 
-function GenericSlider1() {
-  const [people, setPeople] = useState(data)
+function GenericSlider1({ data1 }) {
+  const [people, setPeople] = useState(data1)
   const [index, setIndex] = React.useState(0)
 
   useEffect(() => {
-    const lastIndex = people.length - 1
+    const lastIndex = people?.length - 1
     if (index < 0) {
       setIndex(lastIndex)
     }
@@ -172,8 +175,8 @@ function GenericSlider1() {
   return (
     <StyledSection>
       <div className="section-center">
-        {people.map((person, personIndex) => {
-          const { id, image, name, title, quote } = person
+        {people?.map((person, personIndex) => {
+          const { id, name, title, text } = person
 
           let position = 'nextSlide'
           if (personIndex === index) {
@@ -188,11 +191,17 @@ function GenericSlider1() {
 
           return (
             <article className={position} key={id}>
-              <img src={image} alt={name} className="person-img" />
-              <h4>{name}</h4>
-              <p className="title">{title}</p>
-              <p className="text">{quote}</p>
-              <FaQuoteRight className="icon" />
+              <TestimonialCard testimonial={person}></TestimonialCard>
+              {/*{partialQuote?.partialQuote && (*/}
+              {/*  <TestimonialContent>*/}
+              {/*    <p className="text">{partialQuote?.partialQuote}</p>*/}
+
+              {/*    /!*<img src={image} alt={name} className="person-img" />*!/*/}
+              {/*    <h4>{name}</h4>*/}
+              {/*    <p className="title">{title}</p>*/}
+              {/*    /!*<FaQuoteRight className="icon" />*!/*/}
+              {/*  </TestimonialContent>*/}
+              {/*)}*/}
             </article>
           )
         })}

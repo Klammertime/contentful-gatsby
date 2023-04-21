@@ -1,21 +1,17 @@
 import { GatsbyImage } from 'gatsby-plugin-image'
 import React, { useEffect, useState } from 'react'
-import { FiChevronLeft, FiChevronRight } from 'react-icons/fi'
+import { HiChevronLeft, HiChevronRight } from 'react-icons/hi2'
 import styled from 'styled-components'
 import Section from '../ui/section'
 
 const StyledWrapper = styled.div`
   width: 100%;
-  //height: auto;
-  // also can try height 783, max-width 1021px
-  // but have to edit images bec cuts off area
-  height: 745px;
+  height: 588px;
   max-width: 970px;
-  margin-right: auto;
-  margin-left: auto;
+  margin: 0 auto;
   padding: 38px;
   border-radius: 30px;
-  box-shadow: 0 5px 15px 0 rgba(32, 36, 46, 0.1);
+  box-shadow: 0 5px 15px 0 rgba(32, 36, 46, 0.3);
   position: relative;
   text-align: center;
   clear: both;
@@ -47,7 +43,7 @@ const StyledWrapper = styled.div`
     display: flex;
     width: 56px;
     height: 56px;
-    padding: 14px;
+    padding: 11px;
     justify-content: center;
     align-items: center;
     border-radius: 50%;
@@ -64,7 +60,8 @@ const StyledWrapper = styled.div`
 
   .prev:hover,
   .next:hover {
-    //background-color: var(--primary);
+    //TODO decide what behavior you want on hover
+    //background-color: var(--primary);ui
   }
 
   .prev:focus,
@@ -90,7 +87,7 @@ const StyledWrapper = styled.div`
       width: 56px;
       height: 56px;
       font-size: 3rem;
-      padding: 8px;
+      padding: 11px;
       justify-content: center;
       align-items: center;
       border-radius: 50%;
@@ -130,19 +127,16 @@ const StyledWrapper = styled.div`
     transform: translateX(100%);
   }
 
-  .person-img {
+  .item-img {
     border: 0;
     vertical-align: middle;
     display: inline-block;
-    bottom: 0;
     height: 100%;
-    left: 0;
     margin: 0;
     max-width: none;
     padding: 0;
     position: absolute;
-    right: 0;
-    top: 0;
+    inset: 0;
     width: 100%;
     object-fit: cover;
   }
@@ -155,17 +149,14 @@ const StyledWrapper = styled.div`
     color: #fff;
     position: absolute;
     z-index: 2;
-    top: auto;
-    right: 0;
-    bottom: 0;
-    left: 0;
+    inset: auto 0 0 0;
     margin: auto;
     text-align: center;
     -webkit-tap-highlight-color: transparent;
   }
 
-  .activeSlide,
-  .nonActiveSlide {
+  .activeImg,
+  .nonActiveImg {
     position: relative;
     display: inline-block;
     width: 1em;
@@ -177,48 +168,47 @@ const StyledWrapper = styled.div`
     border-radius: 100%;
   }
 
-  .activeSlide {
+  .activeImg {
     background-color: #222;
   }
 `
 
 function PortfolioSlider({ slideContent }) {
-  const [people, setPeople] = useState(slideContent)
+  const [portfolioItems, setPortfolioItems] = useState(slideContent)
   const [index, setIndex] = React.useState(0)
 
   useEffect(() => {
-    const lastIndex = people.length - 1
+    const lastIndex = portfolioItems.length - 1
     if (index < 0) {
       setIndex(lastIndex)
     }
     if (index > lastIndex) {
       setIndex(0)
     }
-  }, [index, people])
+  }, [index, portfolioItems])
 
   return (
-    <Section color="offWhite">
+    <Section noPaddingTop>
       <StyledWrapper>
         <div className="screen-mask">
-          {people.map((person, personIndex) => {
-            const { portfolioId, portfolioImage } = person
-
+          {portfolioItems.map((item, itemIndex) => {
             let position = 'nextSlide'
-            if (personIndex === index) {
+            if (itemIndex === index) {
               position = 'activeSlide'
             }
             if (
-              personIndex === index - 1 ||
-              (index === 0 && personIndex === people.length - 1)
+              itemIndex === index - 1 ||
+              (index === 0 && itemIndex === portfolioItems.length - 1)
             ) {
               position = 'lastSlide'
             }
 
             return (
-              <article className={position} key={portfolioId}>
+              <article className={position} key={item.id}>
                 <GatsbyImage
-                  image={portfolioImage?.gatsbyImageData}
-                  className="person-img"
+                  objectPosition="0% 0%"
+                  image={item?.gatsbyImageData}
+                  className="item-img"
                   alt="portfolio"
                 />
               </article>
@@ -226,19 +216,17 @@ function PortfolioSlider({ slideContent }) {
           })}
         </div>
         <button className="prev" onClick={() => setIndex(index - 1)}>
-          <FiChevronLeft />
+          <HiChevronLeft />
         </button>
         <button className="next" onClick={() => setIndex(index + 1)}>
-          <FiChevronRight />
+          <HiChevronRight />
         </button>
         <div className="slider-nav">
-          {people.map((person, personIndex) => {
+          {portfolioItems.map((item, itemIndex) => {
             return (
               <div
-                className={
-                  personIndex === index ? 'activeSlide' : 'nonActiveSlide'
-                }
-                onClick={() => setIndex(personIndex)}
+                className={itemIndex === index ? 'activeImg' : 'nonActiveImg'}
+                onClick={() => setIndex(itemIndex)}
               ></div>
             )
           })}

@@ -49,6 +49,9 @@ const Scrolled = styled(NotScrolled)`
     props.bg ? 'rgba(255, 255, 255, 1)' : 'rgba(255, 255, 255, 0)'};
   backdrop-filter: opacity(0);
   transition: 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
+
+  box-shadow: ${(props) =>
+    props.bg ? '0 5px 15px 0 rgba(32, 36, 46, 0.06)' : 'none'};
 `
 
 const LogoWrapper = styled.span`
@@ -76,10 +79,14 @@ const StyledLink = styled(Link)`
     outline: 0;
   }
 
-  &:active {
-    text-decoration: none;
-    background-color: transparent;
-    outline: 0;
+  //&:active {
+  //  text-decoration: none;
+  //  background-color: transparent;
+  //  outline: 0;
+  //}
+
+  &.active {
+    color: var(--primary);
   }
 `
 const StyledLinkLogo = styled(Link)`
@@ -170,9 +177,10 @@ const Underline = styled.div`
   transition: all 0.3s ease-Out;
 `
 
-const Nav = ({ navLinks }) => {
+const Nav = ({ current, navLinks }) => {
   const [scrolling, setScrolling] = useState(false)
-
+  const [currentPath, setCurrentPath] = useState('')
+  console.log('current', current)
   useEffect(() => {
     function onScroll() {
       let currentPosition = window.scrollY
@@ -198,7 +206,12 @@ const Nav = ({ navLinks }) => {
           {navLinks.map((nav) => (
             <NavLinkContainer className="button">
               <Underline className="underline" />
-              <StyledLink to={nav.page} activeClassName="active">
+              <StyledLink
+                onClick={() => setCurrentPath(current)}
+                to={nav.page}
+                className={`${currentPath === nav.page ? 'active' : ''}`}
+                activeClassName="active"
+              >
                 {nav.label}
               </StyledLink>
             </NavLinkContainer>

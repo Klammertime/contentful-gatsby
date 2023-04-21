@@ -19,7 +19,9 @@ const StyledSection = styled.section`
       props.noPaddingTop || props.noPadding ? '0' : '80px'};
     padding-bottom: ${(props) => (props.noPadding ? '0' : '80px')};
   }
-
+  &.grey {
+    background-color: #f8f8f8;
+  }
   &.offWhite {
     background-color: #f7f8fc;
   }
@@ -32,8 +34,9 @@ const StyledSection = styled.section`
 const Wrapper = styled.div`
   width: 100%;
   max-width: 1234px;
-  margin: 0 auto;
-  padding: 0 32px;
+
+  margin: ${(props) => (props.color ? '0' : '0 auto')};
+  padding: ${(props) => (props.color ? '0' : '0 32px')};
 
   @media screen and (max-width: 991px) {
     padding: 0 16px;

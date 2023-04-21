@@ -4,6 +4,7 @@ import React from 'react'
 
 const Bold = ({ children }) => <span className="bold">{children}</span>
 const Text = ({ children }) => <p className="align-center">{children}</p>
+const Bullets = ({ children }) => <li>{children}</li>
 
 const options = {
   renderMark: {
@@ -11,6 +12,7 @@ const options = {
   },
   renderNode: {
     [BLOCKS.PARAGRAPH]: (node, children) => <Text>{children}</Text>,
+    [BLOCKS.UL_LIST]: (node, children) => <Bullets>{children}</Bullets>,
   },
 }
 

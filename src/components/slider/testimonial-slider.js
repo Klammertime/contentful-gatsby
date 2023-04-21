@@ -1,7 +1,6 @@
 import { graphql, useStaticQuery } from 'gatsby'
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import GenericRichText from '../ui/generic-rich-text'
 import Section from '../ui/section'
 
 const ReviewContainer = styled.div`
@@ -18,10 +17,10 @@ const ReviewText = styled.div`
   }
 
   margin-top: 24px;
-  text-align: left;
+  font-weight: 400;
   font-size: 18px;
   line-height: 150%;
-  font-weight: 400;
+  text-align: left;
 `
 
 const ReviewInfo = styled.div`
@@ -46,8 +45,8 @@ const ReviewTabsMenu = styled.div`
 const OwlDot = styled.button`
   width: 30px;
   height: 4px;
-  background-color: var(--light-grey);
   margin-right: 6px;
+  background-color: var(--light-grey);
   border: 0;
   cursor: pointer;
   -webkit-appearance: button;
@@ -67,19 +66,19 @@ const TabsContent = styled.div`
 
 const ReviewsWrapper = styled.div`
   position: relative;
-  width: 100%;
-  max-width: 700px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  text-align: left;
-  padding: 30px 60px;
-  margin: 0 auto 20px auto;
-  grid-column-start: span 1;
-  grid-column-end: span 1;
   grid-row-start: span 1;
   grid-row-end: span 1;
+  grid-column-start: span 1;
+  grid-column-end: span 1;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto 20px auto;
+  padding: 30px 60px;
+  text-align: left;
 `
 
 const TestimonialSlider = () => {
@@ -88,13 +87,10 @@ const TestimonialSlider = () => {
       allContentfulTestimonial {
         nodes {
           name
-          image {
-            gatsbyImageData(width: 100)
-          }
           company
           id
-          quoteRichText {
-            raw
+          text {
+            text
           }
           title
         }
@@ -125,7 +121,7 @@ const TestimonialSlider = () => {
         <TabsContent>
           <ReviewContainer>
             <ReviewText>
-              <GenericRichText richTextLabel="quoteRichText" data1={review} />
+              {/*<GenericRichText richTextLabel="quoteRichText" data1={review} />*/}
             </ReviewText>
             <ReviewInfo>{name}</ReviewInfo>
           </ReviewContainer>

@@ -4,8 +4,10 @@ import { useAboutData } from '../hooks/use-about-data'
 import Button from './ui/button'
 import GridSection from './ui/grid-section'
 import Section from './ui/section'
-import Tags from './ui/tags'
 import Text from './ui/text'
+import { useResumeCompanyData } from '../hooks/use-resume-company-data'
+import GenericRichText from './ui/generic-rich-text'
+import Tag from './ui/tag'
 
 const Date = styled.div`
   grid-area: Date;
@@ -136,6 +138,8 @@ const CareerBlock = styled.div`
 
 const Career = () => {
   const { fullResumeContent } = useAboutData()
+  const { collectionItems } = useResumeCompanyData()
+  console.log('collectionItems', collectionItems)
   return (
     <Section noPaddingTop color="white">
       <GridSection>
@@ -151,26 +155,24 @@ const Career = () => {
           </Button>
         </SectionLeft>
         <SectionRight>
-          {fullResumeContent.fullCareerHistory.map((job, index) => {
-            const { company, date, city, jobTitle } = job
+          {collectionItems.map((job, index) => {
+            const { company, dateRange, location, jobTitle, bullets } = job
             return (
               <CareerBlock key={`${company}${index}`}>
-                <Date>{date}</Date>
+                <Date>{dateRange}</Date>
                 <Timeline className="timeline">
                   <TimelineDot />
                 </Timeline>
                 <Job>
                   <JobHeading>
-                    {company} - {city}
+                    {company} - {location}
                   </JobHeading>
                   <JobDescription>
                     <ul>
-                      {job.bullets.map((bullet, index) => (
-                        <li key={`${job.jobTitle}${index}`}>{bullet}</li>
-                      ))}
+                      <GenericRichText data1={bullets} />
                     </ul>
                   </JobDescription>
-                  <Tags tags={jobTitle}></Tags>
+                  {jobTitle && <Tag>{jobTitle}</Tag>}
                 </Job>
               </CareerBlock>
             )

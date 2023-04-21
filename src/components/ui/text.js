@@ -29,6 +29,9 @@ const StyledText = styled.h2`
   //--dense: 1.3;
   //--default: 1.3;
   //--looser: 1.4;
+
+  //font-size: 15px;
+  //line-height: 24px;
   //--loose: 1.6;
 
   ${(props) => {
@@ -36,20 +39,20 @@ const StyledText = styled.h2`
       case 'xl':
         // commonly H1
         return css`
-          font-size: var(--text-xl);
           color: var(--black);
+          font-size: var(--text-xl);
         `
       case 'large':
         // commonly H2
         return css`
-          font-size: var(--text-xl);
           color: var(--black);
+          font-size: var(--text-xl);
         `
       case 'medium':
         // commonly H3
         return css`
-          font-size: var(--text-lg);
           color: var(--black);
+          font-size: var(--text-lg);
         `
       case 'small':
         // commonly H4
@@ -74,16 +77,16 @@ const StyledText = styled.h2`
         `
       case 'body':
         return css`
+          font-weight: var(--body);
           font-size: var(--text-sm);
           line-height: var(--loose);
-          font-weight: var(--body);
         `
       case 'textGrey':
         return css`
+          color: var(--grey);
           font-weight: var(--body);
           font-size: var(--text-sm);
           line-height: var(--loose);
-          color: var(--grey);
         `
 
       case 'breadCrumb':
@@ -98,34 +101,34 @@ const StyledText = styled.h2`
 
       case 'tag':
         return css`
-          text-transform: uppercase;
           font-weight: var(--semibold);
           font-size: var(--text-xxs);
           line-height: 20px;
+          text-transform: uppercase;
           background-color: transparent;
         `
 
       case 'tagLower':
         return css`
+          font-weight: var(--semibold);
           font-size: var(--text-xxs);
           line-height: var(--dense);
-          font-weight: var(--semibold);
         `
 
       case 'smallLink':
         return css`
-          font-size: var(--text-xs);
-          font-weight: var(--semibold);
-          line-height: var(--dense);
           color: var(--black);
+          font-weight: var(--semibold);
+          font-size: var(--text-xs);
+          line-height: var(--dense);
         `
 
       case 'dynamicText':
         return css`
           margin-top: 4px;
+          font-weight: var(--medium);
           font-size: var(--text-md);
           line-height: var(--loose);
-          font-weight: var(--medium);
           @media screen and (max-width: var(--md)) {
             font-size: var(--text-sm);
           }

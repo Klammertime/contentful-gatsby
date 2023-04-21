@@ -6,6 +6,15 @@ html * {
   box-sizing: border-box;
 }
 
+@font-face {
+  font-weight: 100 900;
+  font-family: 'Slender var';
+  font-style: normal;
+  src: url(/fonts/Slender-PK3qE.ttf) format('ttf');
+  font-display: swap;
+  font-named-instance: 'Regular';
+}
+
 body {
   margin: 0;
   font-size: 16px;
@@ -30,7 +39,6 @@ h6 {
   font-weight: var(--semibold);
   line-height: var(--dense);
 }
-
 
 a {
   color: currentColor;

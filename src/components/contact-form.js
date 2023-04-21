@@ -38,13 +38,14 @@ const StyledForm = styled.form`
   grid-area: 1 / 5 / 2 / 13;
   grid-gap: 24px 16px;
   margin: 0;
+
   @media (max-width: 911px) {
     grid-gap: 0;
   }
 `
 const NameLabel = styled(StyledLabel)`
   grid-row: 1/2;
-  grid-column: 1/6;
+  grid-column: 1/7;
 
   @media (max-width: 911px) {
     grid-column: 1/13;
@@ -53,7 +54,7 @@ const NameLabel = styled(StyledLabel)`
 
 const EmailLabel = styled(StyledLabel)`
   grid-row: 1/2;
-  grid-column: 6/13;
+  grid-column: 7/13;
   @media (max-width: 911px) {
     grid-row: 2/3;
     grid-column: 1/13;

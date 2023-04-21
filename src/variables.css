@@ -50,7 +50,8 @@
   /* radii */
   --radius-sm: 4px;
   --radius: 0.25rem;
-
+  --transition: all 0.3s linear;
+  --spacing: 0.1rem;
 
   /*screen size */
   --tiny: 479px;

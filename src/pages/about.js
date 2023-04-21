@@ -90,7 +90,6 @@ const AboutPage = ({ location }) => {
       </Section>
       <Skills />
       <Career />
-      <Section>{/*<TestimonialSlider />*/}</Section>
     </Layout>
   )
 }

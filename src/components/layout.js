@@ -1,9 +1,7 @@
 import { graphql, useStaticQuery } from 'gatsby'
 import React from 'react'
 import styled from 'styled-components'
-import '../global.css'
-import '../normalize.css'
-import '../variables.css'
+
 import Footer from './footer'
 import HomeHero from './hero/home-hero'
 import PageHero from './hero/page-hero'
@@ -91,13 +89,8 @@ const Layout = ({ location, children, header }) => {
       <Site>
         <Seo />
         <SiteHeader role="banner">
-          <Nav navLinks={mainNavLinks} />
-          {isRootPath ? (
-            <HomeHero />
-          ) : (
-            // pass both pathname or whatever
-            <PageHero header={header} />
-          )}
+          <Nav current={pathname} navLinks={mainNavLinks} />
+          {isRootPath ? <HomeHero /> : <PageHero header={header} />}
         </SiteHeader>
         <SiteMain role="main">{children}</SiteMain>
         <SiteFooter role="contentinfo">
