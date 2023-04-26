@@ -17,13 +17,14 @@ const Date = styled.div`
   font-size: 13px;
   line-height: 1.5;
   text-align: right;
-  @media screen and (max-width: 479px) {
-    padding: 5px 0;
-    text-align: left;
-  }
 
   @media screen and (max-width: 767px) {
     width: 90px;
+  }
+
+  @media screen and (max-width: 479px) {
+    padding: 5px 0;
+    text-align: left;
   }
 `
 
@@ -103,7 +104,7 @@ const SectionRight = styled.div`
   grid-column: 6/13;
   @media screen and (max-width: 991px) {
     grid-row-start: 2;
-    grid-column-start: 2;
+    grid-column: 1 / span 7;
   }
 `
 
@@ -116,17 +117,17 @@ const CareerBlock = styled.div`
   grid-template-rows: auto;
   grid-template-columns: auto minmax(32px, auto) 1fr;
 
+  @media screen and (max-width: 767px) {
+    grid-column-gap: 32px;
+    padding-left: 8px;
+  }
+
   @media screen and (max-width: 479px) {
     grid-row-gap: 8px;
     grid-template-areas:
       'Timeline Date Date'
       'Timeline Job Job';
     grid-template-rows: auto auto;
-  }
-
-  @media screen and (max-width: 767px) {
-    grid-column-gap: 32px;
-    padding-left: 8px;
   }
 
   &:last-of-type {
@@ -139,7 +140,6 @@ const CareerBlock = styled.div`
 const Career = () => {
   const { fullResumeContent } = useAboutData()
   const { collectionItems } = useResumeCompanyData()
-  console.log('collectionItems', collectionItems)
   return (
     <Section noPaddingTop color="white">
       <GridSection>
@@ -155,10 +155,10 @@ const Career = () => {
           </Button>
         </SectionLeft>
         <SectionRight>
-          {collectionItems.map((job, index) => {
-            const { company, dateRange, location, jobTitle, bullets } = job
+          {collectionItems.map((job) => {
+            const { company, dateRange, location, jobTitle, bullets, id } = job
             return (
-              <CareerBlock key={`${company}${index}`}>
+              <CareerBlock key={id}>
                 <Date>{dateRange}</Date>
                 <Timeline className="timeline">
                   <TimelineDot />
@@ -168,9 +168,7 @@ const Career = () => {
                     {company} - {location}
                   </JobHeading>
                   <JobDescription>
-                    <ul>
-                      <GenericRichText data1={bullets} />
-                    </ul>
+                    <GenericRichText data1={bullets} />
                   </JobDescription>
                   {jobTitle && <Tag>{jobTitle}</Tag>}
                 </Job>

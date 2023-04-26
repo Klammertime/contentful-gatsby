@@ -12,7 +12,6 @@ html * {
   font-style: normal;
   src: url(/fonts/Slender-PK3qE.ttf) format('ttf');
   font-display: swap;
-  font-named-instance: 'Regular';
 }
 
 body {
@@ -72,6 +71,7 @@ kbd {
 tt,
 code {
   padding: 0.2em 0;
+  color: var(--white);
   font-weight: var(--medium);
   background-color: var(--black);
   border-radius: var(--radius-sm);

@@ -18,24 +18,31 @@ const Meta = styled.div`
   display: flex;
   justify-content: space-between;
 `
-const PortfolioCard = ({ card1 }) => {
-  const { slug, heroImage, title, tags } = card1
+const PortfolioCard = ({ cardInfo, small }) => {
+  const { slug, heroImage, title, tags } = cardInfo
   return (
     <CardWrapper>
       <Link to={`/portfolio/${slug}`}>
         <GatsbyImage
           objectFit="cover"
           image={heroImage?.gatsbyImageData}
-          alt="title"
+          alt={heroImage?.description || ''}
         />
       </Link>
-      <Text margin="20px 0 12px 0" asType="h2" variant="small">
-        {title}
-      </Text>
-      {card1?.workCardDescription?.workCardDescription && (
+      {small ? (
+        <Text margin="20px 0 12px 0" asType="h4" variant="small">
+          {title}
+        </Text>
+      ) : (
+        <Text margin="20px 0 12px 0" asType="h3" variant="medium">
+          {title}
+        </Text>
+      )}
+
+      {cardInfo?.workCardDescription?.workCardDescription && (
         <CardDescription>
           <Text variant="textGrey" asType="p">
-            {card1?.workCardDescription?.workCardDescription}
+            {cardInfo?.workCardDescription?.workCardDescription}
           </Text>
         </CardDescription>
       )}

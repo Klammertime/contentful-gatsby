@@ -16,12 +16,15 @@ const StyledWrapper = styled.div`
   text-align: center;
   clear: both;
   background-color: #fff;
-  @media screen and (max-width: 767px) {
-    height: 100%;
-  }
-
   @media screen and (max-width: 1024px) {
     width: 90%;
+  }
+  @media screen and (max-width: 991px) {
+    width: 100%;
+    height: 50vh;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
   }
 
   .screen-mask {
@@ -41,8 +44,11 @@ const StyledWrapper = styled.div`
 
   .prev,
   .next {
+    background-color: #433056;
+    color: #fff;
+
     transform: translateY(-50%);
-    background-color: var(--white);
+    //background-color: var(--white);
     place-items: center;
     border-color: transparent;
     box-shadow: 0 5px 15px 0 rgba(32, 36, 46, 0.06);
@@ -55,20 +61,17 @@ const StyledWrapper = styled.div`
     align-items: center;
     border-radius: 50%;
     position: absolute;
-    top: 0;
-    bottom: 0;
+    //top: 0;
+    //bottom: 0;
     margin: auto;
     cursor: pointer;
     overflow: hidden;
-    //color: #fff;
     font-size: 40px;
     user-select: none;
-  }
-
-  .prev:hover,
-  .next:hover {
-    //TODO decide what behavior you want on hover
-    //background-color: var(--primary);ui
+    @media (min-width: 800px) {
+      font-size: 3rem;
+      //color: #333640;
+    }
   }
 
   .prev:focus,
@@ -80,50 +83,38 @@ const StyledWrapper = styled.div`
     z-index: 3;
     right: auto;
     left: -88px;
-    @media screen and (max-width: 767px) {
-      left: 0;
-    }
-    @media screen and (max-width: 1024px) {
-      left: -5%;
-    }
+    bottom: 43%;
     @media screen and (max-width: 1185px) {
       left: -33px;
+    }
+
+    //@media screen and (max-width: 1024px) {
+    //  left: -5%;
+    //}
+
+    @media screen and (max-width: 991px) {
+      left: 0;
+      bottom: -17%;
     }
   }
 
   .next {
     left: auto;
     right: -88px;
-
-    @media screen and (max-width: 767px) {
-      right: 0;
-    }
-    @media screen and (max-width: 1024px) {
-      right: -5%;
-    }
+    bottom: 43%;
     @media screen and (max-width: 1185px) {
       right: -33px;
     }
 
-  }
-
-
-  @media (min-width: 800px) {
-    .prev,
-    .next {
-      display: flex;
-      width: 56px;
-      height: 56px;
-      font-size: 3rem;
-      padding: 11px;
-      justify-content: center;
-      align-items: center;
-      border-radius: 50%;
-      box-shadow: 0 5px 15px 0 rgba(32, 36, 46, 0.06);
-      transition: transform 0.3s, -webkit-transform 0.3s;
-      color: #333640;
+    //@media screen and (max-width: 1024px) {
+    //  right: -5%;
+    //}
+    @media screen and (max-width: 991px) {
+      left: -80%;
+      bottom: -17%;
     }
   }
+
 
   article {
     position: absolute;
@@ -202,7 +193,6 @@ const StyledWrapper = styled.div`
 
     .activeImg {
       background-color: #222;
-
     }
 `
 
@@ -221,7 +211,7 @@ function PortfolioSlider({ slideContent }) {
   }, [index, portfolioItems])
 
   return (
-    <Section noPaddingTop>
+    <Section noPadding>
       <StyledWrapper>
         <div className="screen-mask">
           {portfolioItems.map((item, itemIndex) => {
@@ -242,7 +232,7 @@ function PortfolioSlider({ slideContent }) {
                   objectPosition="0% 0%"
                   image={item?.gatsbyImageData}
                   className="item-img"
-                  alt="portfolio"
+                  alt={item?.description || ''}
                 />
               </article>
             )
@@ -258,6 +248,7 @@ function PortfolioSlider({ slideContent }) {
           {portfolioItems.map((item, itemIndex) => {
             return (
               <div
+                key={item.id}
                 className={itemIndex === index ? 'activeImg' : 'nonActiveImg'}
                 onClick={() => setIndex(itemIndex)}
               ></div>

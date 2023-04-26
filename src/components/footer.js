@@ -1,14 +1,15 @@
 import React from 'react'
-import { Link } from 'gatsby'
 import styled from 'styled-components'
 import { SocialIcon } from 'react-social-icons'
 import Text from './ui/text'
+import Link from './ui/link'
 
-const FooterGrid = styled.footer`
+const FooterGrid = styled.div`
   display: grid;
   grid-auto-columns: 1fr;
   grid-row-gap: 16px;
   grid-column-gap: 8vw;
+  grid-template-rows: auto;
   grid-template-columns: 1fr auto auto;
   padding: 3vw;
   color: var(--white);
@@ -25,6 +26,7 @@ const FooterNav = styled.nav`
   flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
+  align-self: start;
 `
 
 const StyledLink = styled(Link)`
@@ -41,19 +43,28 @@ const StyledLink = styled(Link)`
   }
 `
 
-const FooterLinks = styled.div`
+const FooterLinks = styled.ul`
   display: flex;
   flex-direction: column;
-  padding-right: 4vw;
+  margin: 0;
+  padding-right: 6vw;
+  list-style-type: none;
+
   @media (max-width: 991px) {
     flex-direction: row;
+    padding: 0;
   }
 `
 
-const StyledFooterLinks = styled.div`
+const StyledFooterLinks = styled.li`
   display: flex;
   align-items: center;
   padding: 6px 0;
+  overflow: hidden;
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 10px;
+
   @media (max-width: 991px) {
     flex-direction: row;
     margin-right: 20px;
@@ -70,7 +81,9 @@ const Footer = ({ navLinks, socialLinks }) => {
     <FooterGrid>
       <FooterNav>
         {navLinks.map((nav) => (
-          <StyledLink to={nav.page}>{nav.label}</StyledLink>
+          <StyledLink key={nav.label} to={nav.page}>
+            {nav.label}
+          </StyledLink>
         ))}
       </FooterNav>
 
@@ -85,17 +98,14 @@ const Footer = ({ navLinks, socialLinks }) => {
 
       <FooterLinks>
         {socialLinks.map((social) => (
-          <StyledFooterLinks>
-            <Text variant="xs" color="white">
-              <SocialIcon
-                bgColor="white"
-                style={{ height: 20, width: 20, marginRight: '12px' }}
-                url={social.url}
-                target="_blank"
-                rel="noopener noreferrer"
-              />
-              {social.label}
-            </Text>
+          <StyledFooterLinks key={social.label}>
+            <SocialIcon
+              bgColor="white"
+              style={{ height: 20, width: 20, marginRight: '12px' }}
+              url={social.url}
+              rel="noopener noreferrer"
+            />
+            {social.label}
           </StyledFooterLinks>
         ))}
       </FooterLinks>

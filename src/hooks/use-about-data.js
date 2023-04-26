@@ -13,6 +13,7 @@ export const useAboutData = () => {
         }
         fullResumeContent {
           fullCareerHistory {
+            id
             bullets
             city
             company
@@ -20,6 +21,7 @@ export const useAboutData = () => {
             date
           }
           fullEducationList {
+            id
             degree
             school
             subject
@@ -39,6 +41,7 @@ export const useAboutData = () => {
         }
         fullSkillsList {
           skillLogos {
+            id
             description
             url
             title

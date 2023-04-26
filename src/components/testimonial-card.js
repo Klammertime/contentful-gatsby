@@ -2,6 +2,7 @@ import { GatsbyImage } from 'gatsby-plugin-image'
 import React from 'react'
 import { IoMdQuote } from 'react-icons/io'
 import { RiStarFill } from 'react-icons/ri'
+import GenericRichText from './ui/generic-rich-text'
 import styled from 'styled-components'
 
 const TestimonialWrapper = styled.div`
@@ -128,8 +129,8 @@ const Bottom = styled.div`
 `
 
 const TestimonialCard = ({ testimonial }) => {
-  const { name, title, text, image } = testimonial
-  if (!text || !name) {
+  const { name, title, image, paragraphText } = testimonial
+  if (!paragraphText || !name) {
     return null
   }
   return (
@@ -154,7 +155,9 @@ const TestimonialCard = ({ testimonial }) => {
             <IoMdQuote />
           </div>
         </Author>
-        <QuoteText>{text?.text}</QuoteText>
+        <QuoteText>
+          <GenericRichText data1={paragraphText} />
+        </QuoteText>
         <Bottom>
           <div className="rating">
             <RiStarFill />

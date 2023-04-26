@@ -24,7 +24,7 @@ const TestimonialsPage = ({ location }) => {
       <Section>
         <List>
           {collectionItems.map((testimonial) => (
-            <TestimonialCard testimonial={testimonial}></TestimonialCard>
+            <TestimonialCard key={testimonial.id} testimonial={testimonial} />
           ))}
         </List>
       </Section>

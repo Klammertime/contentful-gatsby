@@ -13,8 +13,8 @@ export const useTestimonialData = () => {
               gatsbyImageData
             }
             title
-            text {
-              text
+            paragraphText {
+              raw
             }
           }
         }

@@ -10,10 +10,8 @@ const Bullet = styled.div`
   z-index: 2;
   width: 8px;
   height: 8px;
-  margin-top: 15px;
-  margin-right: 20px;
-  margin-left: 6px;
-  background-color: #f96a4c;
+  margin: 15px 20px 0 6px;
+  background-color: var(--primary);
   border-radius: 50%;
   box-shadow: 0 0 0 6px rgba(249, 106, 76, 0.2);
 `
@@ -23,9 +21,7 @@ const Item = styled.li`
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 32px;
+  padding: 8px 0 8px 32px;
   font-weight: 500;
   font-size: 17px;
   list-style-type: none;
@@ -40,9 +36,9 @@ const ListItems = ({ items }) => {
     <>
       {items && (
         <List>
-          {items.map((val) => {
+          {items.map((val, ind) => {
             return (
-              <Item>
+              <Item key={ind}>
                 <Bullet />
                 <span>{val}</span>
               </Item>

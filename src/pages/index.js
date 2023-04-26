@@ -7,6 +7,7 @@ import PortfolioCard from '../components/portfolio/portfolio-card'
 import Quote from '../components/quote'
 import Section from '../components/ui/section'
 import Text from '../components/ui/text'
+import Skills from '../components/skills'
 
 const WorkGrid1 = styled.div`
   display: grid;
@@ -37,6 +38,7 @@ const WorkGrid2 = styled.div`
   grid-column-gap: 0;
   grid-template-rows: auto auto;
   grid-template-columns: 1fr;
+  min-width: 41%;
   margin-left: 11%;
   padding-top: 8px;
 
@@ -74,8 +76,16 @@ const DynamicWorksIntro = styled.div`
 `
 
 const SideLink = styled(Link)`
+  position: relative;
   padding: 7px 16px 8px;
-  border-left: 1px solid var(--border);
+  overflow: hidden;
+  color: #151515;
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 16px;
+  border-left: 1px solid #e4e8ed;
+  -webkit-transition: color 400ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: color 400ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
 `
 
 class RootIndex extends React.Component {
@@ -90,7 +100,7 @@ class RootIndex extends React.Component {
           <DynamicWorks>
             <WorkGrid1>
               <DynamicWorksIntro>
-                <Text margin="0 24px 0 0" asType="h2" variant="xl">
+                <Text margin="0 24px 0 0" asType="h2" variant="large">
                   Recent Works
                 </Text>
                 <SideLink to="/portfolio">
@@ -99,16 +109,17 @@ class RootIndex extends React.Component {
                   </Text>
                 </SideLink>
               </DynamicWorksIntro>
-              <PortfolioCard card1={card1} />
+              <PortfolioCard cardInfo={card1} />
               <Quote />
             </WorkGrid1>
 
             <WorkGrid2>
-              <PortfolioCard card1={card2} />
-              <PortfolioCard card1={card3} />
+              <PortfolioCard small cardInfo={card2} />
+              <PortfolioCard small cardInfo={card3} />
             </WorkGrid2>
           </DynamicWorks>
         </Section>
+        <Skills />
       </Layout>
     )
   }

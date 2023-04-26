@@ -11,10 +11,8 @@ import PortfolioNavigation from '../components/portfolio/portfolio-navigation'
 import Seo from '../components/seo'
 import PortfolioSlider from '../components/slider/portfolio-slider'
 import TestimonialCard from '../components/testimonial-card'
-import Link from '../components/ui/link'
 import Section from '../components/ui/section'
 import Text from '../components/ui/text'
-import Tags from '../components/ui/tags'
 
 const MainGrid = styled.div`
   display: grid;
@@ -22,55 +20,33 @@ const MainGrid = styled.div`
   padding-top: 32px;
   perspective: 2000px;
 
-  .workCardDescription {
-    color: #777;
-    font-size: 15px;
-    line-height: 24px;
-  }
+  .mobileImage {
+    display: none;
+    @media screen and (max-width: 990px) {
+      display: block;
+      margin-bottom: 32px;
+      grid-row-start: 1;
+      grid-column: 1/13;
+    }
 
-  .info {
-    display: flex;
-    overflow: hidden;
-    margin-right: auto;
-    margin-left: auto;
-    padding-top: 12px;
-    padding-bottom: 40px;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: stretch;
-  }
+    .infoCellHeader {
+      margin-right: 8px;
+      color: #777;
+    }
 
-  //TODO what is this also doing here when it has its own
-  // styled component
-  .infoCell {
-    display: flex;
-    padding-top: 12px;
-    padding-bottom: 12px;
-    align-items: center;
-    flex: 0 auto;
-    border-bottom: 1px solid #e4e4e4;
-    font-size: 15px;
-    line-height: 24px;
-  }
-
-  .infoCellHeader {
-    margin-right: 8px;
-    color: #777;
-  }
-
-  .sectionHeader {
-    margin: 23px 0 16px 0;
-    font-size: 40px;
-    line-height: 48px;
-    font-weight: 700;
-  }
+    .sectionHeader {
+      margin: 23px 0 16px 0;
+      font-size: 40px;
+      line-height: 48px;
+      font-weight: 700;
+    }
 `
 
 const BodyWrapper = styled.div`
   position: relative;
   top: 8px;
   flex: 1;
-  grid-column: 1/9;
+  grid-column: 1/13;
   text-align: left;
   @media (max-width: 990px) {
     position: static;
@@ -82,30 +58,90 @@ const BodyWrapper = styled.div`
     margin: 40px 0 60px 0;
   }
 `
-
-const InfoBoxWrapper = styled.div`
+const WorkIntro = styled.div`
+  flex-direction: row;
   grid-row-start: 1;
-  flex: 1;
-  grid-column: 10/13;
-  margin-top: 40px;
-  @media screen and (max-width: 990px) {
-    grid-row-start: 1;
-    grid-column: 1/13;
+  grid-column: 1/13;
+  display: flex;
+  margin: 0;
+  font-size: 17px;
+  line-height: 24px;
+  padding: 60px 0;
+  align-items: flex-start;
+  @media (max-width: 990px) {
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 40px;
+  }
+
+  .workCardDescription {
+    font-size: 17px;
+    line-height: 24px;
+    padding: 16px 0;
+    color: #666d7a;
+    font-weight: 500;
+    margin: 0;
+    width: 50%;
+    padding-right: 10%;
+    text-align: left;
+
+    @media (max-width: 990px) {
+      width: 80%;
+      padding-right: 0;
+      text-align: center;
+      margin-bottom: 24px;
+    }
   }
 `
 
-const InfoBox = styled.div`
-  position: sticky;
-  top: 100px;
+const WorkBlocks = styled.div`
+  text-align: center;
+  display: grid;
+  overflow: hidden;
   flex: 1;
+  grid-auto-columns: 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #e4e8ed;
+  border-radius: 8px;
+`
+
+const WorkBlock = styled.div`
+  display: flex;
+  padding: 32px;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 1px 0 0 0 #e4e8ed;
+  padding-right: 40px;
+  padding-left: 40px;
+`
+const WorkBlockHeading = styled.h6`
+  margin-top: 0px;
+  margin-bottom: 16px;
+  font-size: 15px;
+  line-height: 20px;
+  font-weight: 700;
   @media screen and (max-width: 990px) {
-    margin-right: 0;
-    padding: 0;
-  }
-  @media screen and (max-width: 767px) {
-    position: static;
+    font-size: 14px;
+    line-height: 18px;
+    margin-bottom: 12px;
   }
 `
+const WorkBlockInfo = styled.div`
+  font-size: 17px;
+  line-height: 24px;
+  color: #666d7a;
+  font-weight: 500;
+  @media screen and (max-width: 990px) {
+    font-size: 15px;
+    line-height: 20px;
+  }
+`
+
 const SliderWrapper = styled.div`
   padding-top: 60px;
   @media screen and (max-width: 767px) {
@@ -172,9 +208,21 @@ class PortfolioPostTemplate extends React.Component {
         [BLOCKS.UL_LIST]: (node, children) => (
           <BulletText>{children}</BulletText>
         ),
-        [BLOCKS.EMBEDDED_ENTRY]: (node, children) => <div>{children}</div>,
+        // [BLOCKS.EMBEDDED_ENTRY]: (node, children) => <div>{children}</div>,
+        [BLOCKS.EMBEDDED_ENTRY]: (node) => {
+          console.log('node?.data', node?.data)
+          const { name } = node?.data?.target
+          return (
+            <>
+              <TestimonialCard testimonial={node?.data?.target} />
+              <pre>
+                <code>{JSON.stringify(node, null, 2)}</code>
+              </pre>
+            </>
+          )
+        },
         [BLOCKS.EMBEDDED_ASSET]: (node) => {
-          const { gatsbyImageData } = node?.data?.target
+          const { gatsbyImageData, description } = node?.data?.target
           if (!gatsbyImageData) {
             // asset is not an image
             return null
@@ -189,7 +237,7 @@ class PortfolioPostTemplate extends React.Component {
               }}
               className="bodyImage"
               image={gatsbyImageData}
-              alt="get correct one"
+              alt={description || ''}
             />
           )
         },
@@ -210,62 +258,42 @@ class PortfolioPostTemplate extends React.Component {
               {post?.body?.raw && renderRichText(post.body, options)}
               {post?.shortQuotes &&
                 post?.shortQuotes?.map((val) => {
-                  return <TestimonialCard testimonial={val} />
+                  return <TestimonialCard key={val.id} testimonial={val} />
                 })}
             </BodyWrapper>
-
-            <InfoBoxWrapper>
-              <InfoBox>
-                <h2 className="sectionHeader"> {post?.title}</h2>
-                {post?.workCardDescription?.workCardDescription && (
-                  <p className="workCardDescription">
-                    {post?.workCardDescription?.workCardDescription}
-                  </p>
-                )}
-                <div className="info">
+            <WorkIntro>
+              {post?.workCardDescription?.workCardDescription && (
+                <p className="workCardDescription">
+                  {post?.workCardDescription?.workCardDescription}
+                </p>
+              )}
+              <WorkBlocks>
+                <WorkBlock>
                   {post?.title && (
-                    <div className="infoCell">
-                      <div className="infoCellHeader">
-                        <Text variant="textGrey">Client:</Text>
-                      </div>
-                      <Text color="black" variant="textGrey">
-                        {post?.client}
-                      </Text>
-                    </div>
+                    <>
+                      <WorkBlockHeading>Company</WorkBlockHeading>
+                      <WorkBlockInfo>{post?.client}</WorkBlockInfo>
+                    </>
                   )}
+                </WorkBlock>
+                <WorkBlock>
                   {post?.role && (
-                    <div className="infoCell">
-                      <div className="infoCellHeader">
-                        <Text variant="textGrey">Role:</Text>
-                      </div>
-                      <Text color="black" variant="textGrey">
-                        {post?.role}
-                      </Text>
-                    </div>
+                    <>
+                      <WorkBlockHeading>Role</WorkBlockHeading>
+                      <WorkBlockInfo>{post?.role}</WorkBlockInfo>
+                    </>
                   )}
-                  {post?.seeItLive?.url && (
-                    <div className="infoCell">
-                      <div className="infoCellHeader">
-                        <Text variant="textGrey">Link:</Text>
-                      </div>
-
-                      <Link to={post?.seeItLive?.url}>View It Live</Link>
-                    </div>
-                  )}
-                </div>
-                {post?.technology?.longList && (
-                  <Tags tags={post?.technology?.longList} />
-                )}
-              </InfoBox>
-            </InfoBoxWrapper>
+                </WorkBlock>
+              </WorkBlocks>
+            </WorkIntro>
           </MainGrid>
         </Section>
 
         {post?.testimonials && (
-          <Section>
+          <Section noPaddingTop>
             <TestimonialsContainer>
               {post?.testimonials.map((val) => (
-                <TestimonialCard testimonial={val} />
+                <TestimonialCard key={val.id} testimonial={val} />
               ))}
             </TestimonialsContainer>
           </Section>
@@ -280,7 +308,7 @@ class PortfolioPostTemplate extends React.Component {
             >
               {post?.inTheNews &&
                 post?.inTheNews.map((val) => {
-                  return <InfoCard info={val} />
+                  return <InfoCard key={val.id} info={val} />
                 })}
             </Col>
           </Section>
@@ -309,12 +337,14 @@ export const pageQuery = graphql`
       title
       slider
       technology {
+        id
         longList
       }
       workCardDescription {
         workCardDescription
       }
       shortQuotes {
+        id
         name
         title
         articleLink
@@ -324,17 +354,20 @@ export const pageQuery = graphql`
         }
       }
       testimonials {
+        id
         title
         company
         name
         image {
+          description
           gatsbyImageData
         }
-        text {
-          text
+        paragraphText {
+          raw
         }
       }
       testimonialQuote {
+        id
         blurbQuote {
           blurbQuote
         }
@@ -343,6 +376,7 @@ export const pageQuery = graphql`
         company
       }
       inTheNews {
+        id
         source
         linkTextOptions
         pdf {
@@ -352,6 +386,7 @@ export const pageQuery = graphql`
         url
         heading
         newsImage {
+          description
           gatsbyImageData
         }
         summary {
@@ -371,9 +406,26 @@ export const pageQuery = graphql`
       body {
         raw
         references {
+          ... on ContentfulTestimonial {
+            contentful_id
+            __typename
+            name
+            company
+            blurbQuote {
+              id
+            }
+            paragraphText {
+              raw
+            }
+            title
+            image {
+              gatsbyImageData
+            }
+          }
           ... on ContentfulAsset {
             contentful_id
             __typename
+            description
             gatsbyImageData(
               layout: FULL_WIDTH
               placeholder: BLURRED
@@ -383,6 +435,7 @@ export const pageQuery = graphql`
         }
       }
       sliderSizedImages {
+        description
         gatsbyImageData(
           cropFocus: TOP
           quality: 70
@@ -406,25 +459,29 @@ export const pageQuery = graphql`
     }
     previous: contentfulPortfolioPost(slug: { eq: $previousPostSlug }) {
       slug
+      id
       title
       heroImage {
+        description
         gatsbyImageData(
-          layout: FIXED
+          layout: CONSTRAINED
           placeholder: BLURRED
-          height: 150
-          width: 150
+          height: 165
+          width: 165
         )
       }
     }
     next: contentfulPortfolioPost(slug: { eq: $nextPostSlug }) {
       slug
+      id
       title
       heroImage {
+        description
         gatsbyImageData(
-          layout: FIXED
+          layout: CONSTRAINED
           placeholder: BLURRED
-          height: 150
-          width: 150
+          height: 165
+          width: 165
         )
       }
     }

@@ -8,13 +8,11 @@ let styles = {
     width: '26px',
     height: '22px',
     right: '30px',
-    top: '30px',
+    top: '39%',
   },
   bmBurgerBars: {
     background: '#151515',
     height: '2px',
-    marginTop: '4px',
-    marginBottom: '4px',
   },
   bmBurgerBarsHover: {
     background: '#a90000',
@@ -23,7 +21,7 @@ let styles = {
     height: '28px',
     width: '28px',
     right: 24,
-    top: 24,
+    top: 26,
     color: '#151515',
   },
   bmCross: {
@@ -86,7 +84,7 @@ const MyProvider = (props) => {
     </MyContext.Provider>
   )
 }
-
+// TODO remove or use
 // create a button that calls a context function to set a new open state when clicked
 // const Button = () => {
 //   const ctx = useContext(MyContext)
@@ -105,9 +103,10 @@ const Navigation = ({ navLinks }) => {
       isOpen={ctx.isMenuOpen}
       onStateChange={(state) => ctx.stateChangeHandler(state)}
     >
-      {navLinks.map((nav) => (
+      {navLinks.map((nav, index) => (
         <Link
-          id={nav.label}
+          key={`${nav.label}${index}`}
+          id={nav.id}
           to={nav.page}
           className="menu-item"
           activeClassName="active"
@@ -124,6 +123,7 @@ const BurgerMenu = ({ navLinks }) => {
   return (
     <MyProvider>
       <div>
+        {/*TODO remove or use*/}
         {/*<Button />*/}
         <Navigation navLinks={navLinks} />
       </div>

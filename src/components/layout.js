@@ -1,7 +1,6 @@
 import { graphql, useStaticQuery } from 'gatsby'
 import React from 'react'
 import styled from 'styled-components'
-
 import Footer from './footer'
 import HomeHero from './hero/home-hero'
 import PageHero from './hero/page-hero'
@@ -49,7 +48,7 @@ const FooterBottom = styled.div`
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  padding: 17px 30px;
+  padding: 1.6vw 3vw;
   color: hsla(0, 0%, 100%, 0.5);
   font-size: 11px;
   line-height: 16px;
@@ -96,7 +95,7 @@ const Layout = ({ location, children, header }) => {
         <SiteFooter role="contentinfo">
           <Footer socialLinks={socialLinks} navLinks={mainNavLinks} />
           <FooterBottom>
-            Developed by © Audrey Klammer - {new Date().getFullYear()}
+            Developed by Audrey Klammer - {new Date().getFullYear()}
           </FooterBottom>
         </SiteFooter>
       </Site>

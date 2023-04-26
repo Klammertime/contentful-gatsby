@@ -41,29 +41,66 @@ const StyledText = styled.h2`
         return css`
           color: var(--black);
           font-size: var(--text-xl);
+
+          @media screen and (max-width: 991px) {
+            font-size: 32px;
+            line-height: 40px;
+          }
         `
       case 'large':
         // commonly H2
         return css`
           color: var(--black);
           font-size: var(--text-xl);
+          @media screen and (max-width: 991px) {
+            font-size: 32px;
+            line-height: 40px;
+          }
+
+          @media screen and (max-width: 767px) {
+            font-size: 28px;
+            line-height: 36px;
+          }
         `
+
       case 'medium':
         // commonly H3
         return css`
+          margin-top: 0;
+          margin-bottom: 4px;
           color: var(--black);
           font-size: var(--text-lg);
+
+          @media screen and (max-width: 991px) {
+            font-size: 17px;
+            line-height: 24px;
+          }
+
+          @media screen and (max-width: 767px) {
+            font-size: 15px;
+            line-height: 20px;
+          }
+
+          @media screen and (max-width: 479px) {
+            font-size: 17px;
+            line-height: 24px;
+          }
         `
       case 'small':
         // commonly H4
         return css`
           font-size: var(--text-md);
           line-height: var(--looser);
+
+          @media screen and (max-width: 991px) {
+            font-size: 18px;
+            line-height: 24px;
+          }
         `
       case 'xs':
         // bullets
         return css`
-          font-weight: var(--medium);
+          font-weight: 600;
           font-size: var(--text-xs);
           line-height: var(--loose);
         `

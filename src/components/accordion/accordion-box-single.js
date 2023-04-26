@@ -23,9 +23,9 @@ function AccordionBoxSingle({ newList, title }) {
       <article>
         <h4>{title}</h4>
         <ul>
-          {showImmediately.map((v, i) => {
+          {showImmediately.map((v) => {
             return (
-              <li key={i} className="bullet">
+              <li key={v.id} className="bullet">
                 {v}
               </li>
             )
