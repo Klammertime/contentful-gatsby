@@ -13,6 +13,7 @@ import PortfolioSlider from '../components/slider/portfolio-slider'
 import TestimonialCard from '../components/testimonial-card'
 import Section from '../components/ui/section'
 import Text from '../components/ui/text'
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 
 const MainGrid = styled.div`
   display: grid;
@@ -116,8 +117,8 @@ const WorkBlock = styled.div`
   flex-direction: column;
   align-items: center;
   box-shadow: 1px 0 0 0 #e4e8ed;
-  padding-right: 40px;
-  padding-left: 40px;
+  //padding-right: 40px;
+  //padding-left: 40px;
 `
 const WorkBlockHeading = styled.h6`
   margin-top: 0px;
@@ -177,14 +178,18 @@ class PortfolioPostTemplate extends React.Component {
     const next = get(this.props, 'data.next')
     const Bold = ({ children }) => <span className="bold"> {children}</span>
     const ParagraphText = ({ children }) => (
-      <Text margin="0 0 24px 0" variant="body" asType="p">
+      <Text margin="0 16.66% 32px 16.66%" variant="body" asType="p">
         {children}
       </Text>
     )
 
-    const BulletText = ({ children }) => <ul>{children}</ul>
+    const BulletText = ({ children }) => (
+      <Text margin="0 16.66% 32px 16.66%" variant="bulletText" asType="ul">
+        {children}
+      </Text>
+    )
     const Heading2 = ({ children }) => (
-      <Text margin="0 0 16px 0" variant="large" asType="h2">
+      <Text margin="0 16.66% 32px 16.66%" variant="large" asType="h2">
         {children}
       </Text>
     )
@@ -208,18 +213,14 @@ class PortfolioPostTemplate extends React.Component {
         [BLOCKS.UL_LIST]: (node, children) => (
           <BulletText>{children}</BulletText>
         ),
-        // [BLOCKS.EMBEDDED_ENTRY]: (node, children) => <div>{children}</div>,
-        [BLOCKS.EMBEDDED_ENTRY]: (node) => {
-          console.log('node?.data', node?.data)
-          const { name } = node?.data?.target
-          return (
-            <>
-              <TestimonialCard testimonial={node?.data?.target} />
-              <pre>
-                <code>{JSON.stringify(node, null, 2)}</code>
-              </pre>
-            </>
-          )
+        [BLOCKS.LIST_ITEM]: (node, children) => {
+          const normalisedChildren = documentToReactComponents(node, {
+            renderNode: {
+              [BLOCKS.PARAGRAPH]: (node, children) => children,
+              [BLOCKS.LIST_ITEM]: (node, children) => <li>{children}</li>,
+            },
+          })
+          return normalisedChildren
         },
         [BLOCKS.EMBEDDED_ASSET]: (node) => {
           const { gatsbyImageData, description } = node?.data?.target
@@ -293,7 +294,10 @@ class PortfolioPostTemplate extends React.Component {
           <Section noPaddingTop>
             <TestimonialsContainer>
               {post?.testimonials.map((testimonial) => (
-                <TestimonialCard key={testimonial.id} {...testimonial} />
+                <TestimonialCard
+                  key={testimonial.id}
+                  testimonial={testimonial}
+                />
               ))}
             </TestimonialsContainer>
           </Section>
@@ -406,22 +410,6 @@ export const pageQuery = graphql`
       body {
         raw
         references {
-          ... on ContentfulTestimonial {
-            contentful_id
-            __typename
-            name
-            company
-            blurbQuote {
-              id
-            }
-            paragraphText {
-              raw
-            }
-            title
-            image {
-              gatsbyImageData
-            }
-          }
           ... on ContentfulAsset {
             contentful_id
             __typename
@@ -440,17 +428,15 @@ export const pageQuery = graphql`
           cropFocus: TOP
           quality: 70
           layout: CONSTRAINED
-          height: 1500
           aspectRatio: 1.3
-          placeholder: TRACED_SVG
+          placeholder: BLURRED
         )
         id
       }
       heroImage {
         description
         gatsbyImageData(
-          width: 1170
-          height: 720
+          width: 2400
           layout: FULL_WIDTH
           placeholder: BLURRED
           quality: 80
@@ -464,7 +450,7 @@ export const pageQuery = graphql`
       heroImage {
         description
         gatsbyImageData(
-          layout: CONSTRAINED
+          layout: FULL_WIDTH
           placeholder: BLURRED
           height: 165
           width: 165
@@ -478,7 +464,7 @@ export const pageQuery = graphql`
       heroImage {
         description
         gatsbyImageData(
-          layout: CONSTRAINED
+          layout: FULL_WIDTH
           placeholder: BLURRED
           height: 165
           width: 165

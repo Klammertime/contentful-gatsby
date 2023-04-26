@@ -112,12 +112,20 @@ const StyledText = styled.h2`
           letter-spacing: 0.8px;
           text-transform: uppercase;
         `
+      case 'bulletText':
+        return css`
+          font-weight: var(--body);
+          font-size: var(--text-sm);
+          line-height: var(--loose);
+        `
+
       case 'body':
         return css`
           font-weight: var(--body);
           font-size: var(--text-sm);
           line-height: var(--loose);
         `
+
       case 'textGrey':
         return css`
           color: var(--grey);

@@ -124,7 +124,8 @@ const Bottom = styled.div`
   }
 `
 
-const TestimonialCard = ({ name, title, image, paragraphText }) => {
+const TestimonialCard = ({ testimonial }) => {
+  const { name, title, image, paragraphText } = testimonial
   if (!paragraphText || !name) {
     return null
   }
