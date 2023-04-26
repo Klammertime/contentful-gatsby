@@ -292,8 +292,8 @@ class PortfolioPostTemplate extends React.Component {
         {post?.testimonials && (
           <Section noPaddingTop>
             <TestimonialsContainer>
-              {post?.testimonials.map((val) => (
-                <TestimonialCard key={val.id} testimonial={val} />
+              {post?.testimonials.map((testimonial) => (
+                <TestimonialCard key={testimonial.id} {...testimonial} />
               ))}
             </TestimonialsContainer>
           </Section>

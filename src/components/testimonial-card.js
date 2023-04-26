@@ -80,19 +80,15 @@ const QuoteText = styled.div`
 
   &:before {
     display: table;
-    grid-row-start: 1;
-    grid-row-end: 2;
-    grid-column-start: 1;
-    grid-column-end: 2;
+    grid-row: 1/2;
+    grid-column: 1/2;
     content: ' ';
   }
 
   &:after {
     display: table;
-    grid-row-start: 1;
-    grid-row-end: 2;
-    grid-column-start: 1;
-    grid-column-end: 2;
+    grid-row: 1/2;
+    grid-column: 1/2;
     content: ' ';
   }
 `
@@ -128,8 +124,7 @@ const Bottom = styled.div`
   }
 `
 
-const TestimonialCard = ({ testimonial }) => {
-  const { name, title, image, paragraphText } = testimonial
+const TestimonialCard = ({ name, title, image, paragraphText }) => {
   if (!paragraphText || !name) {
     return null
   }
