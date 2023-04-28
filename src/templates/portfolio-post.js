@@ -50,6 +50,7 @@ const RightContainer = styled.div`
 
   @media screen and (max-width: 990px) {
     grid-column: 1/13;
+    grid-row-start: 2;
   }
 `
 
@@ -65,6 +66,7 @@ const BodyWrapper = styled.div`
     position: static;
     grid-column: 1/13;
     padding: 0;
+    grid-row-start: 3;
   }
 
   .bodyImage {
