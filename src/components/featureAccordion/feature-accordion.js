@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
-import data from './data3'
-import SingleQuestion from './single-accordion-item'
+import SingleAccordionItem from './single-accordion-item'
 import styled from 'styled-components'
 
 const Container = styled.div`
@@ -18,13 +17,19 @@ const Container = styled.div`
   }
 `
 
-function FeatureAccordion() {
-  const [features, setFeature] = useState(data)
+function FeatureAccordion({ featuresList }) {
+  console.log('featuresList', featuresList)
+  const [features, setFeature] = useState(featuresList)
   return (
     <Container>
       <section className="info">
         {features.map((feature) => {
-          return <SingleQuestion key={feature.id} {...feature}></SingleQuestion>
+          return (
+            <SingleAccordionItem
+              key={feature.id}
+              {...feature}
+            ></SingleAccordionItem>
+          )
         })}
       </section>
     </Container>

@@ -294,7 +294,9 @@ class PortfolioPostTemplate extends React.Component {
                 })}
             </BodyWrapper>
             <RightContainer>
-              <FeatureAccordion />
+              {post?.sidebar && (
+                <FeatureAccordion featuresList={post?.featuresAccordion} />
+              )}
             </RightContainer>
             <WorkIntro>
               {post?.workCardDescription?.workCardDescription && (
@@ -387,6 +389,7 @@ export const pageQuery = graphql`
           text
         }
       }
+      sidebar
       featuresAccordion {
         title
         info {
