@@ -58,7 +58,7 @@ const BodyWrapper = styled.div`
   grid-row: 2;
   top: 0;
   flex: 1;
-  grid-column: 1/8;
+  grid-column: ${(props) => (props.sidebar ? '1/8' : '1/13')};
   text-align: left;
 
   @media (max-width: 990px) {
@@ -286,7 +286,7 @@ class PortfolioPostTemplate extends React.Component {
 
         <Section color="white" noPaddingTop>
           <MainGrid>
-            <BodyWrapper>
+            <BodyWrapper sidebar={post?.sidebar}>
               {post?.body?.raw && renderRichText(post.body, options)}
               {post?.shortQuotes &&
                 post?.shortQuotes?.map((val) => {
