@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 import { useAboutData } from '../hooks/use-about-data'
-import Button from './ui/button'
 import GridSection from './ui/grid-section'
 import Section from './ui/section'
 import Text from './ui/text'
@@ -150,9 +149,9 @@ const Career = () => {
           <Text color="grey" variant="textGrey" asType="p">
             {fullResumeContent.resumeSummary.resumeSummary}
           </Text>
-          <Button href={fullResumeContent.resumePdf?.file?.url} download>
-            Download Resume
-          </Button>
+          {/*<Button href={fullResumeContent.resumePdf?.file?.url} download>*/}
+          {/*  Download Resume*/}
+          {/*</Button>*/}
         </SectionLeft>
         <SectionRight>
           {collectionItems.map((job) => {
