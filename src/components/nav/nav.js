@@ -38,6 +38,10 @@ const NotScrolled = styled.div`
   backdrop-filter: opacity(1);
   will-change: height, background;
 
+  @media screen and (max-width: 767px) {
+    height: 64px;
+  }
+
   @media screen and (max-width: 479px) {
     z-index: 100;
     max-width: 479px;
@@ -149,6 +153,7 @@ const NavLinkContainer = styled.li`
   text-transform: uppercase;
   text-decoration: none;
   cursor: pointer;
+
   @media screen and (max-width: 991px) {
     display: block;
     margin: 0;
@@ -180,7 +185,6 @@ const Underline = styled.div`
 const Nav = ({ current, navLinks }) => {
   const [scrolling, setScrolling] = useState(false)
   const [currentPath, setCurrentPath] = useState('')
-  console.log('current', current)
   useEffect(() => {
     function onScroll() {
       let currentPosition = window.scrollY
@@ -203,8 +207,8 @@ const Nav = ({ current, navLinks }) => {
           </StyledLinkLogo>
         </NavLeft>
         <NavMenu>
-          {navLinks.map((nav) => (
-            <NavLinkContainer className="button">
+          {navLinks.map((nav, index) => (
+            <NavLinkContainer key={`${nav.label}${index}`} className="button">
               <Underline className="underline" />
               <StyledLink
                 onClick={() => setCurrentPath(current)}

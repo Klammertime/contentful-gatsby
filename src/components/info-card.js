@@ -146,15 +146,13 @@ const InfoCardWrapper = styled.div`
 `
 const Category = styled.div`
   position: absolute;
-  top: 0px;
-  right: 0px;
+  top: 0;
+  right: 0;
   z-index: 1;
   display: inline-block;
   height: 24px;
   margin: 40px;
-  padding-top: 4px;
-  padding-right: 8px;
-  padding-left: 10px;
+  padding: 4px 8px 0 10px;
   color: #111;
   font-weight: 700;
   font-size: 8px;
@@ -185,6 +183,7 @@ const InfoCard = ({ info }) => {
           style={{ height: '207px' }}
           image={newsImage?.gatsbyImageData}
           className="info-card-image"
+          alt={newsImage?.description || ''}
         />
         <div className="info-card-content">
           {title && <h4>{title}</h4>}

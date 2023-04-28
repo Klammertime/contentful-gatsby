@@ -13,7 +13,6 @@ class PortfolioIndex extends React.Component {
     return (
       <Layout header="Portfolio" location={this.props.location}>
         <Seo title="Portfolio" />
-
         <Section>
           <Filter posts={posts} />
         </Section>
@@ -28,14 +27,15 @@ export const pageQuery = graphql`
   query PortfolioIndexQuery {
     allContentfulPortfolioPost(sort: { order: ASC }) {
       nodes {
+        id
         workCardDescription {
           workCardDescription
         }
-        id
         singleCategory
         title
         slug
         heroImage {
+          description
           gatsbyImageData(
             placeholder: BLURRED
             layout: CONSTRAINED

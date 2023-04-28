@@ -58,6 +58,7 @@ const QuoteWrapper = styled.div`
       }
     }
 `
+// TODO check error and tiny var
 
 const Quote = ({ testimonialQuote }) => {
   return (

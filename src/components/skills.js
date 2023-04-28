@@ -18,10 +18,8 @@ const SkillCircle = styled.div`
   background-color: var(--tag-grey);
   border-radius: 50%;
   cursor: pointer;
-
-  @media screen and (max-width: 991px) {
-    width: 105px;
-    height: 105px;
+  @media screen and (max-width: 479px) {
+    margin: 12px;
   }
 `
 
@@ -46,13 +44,13 @@ const Skills = () => {
     >
       <SkillsRow>
         {fullSkillsList.skillLogos.map((val) => (
-          <SkillCircle key={val.title}>
+          <SkillCircle key={val.id}>
             <GatsbyImage
               image={val.gatsbyImageData}
               imgStyle={{
                 width: '44px',
               }}
-              alt={val.description}
+              alt={val.title || ''}
             />
             <Text variant="tagLower" margin="8px 0 0 0">
               {val.title}

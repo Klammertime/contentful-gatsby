@@ -8,6 +8,13 @@ const BtnContainer = styled.div`
   display: flex;
   justify-content: center;
   margin-bottom: 112px;
+  padding: 8px 0;
+  @media screen and (max-width: 991px) {
+    margin-bottom: 64px;
+  }
+  @media screen and (max-width: 479px) {
+    margin-bottom: 48px;
+  }
 
   .filter-btn {
     display: flex;
@@ -23,6 +30,10 @@ const BtnContainer = styled.div`
     letter-spacing: 1px;
     cursor: pointer;
     transition: var(--transition);
+
+    span::first-letter {
+      text-transform: uppercase;
+    }
   }
 
   .active {
@@ -33,7 +44,7 @@ const BtnContainer = styled.div`
 const CardGrid = styled.div`
   display: grid;
   grid-auto-columns: 1fr;
-  grid-template-rows: 1fr 1fr;
+  grid-template-rows: auto;
   grid-template-columns: 1fr 1fr;
   gap: 80px;
 
@@ -43,6 +54,7 @@ const CardGrid = styled.div`
   }
 
   @media screen and (max-width: 479px) {
+    grid-row-gap: 41px;
     grid-template-columns: 1fr;
   }
 `
@@ -79,7 +91,7 @@ function Filter({ posts }) {
                 key={category}
                 onClick={() => filterItems(category)}
               >
-                {category}
+                <span>{category}</span>
               </Link>
             )
           })}
@@ -87,7 +99,7 @@ function Filter({ posts }) {
       </Section>
       <CardGrid>
         {portfolioMenuItems.map((menuItem) => {
-          return <PortfolioCard key={menuItem.id} card1={menuItem} />
+          return <PortfolioCard small key={menuItem.id} cardInfo={menuItem} />
         })}
       </CardGrid>
     </>

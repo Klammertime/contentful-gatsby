@@ -2,11 +2,12 @@ import { GatsbyImage } from 'gatsby-plugin-image'
 import React from 'react'
 import { IoMdQuote } from 'react-icons/io'
 import { RiStarFill } from 'react-icons/ri'
+import GenericRichText from './ui/generic-rich-text'
 import styled from 'styled-components'
 
 const TestimonialWrapper = styled.div`
   display: inline-block;
-  max-width: 570px;
+  max-width: 100%;
 
   .testimonial {
     margin: 15px 8px;
@@ -73,29 +74,21 @@ const Author = styled.div`
 const QuoteText = styled.div`
   margin-top: 32px;
   margin-bottom: 16px;
-
-  .testimonial-text {
-    margin-bottom: 16px;
-    color: #4d5464;
-    font-size: 16px;
-    line-height: 28px;
-  }
+  color: #4d5464;
+  font-size: 16px;
+  line-height: 28px;
 
   &:before {
     display: table;
-    grid-row-start: 1;
-    grid-row-end: 2;
-    grid-column-start: 1;
-    grid-column-end: 2;
+    grid-row: 1/2;
+    grid-column: 1/2;
     content: ' ';
   }
 
   &:after {
     display: table;
-    grid-row-start: 1;
-    grid-row-end: 2;
-    grid-column-start: 1;
-    grid-column-end: 2;
+    grid-row: 1/2;
+    grid-column: 1/2;
     content: ' ';
   }
 `
@@ -132,8 +125,8 @@ const Bottom = styled.div`
 `
 
 const TestimonialCard = ({ testimonial }) => {
-  const { name, title, text, image } = testimonial
-  if (!text || !name) {
+  const { name, title, image, paragraphText } = testimonial
+  if (!paragraphText || !name) {
     return null
   }
   return (
@@ -158,7 +151,9 @@ const TestimonialCard = ({ testimonial }) => {
             <IoMdQuote />
           </div>
         </Author>
-        <QuoteText>{text?.text}</QuoteText>
+        <QuoteText>
+          <GenericRichText data1={paragraphText} />
+        </QuoteText>
         <Bottom>
           <div className="rating">
             <RiStarFill />

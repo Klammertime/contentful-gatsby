@@ -13,6 +13,10 @@ const WorkNav = styled.nav`
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
 
+  @media screen and (max-width: 767px) {
+    padding: 24px 0;
+  }
+
   @media screen and (max-width: 479px) {
     grid-row-gap: 40px;
     grid-template-rows: auto auto auto;
@@ -22,23 +26,23 @@ const WorkNav = styled.nav`
     border-bottom-style: none;
   }
 
-  @media screen and (max-width: 767px) {
-    padding: 24px 0;
-  }
-
   .preview {
-    width: 110px;
-    height: 110px;
+    width: 100px;
+    height: 100px;
     overflow: hidden;
     border-radius: 50%;
+    @media screen and (max-width: 991px) {
+      width: 88px;
+      height: 88px;
+    }
 
     @media screen and (max-width: 767px) {
-      width: 150px;
-      height: 150px;
+      width: 165px;
+      height: 165px;
     }
 
     @media screen and (max-width: 479px) {
-      margin: 10px;
+      margin: 7px;
     }
   }
 
@@ -69,14 +73,13 @@ const WorkNav = styled.nav`
     display: flex;
     align-items: center;
 
-    @media screen and (max-width: 479px) {
-      flex-direction: column;
-      padding: 20px 0;
-    }
-
     @media screen and (max-width: 991px) {
       justify-self: stretch;
       padding: 0;
+    }
+    @media screen and (max-width: 479px) {
+      flex-direction: column;
+      padding: 20px 0;
     }
   }
 
@@ -140,14 +143,14 @@ const PortfolioNavigation = ({ previous, next, nextImg, prevImg }) => {
               rel="prev"
             >
               <div className="preview">
-                <GatsbyImage image={prevImg} alt="get correct one" />
+                <GatsbyImage image={prevImg} alt={prevImg?.description || ''} />
               </div>
               <div className="info">
-                <Text variant="xs" asType="h3">
+                <Text variant="xs" color="mediumGrey" asType="p" margin="4px 0">
                   Previous
                 </Text>
 
-                <Text asType="h4" variant="medium">
+                <Text asType="h3" variant="medium">
                   {previous.title}
                 </Text>
               </div>
@@ -169,15 +172,15 @@ const PortfolioNavigation = ({ previous, next, nextImg, prevImg }) => {
               rel="next"
             >
               <div className="info">
-                <Text variant="xs" asType="h3">
+                <Text variant="xs" color="mediumGrey" asType="p" margin="4px 0">
                   Next
                 </Text>
-                <Text asType="h4" variant="medium">
+                <Text asType="h3" variant="medium">
                   {next?.title}
                 </Text>
               </div>
               <div className="preview">
-                <GatsbyImage image={nextImg} alt="get correct one" />
+                <GatsbyImage image={nextImg} alt={nextImg?.description || ''} />
               </div>
             </Link>
           )}

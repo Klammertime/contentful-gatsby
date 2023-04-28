@@ -6,22 +6,27 @@ const StyledSection = styled.section`
   display: flex;
   padding-top: ${(props) =>
     props.noPaddingTop || props.noPadding ? '0' : '128px'};
-  padding-bottom: ${(props) => (props.noPadding ? '0' : '128px')};
-
-  @media screen and (max-width: 767px) {
-    padding-top: ${(props) =>
-      props.noPaddingTop || props.noPadding ? '0' : '64px'};
-    padding-bottom: ${(props) => (props.noPadding ? '0' : '64px')};
-  }
+  padding-bottom: ${(props) =>
+    props.noPadding || props.noPaddingBottom ? '0' : '128px'};
 
   @media screen and (max-width: 991px) {
     padding-top: ${(props) =>
       props.noPaddingTop || props.noPadding ? '0' : '80px'};
-    padding-bottom: ${(props) => (props.noPadding ? '0' : '80px')};
+    padding-bottom: ${(props) =>
+      props.noPadding || props.noPaddingBottom ? '0' : '80px'};
   }
+
+  @media screen and (max-width: 767px) {
+    padding-top: ${(props) =>
+      props.noPaddingTop || props.noPadding ? '0' : '64px'};
+    padding-bottom: ${(props) =>
+      props.noPadding || props.noPaddingBottom ? '0' : '64px'};
+  }
+
   &.grey {
     background-color: #f8f8f8;
   }
+
   &.offWhite {
     background-color: #f7f8fc;
   }
@@ -52,19 +57,18 @@ const HeaderSection = styled.div`
   justify-content: center;
   max-width: 570px;
   margin: 0 auto 64px auto;
-
-  @media screen and (max-width: 767px) {
-    margin-bottom: 48px;
-  }
-
   @media screen and (max-width: 991px) {
     margin-bottom: 64px;
+  }
+  @media screen and (max-width: 767px) {
+    margin-bottom: 48px;
   }
 `
 
 const Section = ({
   children,
   noPaddingTop,
+  noPaddingBottom,
   noPadding,
   color,
   textLabel,
@@ -75,6 +79,7 @@ const Section = ({
       className={color ? `${color}` : ''}
       noPaddingTop={noPaddingTop}
       noPadding={noPadding}
+      noPaddingBottom={noPaddingBottom}
     >
       <Wrapper className={color ? `${color}` : ''}>
         {textLabel && (

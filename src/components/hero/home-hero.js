@@ -8,14 +8,16 @@ const DynamicTextWrapper = styled.div`
   z-index: 1;
   height: 48px;
   overflow: hidden;
-  @media screen and (max-width: 479px) {
-    padding: 0;
+  @media screen and (max-width: 991px) {
+    margin-bottom: 12px;
   }
+  
   @media screen and (max-width: 767px) {
     margin-top: -4px;
   }
-  @media screen and (max-width: 991px) {
-    margin-bottom: 12px;
+
+  @media screen and (max-width: 479px) {
+    padding: 0;
   }
 `
 const slide = keyframes`
@@ -90,9 +92,12 @@ const HeroPhoto = styled.div`
   max-height: 24vw;
   object-fit: cover;
   border-radius: 50%;
-  @media screen and (max-width: 479px) {
-    width: 40vw;
-    height: 40vw;
+
+  @media screen and (max-width: 991px) {
+    width: 24vw;
+    max-width: none;
+    height: 24vw;
+    max-height: none;
   }
 
   @media screen and (max-width: 767px) {
@@ -100,11 +105,9 @@ const HeroPhoto = styled.div`
     height: 24vw;
   }
 
-  @media screen and (max-width: 991px) {
-    width: 24vw;
-    max-width: none;
-    height: 24vw;
-    max-height: none;
+  @media screen and (max-width: 479px) {
+    width: 40vw;
+    height: 40vw;
   }
 `
 const HeroH1 = styled.h1`
@@ -128,18 +131,19 @@ const HeroInfo = styled.div`
   font-weight: 700;
   font-size: 36px;
   line-height: 48px;
-  @media screen and (max-width: 479px) {
-    padding-top: 16px;
-    padding-left: 0;
-  }
-  @media screen and (max-width: 767px) {
-    padding-top: 0;
-  }
+
   @media screen and (max-width: 991px) {
     padding-top: 32px;
     padding-left: 5%;
     font-size: 26px;
     line-height: 36px;
+  }
+  @media screen and (max-width: 767px) {
+    padding-top: 0;
+  }
+  @media screen and (max-width: 479px) {
+    padding-top: 16px;
+    padding-left: 0;
   }
 `
 const HeroAngle = styled.div`
@@ -184,7 +188,7 @@ const HeroSection = () => {
           <HeroPhoto className="hero-v1-photo">
             <GatsbyImage
               image={hero?.gatsbyImageData}
-              alt="hi"
+              alt={hero?.description}
               imgStyle={{ borderRadius: '50%' }}
             />
           </HeroPhoto>
@@ -193,7 +197,9 @@ const HeroSection = () => {
             <HeroH1 className="hero-v1-text">{pageHeader.pageHeader}</HeroH1>
             <DynamicTextWrapper className="dynamic-text-wrapper">
               {dynamicTextList.map((val, index) => (
-                <DynamicTextLine key={index}>{val}</DynamicTextLine>
+                <DynamicTextLine key={`${val.label}${index}`}>
+                  {val}
+                </DynamicTextLine>
               ))}
             </DynamicTextWrapper>
           </HeroInfo>

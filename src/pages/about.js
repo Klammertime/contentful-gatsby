@@ -14,13 +14,14 @@ import { useAboutData } from '../hooks/use-about-data'
 const AboutImgWrapper = styled.div`
   grid-row: 1/2;
   grid-column: 1/6;
+
+  @media (max-width: 991px) {
+    grid-row: 1/2;
+    grid-column: 2 / span 6;
+  }
   @media screen and (max-width: 479px) {
     grid-row: 1/2;
     grid-column: 2/12;
-  }
-  @media (max-width: 991px) {
-    grid-row: 1/2;
-    grid-column: 3/11;
   }
 `
 const AboutTextWrapper = styled.div`
@@ -31,23 +32,15 @@ const AboutTextWrapper = styled.div`
   grid-column: 7/12;
   align-self: center;
   justify-self: start;
+
+  @media screen and (max-width: 991px) {
+    grid-row: 2/3;
+    grid-column: 2 / span 6;
+  }
   @media screen and (max-width: 479px) {
     grid-row: 2/3;
     grid-column: 2/12;
   }
-  @media screen and (max-width: 991px) {
-    grid-row: 2/3;
-    grid-column: 3/11;
-  }
-`
-
-const StyledBlockquote = styled.blockquote`
-  margin: 24px 0;
-  padding: 8px 30px;
-  font-size: 17px;
-  line-height: 24px;
-  text-align: left;
-  border-left: 2px solid var(--primary);
 `
 
 const AboutPage = ({ location }) => {
@@ -64,12 +57,12 @@ const AboutPage = ({ location }) => {
   return (
     <Layout header={title} location={location} pageDescription={pageHeader}>
       <Seo title={title} />
-      <Section>
+      <Section noPaddingBottom>
         <GridSection>
           <AboutImgWrapper>
             <GatsbyImage
               image={profilePic?.gatsbyImageData}
-              alt={profilePic.description}
+              alt={profilePic.description || ''}
             />
           </AboutImgWrapper>
           <AboutTextWrapper>
@@ -82,9 +75,7 @@ const AboutPage = ({ location }) => {
             <Text variant="textGrey" asType="p" color="grey">
               {bioText.bioText}
             </Text>
-            <StyledBlockquote>
-              <GenericRichText data1={writerQuote} />
-            </StyledBlockquote>
+            <GenericRichText data1={writerQuote} />
           </AboutTextWrapper>
         </GridSection>
       </Section>

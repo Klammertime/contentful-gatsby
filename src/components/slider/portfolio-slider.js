@@ -16,6 +16,16 @@ const StyledWrapper = styled.div`
   text-align: center;
   clear: both;
   background-color: #fff;
+  @media screen and (max-width: 1024px) {
+    width: 90%;
+  }
+  @media screen and (max-width: 991px) {
+    width: 100%;
+    height: 50vh;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+  }
 
   .screen-mask {
     min-height: 420px;
@@ -34,6 +44,7 @@ const StyledWrapper = styled.div`
 
   .prev,
   .next {
+    color: #333640;
     transform: translateY(-50%);
     background-color: var(--white);
     place-items: center;
@@ -44,24 +55,21 @@ const StyledWrapper = styled.div`
     width: 56px;
     height: 56px;
     padding: 11px;
+    font-size: 3rem;
     justify-content: center;
     align-items: center;
     border-radius: 50%;
     position: absolute;
-    top: 0;
-    bottom: 0;
+    //top: 0;
+    //bottom: 0;
     margin: auto;
     cursor: pointer;
     overflow: hidden;
-    color: #fff;
-    font-size: 40px;
     user-select: none;
-  }
-
-  .prev:hover,
-  .next:hover {
-    //TODO decide what behavior you want on hover
-    //background-color: var(--primary);ui
+    @media screen and (max-width: 991px) {
+      background-color: #433056;
+      color: #fff;
+    }
   }
 
   .prev:focus,
@@ -73,29 +81,38 @@ const StyledWrapper = styled.div`
     z-index: 3;
     right: auto;
     left: -88px;
+    bottom: 43%;
+    @media screen and (max-width: 1185px) {
+      left: -33px;
+    }
+
+    //@media screen and (max-width: 1024px) {
+    //  left: -5%;
+    //}
+
+    @media screen and (max-width: 991px) {
+      left: 0;
+      bottom: -17%;
+    }
   }
 
   .next {
     left: auto;
     right: -88px;
-  }
+    bottom: 43%;
+    @media screen and (max-width: 1185px) {
+      right: -33px;
+    }
 
-  @media (min-width: 800px) {
-    .prev,
-    .next {
-      display: flex;
-      width: 56px;
-      height: 56px;
-      font-size: 3rem;
-      padding: 11px;
-      justify-content: center;
-      align-items: center;
-      border-radius: 50%;
-      box-shadow: 0 5px 15px 0 rgba(32, 36, 46, 0.06);
-      transition: transform 0.3s, -webkit-transform 0.3s;
-      color: #333640;
+    //@media screen and (max-width: 1024px) {
+    //  right: -5%;
+    //}
+    @media screen and (max-width: 991px) {
+      left: -80%;
+      bottom: -17%;
     }
   }
+
 
   article {
     position: absolute;
@@ -117,60 +134,64 @@ const StyledWrapper = styled.div`
   article.activeSlide {
     opacity: 1;
     transform: translateX(0);
-  }
 
-  article.lastSlide {
-    transform: translateX(-100%);
-  }
 
-  article.nextSlide {
-    transform: translateX(100%);
-  }
+    article.lastSlide {
+      transform: translateX(-100%);
+    }
 
-  .item-img {
-    border: 0;
-    vertical-align: middle;
-    display: inline-block;
-    height: 100%;
-    margin: 0;
-    max-width: none;
-    padding: 0;
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    object-fit: cover;
-  }
+    article.nextSlide {
+      transform: translateX(100%);
+    }
 
-  .slider-nav {
-    height: 40px;
-    padding-top: 13px;
-    opacity: 0.4;
-    font-size: 6px;
-    color: #fff;
-    position: absolute;
-    z-index: 2;
-    inset: auto 0 0 0;
-    margin: auto;
-    text-align: center;
-    -webkit-tap-highlight-color: transparent;
-  }
+    .item-img {
+      border: 0;
+      vertical-align: middle;
+      display: inline-block;
+      height: 100%;
+      margin: 0;
+      max-width: none;
+      padding: 0;
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      object-fit: cover;
+      @media screen and (max-width: 479px) {
+        height: auto;
+      }
 
-  .activeImg,
-  .nonActiveImg {
-    position: relative;
-    display: inline-block;
-    width: 1em;
-    height: 1em;
-    cursor: pointer;
-    margin: 0 3px 0.5em 3px;
-    transition: background-color 0.1s, color 0.1s;
-    background-color: rgba(34, 34, 34, 0.4);
-    border-radius: 100%;
-  }
+    }
 
-  .activeImg {
-    background-color: #222;
-  }
+    .slider-nav {
+      height: 40px;
+      padding-top: 13px;
+      opacity: 0.4;
+      font-size: 6px;
+      color: #fff;
+      position: absolute;
+      z-index: 2;
+      inset: auto 0 0 0;
+      margin: auto;
+      text-align: center;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .activeImg,
+    .nonActiveImg {
+      position: relative;
+      display: inline-block;
+      width: 1em;
+      height: 1em;
+      cursor: pointer;
+      margin: 0 3px 0.5em 3px;
+      transition: background-color 0.1s, color 0.1s;
+      background-color: rgba(34, 34, 34, 0.4);
+      border-radius: 100%;
+    }
+
+    .activeImg {
+      background-color: #222;
+    }
 `
 
 function PortfolioSlider({ slideContent }) {
@@ -188,7 +209,7 @@ function PortfolioSlider({ slideContent }) {
   }, [index, portfolioItems])
 
   return (
-    <Section noPaddingTop>
+    <Section noPadding>
       <StyledWrapper>
         <div className="screen-mask">
           {portfolioItems.map((item, itemIndex) => {
@@ -209,7 +230,7 @@ function PortfolioSlider({ slideContent }) {
                   objectPosition="0% 0%"
                   image={item?.gatsbyImageData}
                   className="item-img"
-                  alt="portfolio"
+                  alt={item?.description || ''}
                 />
               </article>
             )
@@ -225,6 +246,7 @@ function PortfolioSlider({ slideContent }) {
           {portfolioItems.map((item, itemIndex) => {
             return (
               <div
+                key={item.id}
                 className={itemIndex === index ? 'activeImg' : 'nonActiveImg'}
                 onClick={() => setIndex(itemIndex)}
               ></div>

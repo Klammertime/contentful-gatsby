@@ -41,7 +41,7 @@ const ArticleWidget = ({ articleInfo }) => {
     <Wrapper>
       <Link className="widget" to={url}>
         <GatsbyImage
-          alt="article image"
+          alt=""
           image={newsImage?.gatsbyImageData}
           className="widgetImage"
         ></GatsbyImage>

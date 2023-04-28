@@ -10,11 +10,19 @@ const Grid = styled.div`
   grid-gap: 14px 30px;
   width: 100%;
   perspective: 2000px;
+
+  @media screen and (max-width: 991px) {
+    flex-direction: column;
+    grid-row-gap: 64px;
+    grid-column-gap: 16px;
+    grid-template-rows: auto;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  }
+
   @media (max-width: 640px) {
     grid: auto auto / 1fr;
     grid-gap: 0;
   }
-
   @media screen and (max-width: 479px) {
     grid-row-gap: 48px;
     grid-column-gap: 0;

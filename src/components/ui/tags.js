@@ -12,7 +12,7 @@ const Tags = ({ tags }) =>
   tags?.length > 0 && (
     <Wrapper>
       {tags.map((tagText) => (
-        <Tag>{tagText}</Tag>
+        <Tag key={tagText}>{tagText}</Tag>
       ))}
     </Wrapper>
   )

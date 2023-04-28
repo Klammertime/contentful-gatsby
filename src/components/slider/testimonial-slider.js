@@ -89,9 +89,6 @@ const TestimonialSlider = () => {
           name
           company
           id
-          text {
-            text
-          }
           title
         }
         totalCount
@@ -121,6 +118,7 @@ const TestimonialSlider = () => {
         <TabsContent>
           <ReviewContainer>
             <ReviewText>
+              {/*TODO use or lose*/}
               {/*<GenericRichText richTextLabel="quoteRichText" data1={review} />*/}
             </ReviewText>
             <ReviewInfo>{name}</ReviewInfo>
@@ -130,9 +128,8 @@ const TestimonialSlider = () => {
           {data?.allContentfulTestimonial?.nodes.map((review, index) => {
             const { name } = review
             return (
-              <div className="owl-dots">
+              <div key={review.id} className="owl-dots">
                 <OwlDot
-                  key={index}
                   active={active === index}
                   onClick={() => handleClick(index, review, name)}
                   role="button"

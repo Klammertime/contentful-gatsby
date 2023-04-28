@@ -11,67 +11,56 @@ import PortfolioNavigation from '../components/portfolio/portfolio-navigation'
 import Seo from '../components/seo'
 import PortfolioSlider from '../components/slider/portfolio-slider'
 import TestimonialCard from '../components/testimonial-card'
-import Link from '../components/ui/link'
 import Section from '../components/ui/section'
 import Text from '../components/ui/text'
-import Tags from '../components/ui/tags'
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
+import FeatureAccordion from '../components/featureAccordion/feature-accordion'
 
 const MainGrid = styled.div`
   display: grid;
   grid: auto-flow auto / repeat(12, 1fr [col-start]);
-  padding-top: 32px;
+  padding-top: 0;
   perspective: 2000px;
 
-  .workCardDescription {
-    color: #777;
-    font-size: 15px;
-    line-height: 24px;
-  }
+  .mobileImage {
+    display: none;
+    @media screen and (max-width: 990px) {
+      display: block;
+      margin-bottom: 32px;
+      grid-row-start: 1;
+      grid-column: 1/13;
+    }
 
-  .info {
-    display: flex;
-    overflow: hidden;
-    margin-right: auto;
-    margin-left: auto;
-    padding-top: 12px;
-    padding-bottom: 40px;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: stretch;
-  }
+    .infoCellHeader {
+      margin-right: 8px;
+      color: #777;
+    }
 
-  //TODO what is this also doing here when it has its own
-  // styled component
-  .infoCell {
-    display: flex;
-    padding-top: 12px;
-    padding-bottom: 12px;
-    align-items: center;
-    flex: 0 auto;
-    border-bottom: 1px solid #e4e4e4;
-    font-size: 15px;
-    line-height: 24px;
-  }
+    .sectionHeader {
+      margin: 23px 0 16px 0;
+      font-size: 40px;
+      line-height: 48px;
+      font-weight: 700;
+    }
+`
 
-  .infoCellHeader {
-    margin-right: 8px;
-    color: #777;
-  }
+const RightContainer = styled.div`
+  grid-column: 8/13;
+  grid-row: 2;
 
-  .sectionHeader {
-    margin: 23px 0 16px 0;
-    font-size: 40px;
-    line-height: 48px;
-    font-weight: 700;
+  @media screen and (max-width: 990px) {
+    grid-column: 1/13;
   }
 `
 
 const BodyWrapper = styled.div`
   position: relative;
-  top: 8px;
+  grid-row: 2;
+  top: 0;
   flex: 1;
-  grid-column: 1/9;
+  grid-column: ${(props) => (props.sidebar ? '1/8' : '1/13')};
   text-align: left;
+
   @media (max-width: 990px) {
     position: static;
     grid-column: 1/13;
@@ -79,35 +68,116 @@ const BodyWrapper = styled.div`
   }
 
   .bodyImage {
-    margin: 40px 0 60px 0;
+    margin: 0 0 60px 0;
+    border: 1px solid #e4e4e4;
+
+    @media (max-width: 990px) {
+      margin: 36px 0 36px 0;
+    }
+  }
+
+  p {
+    max-width: 50rem;
   }
 `
-
-const InfoBoxWrapper = styled.div`
+const WorkIntro = styled.div`
+  flex-direction: row;
   grid-row-start: 1;
-  flex: 1;
-  grid-column: 10/13;
-  margin-top: 40px;
-  @media screen and (max-width: 990px) {
-    grid-row-start: 1;
-    grid-column: 1/13;
-  }
-`
-
-const InfoBox = styled.div`
-  position: sticky;
-  top: 100px;
-  flex: 1;
-  @media screen and (max-width: 990px) {
-    margin-right: 0;
+  grid-column: 1/13;
+  display: flex;
+  margin: 0;
+  font-size: 17px;
+  line-height: 24px;
+  padding: 60px 0;
+  align-items: flex-start;
+  @media (max-width: 990px) {
+    flex-direction: column;
+    align-items: center;
     padding: 0;
   }
-  @media screen and (max-width: 767px) {
-    position: static;
+
+  p {
+    width: 50%;
+    padding-top: 16px;
+    padding-right: 10%;
+    padding-bottom: 16px;
+    color: #666d7a;
+  }
+
+  .workCardDescription {
+    font-size: 17px;
+    line-height: 24px;
+    padding: 16px 0;
+    color: #666d7a;
+    font-weight: 500;
+    margin: 0;
+    width: 50%;
+    padding-right: 10%;
+    text-align: left;
+
+    @media (max-width: 990px) {
+      width: 80%;
+      padding-right: 0;
+      text-align: center;
+      margin-bottom: 24px;
+    }
   }
 `
+
+const WorkBlocks = styled.div`
+  text-align: center;
+  display: grid;
+  overflow: hidden;
+  flex: 1;
+  grid-auto-columns: 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #e4e8ed;
+  border-radius: 8px;
+`
+
+const WorkBlock = styled.div`
+  display: flex;
+  padding: 32px;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 1px 0 0 0 #e4e8ed;
+`
+
+const WorkBlockHeading = styled.h6`
+  margin-top: 0px;
+  margin-bottom: 16px;
+  font-size: 15px;
+  line-height: 20px;
+  font-weight: 700;
+  @media screen and (max-width: 990px) {
+    font-size: 14px;
+    line-height: 18px;
+    margin-bottom: 12px;
+  }
+`
+const WorkBlockInfo = styled.div`
+  font-size: 17px;
+  line-height: 24px;
+  color: #666d7a;
+  font-weight: 500;
+  @media screen and (max-width: 990px) {
+    font-size: 15px;
+    line-height: 20px;
+  }
+`
+
 const SliderWrapper = styled.div`
   padding-top: 60px;
+  grid-row-start: 2;
+  grid-column: 1/13;
+  @media screen and (max-width: 767px) {
+    display: none;
+  }
 `
 
 const TestimonialsContainer = styled.div`
@@ -116,6 +186,19 @@ const TestimonialsContainer = styled.div`
   padding-right: 8px;
   padding-left: 8px;
   column-count: 2;
+  @media screen and (max-width: 990px) {
+    column-count: 1;
+  }
+`
+
+const Col = styled.div`
+  display: grid;
+  grid-template-columns: ${(props) =>
+    props.isEven ? '1fr 1fr' : '1fr 1fr 1fr'};
+
+  grid-template-rows: auto;
+  grid-gap: 30px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 `
 
 class PortfolioPostTemplate extends React.Component {
@@ -125,28 +208,29 @@ class PortfolioPostTemplate extends React.Component {
     const next = get(this.props, 'data.next')
     const Bold = ({ children }) => <span className="bold"> {children}</span>
     const ParagraphText = ({ children }) => (
-      <Text margin="0 0 24px 0" variant="body" asType="p">
+      <Text margin="0 0 1.55rem 0" variant="body" asType="p">
         {children}
       </Text>
     )
 
-    const Col = styled.div`
-      display: grid;
-      grid-template-columns: ${(props) =>
-        props.isEven ? '1fr 1fr' : '1fr 1fr 1fr'};
-
-      grid-template-rows: auto;
-      grid-gap: 30px;
-    `
-    const BulletText = ({ children }) => <ul>{children}</ul>
+    const BulletText = ({ children }) => (
+      <Text margin="0 0 1.55rem 0" variant="bulletText" asType="ul">
+        {children}
+      </Text>
+    )
     const Heading2 = ({ children }) => (
-      <Text margin="0 0 16px 0" variant="large" asType="h2">
+      <Text margin="0 0 12px 0" variant="large" asType="h2">
         {children}
       </Text>
     )
 
     const Heading3 = ({ children }) => (
-      <Text margin="20px 0 12px 0" variant="medium" asType="h3">
+      <Text margin="0 0 12px 0" variant="medium" asType="h3">
+        {children}
+      </Text>
+    )
+    const Heading4 = ({ children }) => (
+      <Text margin="0 0 12px 0" variant="small" asType="h4">
         {children}
       </Text>
     )
@@ -157,6 +241,8 @@ class PortfolioPostTemplate extends React.Component {
       renderNode: {
         [BLOCKS.HEADING_2]: (node, children) => <Heading2>{children}</Heading2>,
         [BLOCKS.HEADING_3]: (node, children) => <Heading3>{children}</Heading3>,
+        [BLOCKS.HEADING_4]: (node, children) => <Heading4>{children}</Heading4>,
+
         [BLOCKS.PARAGRAPH]: (node, children) => (
           <ParagraphText>{children}</ParagraphText>
         ),
@@ -164,9 +250,17 @@ class PortfolioPostTemplate extends React.Component {
         [BLOCKS.UL_LIST]: (node, children) => (
           <BulletText>{children}</BulletText>
         ),
-        [BLOCKS.EMBEDDED_ENTRY]: (node, children) => <div>{children}</div>,
+        [BLOCKS.LIST_ITEM]: (node, children) => {
+          const normalisedChildren = documentToReactComponents(node, {
+            renderNode: {
+              [BLOCKS.PARAGRAPH]: (node, children) => children,
+              [BLOCKS.LIST_ITEM]: (node, children) => <li>{children}</li>,
+            },
+          })
+          return normalisedChildren
+        },
         [BLOCKS.EMBEDDED_ASSET]: (node) => {
-          const { gatsbyImageData } = node?.data?.target
+          const { gatsbyImageData, description } = node?.data?.target
           if (!gatsbyImageData) {
             // asset is not an image
             return null
@@ -175,13 +269,10 @@ class PortfolioPostTemplate extends React.Component {
             <GatsbyImage
               imgStyle={{
                 display: 'block',
-                borderStyle: 'solid',
-                borderWidth: '1px',
-                borderColor: '#e4e8ed',
               }}
               className="bodyImage"
               image={gatsbyImageData}
-              alt="get correct one"
+              alt={description || ''}
             />
           )
         },
@@ -196,68 +287,59 @@ class PortfolioPostTemplate extends React.Component {
             <PortfolioSlider slideContent={post?.sliderSizedImages} />
           </SliderWrapper>
         )}
+
         <Section color="white" noPaddingTop>
           <MainGrid>
-            <BodyWrapper>
+            <BodyWrapper sidebar={post?.sidebar}>
               {post?.body?.raw && renderRichText(post.body, options)}
               {post?.shortQuotes &&
                 post?.shortQuotes?.map((val) => {
-                  return <TestimonialCard testimonial={val} />
+                  return <TestimonialCard key={val.id} testimonial={val} />
                 })}
             </BodyWrapper>
 
-            <InfoBoxWrapper>
-              <InfoBox>
-                <h2 className="sectionHeader">{post?.client}</h2>
-                {post?.workCardDescription?.workCardDescription && (
-                  <p className="workCardDescription">
-                    {post?.workCardDescription?.workCardDescription}
-                  </p>
-                )}
-                <div className="info">
-                  {post?.title && (
-                    <div className="infoCell">
-                      <div className="infoCellHeader">
-                        <Text variant="textGrey">Client:</Text>
-                      </div>
-                      <Text color="black" variant="textGrey">
-                        {post?.title}
-                      </Text>
-                    </div>
-                  )}
-                  {post?.role && (
-                    <div className="infoCell">
-                      <div className="infoCellHeader">
-                        <Text variant="textGrey">Role:</Text>
-                      </div>
-                      <Text color="black" variant="textGrey">
-                        {post?.role}
-                      </Text>
-                    </div>
-                  )}
-                  {post?.seeItLive?.url && (
-                    <div className="infoCell">
-                      <div className="infoCellHeader">
-                        <Text variant="textGrey">Link:</Text>
-                      </div>
+            {post?.sidebar && (
+              <RightContainer>
+                <FeatureAccordion featuresList={post?.featuresAccordion} />
+              </RightContainer>
+            )}
 
-                      <Link to={post?.seeItLive?.url}>View It Live</Link>
-                    </div>
+            <WorkIntro>
+              {post?.workCardDescription?.workCardDescription && (
+                <p className="workCardDescription">
+                  {post?.workCardDescription?.workCardDescription}
+                </p>
+              )}
+              <WorkBlocks>
+                <WorkBlock>
+                  {post?.title && (
+                    <>
+                      <WorkBlockHeading>Company</WorkBlockHeading>
+                      <WorkBlockInfo>{post?.client}</WorkBlockInfo>
+                    </>
                   )}
-                </div>
-                {post?.technology?.longList && (
-                  <Tags tags={post?.technology?.longList} />
-                )}
-              </InfoBox>
-            </InfoBoxWrapper>
+                </WorkBlock>
+                <WorkBlock>
+                  {post?.role && (
+                    <>
+                      <WorkBlockHeading>Role</WorkBlockHeading>
+                      <WorkBlockInfo>{post?.role}</WorkBlockInfo>
+                    </>
+                  )}
+                </WorkBlock>
+              </WorkBlocks>
+            </WorkIntro>
           </MainGrid>
         </Section>
 
         {post?.testimonials && (
-          <Section>
+          <Section noPaddingTop>
             <TestimonialsContainer>
-              {post?.testimonials.map((val) => (
-                <TestimonialCard testimonial={val} />
+              {post?.testimonials.map((testimonial) => (
+                <TestimonialCard
+                  key={testimonial.id}
+                  testimonial={testimonial}
+                />
               ))}
             </TestimonialsContainer>
           </Section>
@@ -272,7 +354,7 @@ class PortfolioPostTemplate extends React.Component {
             >
               {post?.inTheNews &&
                 post?.inTheNews.map((val) => {
-                  return <InfoCard info={val} />
+                  return <InfoCard key={val.id} info={val} />
                 })}
             </Col>
           </Section>
@@ -300,13 +382,11 @@ export const pageQuery = graphql`
     contentfulPortfolioPost(slug: { eq: $slug }) {
       title
       slider
-      technology {
-        longList
-      }
       workCardDescription {
         workCardDescription
       }
       shortQuotes {
+        id
         name
         title
         articleLink
@@ -315,18 +395,28 @@ export const pageQuery = graphql`
           text
         }
       }
+      sidebar
+      featuresAccordion {
+        title
+        info {
+          info
+        }
+      }
       testimonials {
+        id
         title
         company
         name
         image {
+          description
           gatsbyImageData
         }
-        text {
-          text
+        paragraphText {
+          raw
         }
       }
       testimonialQuote {
+        id
         blurbQuote {
           blurbQuote
         }
@@ -335,6 +425,7 @@ export const pageQuery = graphql`
         company
       }
       inTheNews {
+        id
         source
         linkTextOptions
         pdf {
@@ -344,6 +435,7 @@ export const pageQuery = graphql`
         url
         heading
         newsImage {
+          description
           gatsbyImageData
         }
         summary {
@@ -366,6 +458,7 @@ export const pageQuery = graphql`
           ... on ContentfulAsset {
             contentful_id
             __typename
+            description
             gatsbyImageData(
               layout: FULL_WIDTH
               placeholder: BLURRED
@@ -375,21 +468,14 @@ export const pageQuery = graphql`
         }
       }
       sliderSizedImages {
-        gatsbyImageData(
-          cropFocus: TOP
-          quality: 70
-          layout: CONSTRAINED
-          height: 1500
-          aspectRatio: 1.3
-          placeholder: TRACED_SVG
-        )
+        description
+        gatsbyImageData(aspectRatio: 1.6, layout: FULL_WIDTH, width: 890)
         id
       }
       heroImage {
         description
         gatsbyImageData(
-          width: 1170
-          height: 720
+          width: 3000
           layout: FULL_WIDTH
           placeholder: BLURRED
           quality: 80
@@ -398,25 +484,30 @@ export const pageQuery = graphql`
     }
     previous: contentfulPortfolioPost(slug: { eq: $previousPostSlug }) {
       slug
+      id
       title
       heroImage {
+        description
         gatsbyImageData(
-          layout: FIXED
+          layout: CONSTRAINED
           placeholder: BLURRED
-          height: 150
-          width: 150
+          width: 500
+          height: 500
+          outputPixelDensities: [0.25, 0.5, 1, 2]
         )
       }
     }
     next: contentfulPortfolioPost(slug: { eq: $nextPostSlug }) {
       slug
+      id
       title
       heroImage {
+        description
         gatsbyImageData(
-          layout: FIXED
+          aspectRatio: 1
+          layout: FULL_WIDTH
           placeholder: BLURRED
-          height: 150
-          width: 150
+          width: 100
         )
       }
     }

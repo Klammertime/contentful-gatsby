@@ -118,7 +118,7 @@ const TestimonialContent = styled.div`
   margin: 0 auto;
   text-align: center;
 `
-
+// TODO decide what you are doing with this one
 const data = [
   {
     id: 1,
@@ -176,7 +176,7 @@ function GenericSlider1({ data1 }) {
     <StyledSection>
       <div className="section-center">
         {people?.map((person, personIndex) => {
-          const { id, name, title, text } = person
+          const { id, name, title } = person
 
           let position = 'nextSlide'
           if (personIndex === index) {
