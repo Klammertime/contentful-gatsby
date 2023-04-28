@@ -293,11 +293,13 @@ class PortfolioPostTemplate extends React.Component {
                   return <TestimonialCard key={val.id} testimonial={val} />
                 })}
             </BodyWrapper>
-            <RightContainer>
-              {post?.sidebar && (
+
+            {post?.sidebar && (
+              <RightContainer>
                 <FeatureAccordion featuresList={post?.featuresAccordion} />
-              )}
-            </RightContainer>
+              </RightContainer>
+            )}
+
             <WorkIntro>
               {post?.workCardDescription?.workCardDescription && (
                 <p className="workCardDescription">
