@@ -1,7 +1,7 @@
 import React from 'react'
 import Layout from '../components/layout'
 
-const NotFoundPage = () => (
+const NotFoundPage = ({ location = '' }) => (
   <Layout header="404">
     <div
       style={{

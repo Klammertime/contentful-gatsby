@@ -1,11 +1,11 @@
 {
-  "name": "contentful-starter-gatsby-blog",
-  "description": "Contentful Gatsby Starter Blog",
+  "name": "contentful-starter",
+  "description": "Audrey Klammer website",
   "private": true,
-  "version": "0.0.1",
-  "author": "Contentful <opensource@contentful.com>",
+  "version": "1",
+  "author": "",
   "bugs": {
-    "url": "https://github.com/contentful/starter-gatsby-blog/issues"
+    "url": ""
   },
   "dependencies": {
     "@contentful/rich-text-html-renderer": "^16.0.3",
@@ -21,7 +21,6 @@
     "gatsby-plugin-sharp": "^5.5.0",
     "gatsby-plugin-styled-components": "^6.6.0",
     "gatsby-source-contentful": "^8.5.0",
-    "gatsby-source-filesystem": "^5.8.0",
     "gatsby-transformer-remark": "^6.7.0",
     "gatsby-transformer-sharp": "^5.5.0",
     "gh-pages": "^3.1.0",
@@ -59,12 +58,8 @@
   "engines": {
     "node": ">=18.0.0"
   },
-  "homepage": "https://github.com/contentful/starter-gatsby-blog#readme",
-  "keywords": [
-    "gatsby",
-    "contentful",
-    "starter"
-  ],
+  "homepage": "",
+  "keywords": [],
   "license": "MIT",
   "main": "n/a",
   "repository": {
