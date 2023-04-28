@@ -19,8 +19,11 @@ body {
   font-size: 16px;
   font-family: var(--font-sans);
   line-height: 24px;
-  text-rendering: optimizeLegibility;
+  text-rendering: optimizeSpeed;
   -webkit-font-smoothing: antialiased;
+  word-wrap: break-word;
+  font-kerning: normal;
+  font-feature-settings: 'kern' 1;
 }
 
 img {

@@ -44,11 +44,9 @@ const StyledWrapper = styled.div`
 
   .prev,
   .next {
-    background-color: #433056;
-    color: #fff;
-
+    color: #333640;
     transform: translateY(-50%);
-    //background-color: var(--white);
+    background-color: var(--white);
     place-items: center;
     border-color: transparent;
     box-shadow: 0 5px 15px 0 rgba(32, 36, 46, 0.06);
@@ -57,6 +55,7 @@ const StyledWrapper = styled.div`
     width: 56px;
     height: 56px;
     padding: 11px;
+    font-size: 3rem;
     justify-content: center;
     align-items: center;
     border-radius: 50%;
@@ -66,11 +65,10 @@ const StyledWrapper = styled.div`
     margin: auto;
     cursor: pointer;
     overflow: hidden;
-    font-size: 40px;
     user-select: none;
-    @media (min-width: 800px) {
-      font-size: 3rem;
-      //color: #333640;
+    @media screen and (max-width: 991px) {
+      background-color: #433056;
+      color: #fff;
     }
   }
 

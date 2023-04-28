@@ -14,11 +14,12 @@ import TestimonialCard from '../components/testimonial-card'
 import Section from '../components/ui/section'
 import Text from '../components/ui/text'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
+import FeatureAccordion from '../components/featureAccordion/feature-accordion'
 
 const MainGrid = styled.div`
   display: grid;
   grid: auto-flow auto / repeat(12, 1fr [col-start]);
-  padding-top: 32px;
+  padding-top: 0;
   perspective: 2000px;
 
   .mobileImage {
@@ -43,12 +44,23 @@ const MainGrid = styled.div`
     }
 `
 
+const RightContainer = styled.div`
+  grid-column: 8/13;
+  grid-row: 2;
+
+  @media screen and (max-width: 990px) {
+    grid-column: 1/13;
+  }
+`
+
 const BodyWrapper = styled.div`
   position: relative;
-  top: 8px;
+  grid-row: 2;
+  top: 0;
   flex: 1;
-  grid-column: 1/13;
+  grid-column: 1/8;
   text-align: left;
+
   @media (max-width: 990px) {
     position: static;
     grid-column: 1/13;
@@ -56,7 +68,12 @@ const BodyWrapper = styled.div`
   }
 
   .bodyImage {
-    margin: 40px 0 60px 0;
+    margin: 0 0 60px 0;
+    border: 1px solid #e4e4e4;
+
+    @media (max-width: 990px) {
+      margin: 36px 0 36px 0;
+    }
   }
 `
 const WorkIntro = styled.div`
@@ -72,7 +89,15 @@ const WorkIntro = styled.div`
   @media (max-width: 990px) {
     flex-direction: column;
     align-items: center;
-    margin-bottom: 40px;
+    padding: 0;
+  }
+
+  p {
+    width: 50%;
+    padding-top: 16px;
+    padding-right: 10%;
+    padding-bottom: 16px;
+    color: #666d7a;
   }
 
   .workCardDescription {
@@ -117,9 +142,8 @@ const WorkBlock = styled.div`
   flex-direction: column;
   align-items: center;
   box-shadow: 1px 0 0 0 #e4e8ed;
-  //padding-right: 40px;
-  //padding-left: 40px;
 `
+
 const WorkBlockHeading = styled.h6`
   margin-top: 0px;
   margin-bottom: 16px;
@@ -145,6 +169,8 @@ const WorkBlockInfo = styled.div`
 
 const SliderWrapper = styled.div`
   padding-top: 60px;
+  grid-row-start: 2;
+  grid-column: 1/13;
   @media screen and (max-width: 767px) {
     display: none;
   }
@@ -178,24 +204,29 @@ class PortfolioPostTemplate extends React.Component {
     const next = get(this.props, 'data.next')
     const Bold = ({ children }) => <span className="bold"> {children}</span>
     const ParagraphText = ({ children }) => (
-      <Text margin="0 16.66% 32px 16.66%" variant="body" asType="p">
+      <Text margin="0 0 1.55rem 0" variant="body" asType="p">
         {children}
       </Text>
     )
 
     const BulletText = ({ children }) => (
-      <Text margin="0 16.66% 32px 16.66%" variant="bulletText" asType="ul">
+      <Text margin="0 0 1.55rem 0" variant="bulletText" asType="ul">
         {children}
       </Text>
     )
     const Heading2 = ({ children }) => (
-      <Text margin="0 16.66% 32px 16.66%" variant="large" asType="h2">
+      <Text margin="0 0 12px 0" variant="large" asType="h2">
         {children}
       </Text>
     )
 
     const Heading3 = ({ children }) => (
-      <Text margin="20px 0 12px 0" variant="medium" asType="h3">
+      <Text margin="0 0 12px 0" variant="medium" asType="h3">
+        {children}
+      </Text>
+    )
+    const Heading4 = ({ children }) => (
+      <Text margin="0 0 12px 0" variant="small" asType="h4">
         {children}
       </Text>
     )
@@ -206,6 +237,8 @@ class PortfolioPostTemplate extends React.Component {
       renderNode: {
         [BLOCKS.HEADING_2]: (node, children) => <Heading2>{children}</Heading2>,
         [BLOCKS.HEADING_3]: (node, children) => <Heading3>{children}</Heading3>,
+        [BLOCKS.HEADING_4]: (node, children) => <Heading4>{children}</Heading4>,
+
         [BLOCKS.PARAGRAPH]: (node, children) => (
           <ParagraphText>{children}</ParagraphText>
         ),
@@ -232,9 +265,6 @@ class PortfolioPostTemplate extends React.Component {
             <GatsbyImage
               imgStyle={{
                 display: 'block',
-                borderStyle: 'solid',
-                borderWidth: '1px',
-                borderColor: '#e4e8ed',
               }}
               className="bodyImage"
               image={gatsbyImageData}
@@ -253,6 +283,7 @@ class PortfolioPostTemplate extends React.Component {
             <PortfolioSlider slideContent={post?.sliderSizedImages} />
           </SliderWrapper>
         )}
+
         <Section color="white" noPaddingTop>
           <MainGrid>
             <BodyWrapper>
@@ -262,6 +293,9 @@ class PortfolioPostTemplate extends React.Component {
                   return <TestimonialCard key={val.id} testimonial={val} />
                 })}
             </BodyWrapper>
+            <RightContainer>
+              <FeatureAccordion />
+            </RightContainer>
             <WorkIntro>
               {post?.workCardDescription?.workCardDescription && (
                 <p className="workCardDescription">
@@ -340,10 +374,6 @@ export const pageQuery = graphql`
     contentfulPortfolioPost(slug: { eq: $slug }) {
       title
       slider
-      technology {
-        id
-        longList
-      }
       workCardDescription {
         workCardDescription
       }
@@ -355,6 +385,12 @@ export const pageQuery = graphql`
         company
         text {
           text
+        }
+      }
+      featuresAccordion {
+        title
+        info {
+          info
         }
       }
       testimonials {
@@ -424,19 +460,13 @@ export const pageQuery = graphql`
       }
       sliderSizedImages {
         description
-        gatsbyImageData(
-          cropFocus: TOP
-          quality: 70
-          layout: CONSTRAINED
-          aspectRatio: 1.3
-          placeholder: BLURRED
-        )
+        gatsbyImageData(aspectRatio: 1.6, layout: FULL_WIDTH, width: 890)
         id
       }
       heroImage {
         description
         gatsbyImageData(
-          width: 2400
+          width: 3000
           layout: FULL_WIDTH
           placeholder: BLURRED
           quality: 80
@@ -450,10 +480,11 @@ export const pageQuery = graphql`
       heroImage {
         description
         gatsbyImageData(
-          layout: FULL_WIDTH
+          layout: CONSTRAINED
           placeholder: BLURRED
-          height: 165
-          width: 165
+          width: 500
+          height: 500
+          outputPixelDensities: [0.25, 0.5, 1, 2]
         )
       }
     }
@@ -464,10 +495,10 @@ export const pageQuery = graphql`
       heroImage {
         description
         gatsbyImageData(
+          aspectRatio: 1
           layout: FULL_WIDTH
           placeholder: BLURRED
-          height: 165
-          width: 165
+          width: 100
         )
       }
     }

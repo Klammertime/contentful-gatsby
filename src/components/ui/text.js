@@ -122,8 +122,8 @@ const StyledText = styled.h2`
       case 'body':
         return css`
           font-weight: var(--body);
-          font-size: var(--text-sm);
-          line-height: var(--loose);
+          font-size: 16px;
+          line-height: 1.7;
         `
 
       case 'textGrey':

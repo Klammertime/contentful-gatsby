@@ -13,7 +13,7 @@ const AccordionBox = styled.section`
   }
 `
 
-function AccordionBoxSingle({ newList, title }) {
+function ShowMore({ newList, title }) {
   const showImmediately = newList?.slice(0, 7)
   const showLater = newList?.slice(7)
   const [showInfo, setShowInfo] = useState(false)
@@ -91,4 +91,4 @@ function AccordionBoxSingle({ newList, title }) {
   )
 }
 
-export default AccordionBoxSingle
+export default ShowMore
