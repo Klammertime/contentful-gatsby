@@ -25,7 +25,7 @@ export default PortfolioIndex
 
 export const pageQuery = graphql`
   query PortfolioIndexQuery {
-    allContentfulPortfolioPost {
+    allContentfulPortfolioPost(sort: { order: ASC }) {
       nodes {
         id
         workCardDescription {

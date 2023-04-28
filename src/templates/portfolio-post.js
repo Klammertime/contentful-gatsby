@@ -75,6 +75,10 @@ const BodyWrapper = styled.div`
       margin: 36px 0 36px 0;
     }
   }
+
+  p {
+    max-width: 50rem;
+  }
 `
 const WorkIntro = styled.div`
   flex-direction: row;
