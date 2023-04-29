@@ -81,8 +81,6 @@ const Layout = ({ location, children, header }) => {
   const mainNavLinks = data.allContentfulNavNavListJsonNode.nodes
   const socialLinks = data.site.siteMetadata.social
   const rootPath = `${__PATH_PREFIX__}/`
-  console.log('rootPath', rootPath)
-  console.log('location', location)
   const pathname = location?.pathname ? location?.pathname : '/'
   const isRootPath = pathname === rootPath
   return (

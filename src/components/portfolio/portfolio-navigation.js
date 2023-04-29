@@ -17,12 +17,14 @@ const Preview = styled.div`
   }
 
   @media screen and (max-width: 767px) {
-    width: 165px;
-    height: 165px;
+    width: 72px;
+    height: 72px;
   }
 
   @media screen and (max-width: 479px) {
     margin: 7px;
+    width: 44vw;
+    height: 44vw;
   }
 `
 const WorkNav = styled.nav`
@@ -57,10 +59,15 @@ const WorkNav = styled.nav`
     position: relative;
     display: flex;
     align-self: center;
-    width: 70px;
-    height: 70px;
+    width: 80px;
+    height: 80px;
     margin: 0 auto;
     padding: 12px;
+
+    @media screen and (max-width: 767px) {
+      width: 72px;
+      height: 72px;
+    }
 
     @media screen and (max-width: 479px) {
       grid-row: 3/4;

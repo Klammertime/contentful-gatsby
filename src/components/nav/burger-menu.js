@@ -9,7 +9,7 @@ let styles = {
     height: '22px',
     right: '30px',
     top: '30px',
-    'z-index': 10,
+    zIndex: 10,
   },
   bmBurgerBars: {
     background: '#151515',
