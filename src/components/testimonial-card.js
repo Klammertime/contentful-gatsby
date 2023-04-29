@@ -42,6 +42,8 @@ const Author = styled.div`
     width: 60px;
     height: 60px;
     margin-right: 20px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
     border-radius: 50%;
   }
 
@@ -106,9 +108,9 @@ const Bottom = styled.div`
 
   .signature {
     color: #8e94a2;
-    font-weight: 300;
+    font-weight: 500;
     font-size: 24px;
-    font-family: Slender, sans-serif;
+    font-family: var(--font-cursif);
     line-height: 32px;
     text-align: right;
   }

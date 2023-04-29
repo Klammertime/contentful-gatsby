@@ -12,6 +12,7 @@
     "@contentful/rich-text-plain-text-renderer": "^15.12.1",
     "@contentful/rich-text-react-renderer": "^15.16.2",
     "@contentful/rich-text-types": "^16.0.3",
+    "@fontsource/dancing-script": "^4.5.11",
     "@fontsource/inter": "^4.5.15",
     "babel-plugin-styled-components": "^2.0.7",
     "gatsby": "^5.5.0",
