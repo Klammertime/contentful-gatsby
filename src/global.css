@@ -8,9 +8,9 @@ html * {
 
 @font-face {
   font-weight: 100 900;
-  font-family: 'Slender var';
+  font-family: 'Slender';
   font-style: normal;
-  src: url(/static/fonts/Slender-PK3qE.ttf) format('ttf');
+  src: url(/fonts/Slender-PK3qE.ttf) format('ttf');
   font-display: swap;
 }
 
