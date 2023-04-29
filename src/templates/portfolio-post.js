@@ -54,6 +54,7 @@ const BodyWrapper = styled.div`
 
     @media (max-width: 990px) {
       margin: 36px 0 36px 0;
+      border: none;
     }
   }
 
@@ -68,30 +69,21 @@ const WorkIntro = styled.div`
   grid-row-start: 1;
   grid-column: 1/13;
   align-items: flex-start;
-  margin: 0;
+  margin: 0 0 20px 0;
   padding: 60px 0;
   font-size: 17px;
   line-height: 24px;
-
   @media screen and (max-width: 990px) {
     flex-direction: column;
     align-items: center;
-    padding: 32px 0 0 0;
-  }
-
-  p {
-    width: 50%;
-    padding-top: 16px;
-    padding-right: 10%;
-    padding-bottom: 16px;
-    color: #666d7a;
   }
 `
 const WorkCardDescription = styled.p`
   width: 50%;
   margin: 0;
-  padding: 16px 0;
+  padding-top: 16px;
   padding-right: 10%;
+  padding-bottom: 16px;
   color: #666d7a;
   font-weight: 500;
   font-size: 17px;
@@ -103,6 +95,9 @@ const WorkCardDescription = styled.p`
     margin-bottom: 24px;
     padding-right: 0;
     text-align: center;
+  }
+  @media screen and (max-width: 479px) {
+    width: 100%;
   }
 `
 
@@ -128,6 +123,9 @@ const WorkBlock = styled.div`
   align-items: center;
   padding: 32px;
   box-shadow: 1px 0 0 0 #e4e8ed;
+  @media screen and (max-width: 767px) {
+    padding: 24px 32px;
+  }
 `
 
 const WorkBlockHeading = styled.h6`
@@ -221,7 +219,6 @@ class PortfolioPostTemplate extends React.Component {
         [BLOCKS.HEADING_2]: (node, children) => <Heading2>{children}</Heading2>,
         [BLOCKS.HEADING_3]: (node, children) => <Heading3>{children}</Heading3>,
         [BLOCKS.HEADING_4]: (node, children) => <Heading4>{children}</Heading4>,
-
         [BLOCKS.PARAGRAPH]: (node, children) => (
           <ParagraphText>{children}</ParagraphText>
         ),
