@@ -151,7 +151,11 @@ const PortfolioNavigation = ({ previous, next, nextImg, prevImg }) => {
               rel="prev"
             >
               <Preview>
-                <GatsbyImage image={prevImg} alt={prevImg?.description || ''} />
+                <GatsbyImage
+                  imgStyle={{ 'border-radius': '50%' }}
+                  image={prevImg}
+                  alt={prevImg?.description || ''}
+                />
               </Preview>
               <div className="info">
                 <Text variant="xs" color="mediumGrey" asType="p" margin="4px 0">
@@ -188,7 +192,11 @@ const PortfolioNavigation = ({ previous, next, nextImg, prevImg }) => {
                 </Text>
               </div>
               <Preview>
-                <GatsbyImage image={nextImg} alt={nextImg?.description || ''} />
+                <GatsbyImage
+                  imgStyle={{ 'border-radius': '50%' }}
+                  image={nextImg}
+                  alt={nextImg?.description || ''}
+                />
               </Preview>
             </Link>
           )}
