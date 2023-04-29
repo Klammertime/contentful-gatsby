@@ -10,6 +10,8 @@ const Preview = styled.div`
   width: 100px;
   height: 100px;
   overflow: hidden;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
   border-radius: 50%;
   @media screen and (max-width: 991px) {
     width: 88px;
