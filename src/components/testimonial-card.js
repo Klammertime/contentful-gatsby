@@ -18,6 +18,10 @@ const TestimonialWrapper = styled.div`
     box-shadow: 0 0 0 1px #e4e8ed;
     transition: transform 400ms cubic-bezier(0.25, 0.46, 0.45, 0.94),
       box-shadow 400ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    @media screen and (max-width: 479px) {
+      margin: 15px 0;
+      padding: 24px 16px;
+    }
   }
 `
 
@@ -136,6 +140,7 @@ const TestimonialCard = ({ testimonial }) => {
           {image && (
             <div>
               <GatsbyImage
+                imgStyle={{ 'border-radius': '50%' }}
                 className="avatar"
                 alt={name}
                 image={image?.gatsbyImageData}
