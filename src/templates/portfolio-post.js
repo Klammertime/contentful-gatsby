@@ -92,10 +92,15 @@ const WorkIntro = styled.div`
   line-height: 24px;
   padding: 60px 0;
   align-items: flex-start;
-  @media (max-width: 990px) {
+
+  @media screen and (max-width: 990px) {
     flex-direction: column;
     align-items: center;
     padding: 0;
+  }
+  
+  @media screen and (max-width: 767px) {
+    padding-top: 32px;
   }
 
   p {
