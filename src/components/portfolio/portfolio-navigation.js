@@ -6,6 +6,25 @@ import Section from '../ui/section'
 import Text from '../ui/text'
 import Dots from './dots'
 
+const Preview = styled.div`
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
+  border-radius: 50%;
+  @media screen and (max-width: 991px) {
+    width: 88px;
+    height: 88px;
+  }
+
+  @media screen and (max-width: 767px) {
+    width: 165px;
+    height: 165px;
+  }
+
+  @media screen and (max-width: 479px) {
+    margin: 7px;
+  }
+`
 const WorkNav = styled.nav`
   display: grid;
   grid-template-columns: 1fr minmax(20px, auto) 1fr;
@@ -24,26 +43,6 @@ const WorkNav = styled.nav`
     text-align: center;
     border-top-style: none;
     border-bottom-style: none;
-  }
-
-  .preview {
-    width: 100px;
-    height: 100px;
-    overflow: hidden;
-    border-radius: 50%;
-    @media screen and (max-width: 991px) {
-      width: 88px;
-      height: 88px;
-    }
-
-    @media screen and (max-width: 767px) {
-      width: 165px;
-      height: 165px;
-    }
-
-    @media screen and (max-width: 479px) {
-      margin: 7px;
-    }
   }
 
   .info {
@@ -142,9 +141,9 @@ const PortfolioNavigation = ({ previous, next, nextImg, prevImg }) => {
               className="nav-link"
               rel="prev"
             >
-              <div className="preview">
+              <Preview>
                 <GatsbyImage image={prevImg} alt={prevImg?.description || ''} />
-              </div>
+              </Preview>
               <div className="info">
                 <Text variant="xs" color="mediumGrey" asType="p" margin="4px 0">
                   Previous
@@ -179,9 +178,9 @@ const PortfolioNavigation = ({ previous, next, nextImg, prevImg }) => {
                   {next?.title}
                 </Text>
               </div>
-              <div className="preview">
+              <Preview>
                 <GatsbyImage image={nextImg} alt={nextImg?.description || ''} />
-              </div>
+              </Preview>
             </Link>
           )}
         </WorkNav>

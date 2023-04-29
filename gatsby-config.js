@@ -44,6 +44,7 @@ module.exports = {
     },
     'gatsby-plugin-styled-components',
     'postcss-styled-components',
+    `gatsby-plugin-postcss`,
     {
       resolve: 'stylelint-color-format',
       rules: {
