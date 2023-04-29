@@ -22,9 +22,9 @@ const Preview = styled.div`
   }
 
   @media screen and (max-width: 479px) {
-    margin: 7px;
     width: 44vw;
     height: 44vw;
+    margin: 7px;
   }
 `
 const WorkNav = styled.nav`
