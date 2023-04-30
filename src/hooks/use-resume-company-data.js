@@ -11,6 +11,7 @@ export const useResumeCompanyData = () => {
             bullets {
               raw
             }
+            dateRange
             company
             jobTitle
             location
