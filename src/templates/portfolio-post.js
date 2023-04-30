@@ -53,7 +53,6 @@ const BodyWrapper = styled.div`
     border: 1px solid #e4e4e4;
 
     @media (max-width: 990px) {
-      margin: 36px 0 36px 0;
       border: none;
     }
   }
