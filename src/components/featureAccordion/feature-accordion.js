@@ -19,7 +19,6 @@ const Container = styled.div`
 `
 
 function FeatureAccordion({ featuresList }) {
-  console.log('featuresList', featuresList)
   const [features, setFeature] = useState(featuresList)
   return (
     <Container>
