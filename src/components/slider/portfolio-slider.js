@@ -21,10 +21,11 @@ const StyledWrapper = styled.div`
   }
   @media screen and (max-width: 991px) {
     width: 100%;
-    height: 50vh;
     max-width: 100%;
     margin: 0;
     padding: 0;
+
+    height: 525px;
   }
 
   .screen-mask {
@@ -60,16 +61,10 @@ const StyledWrapper = styled.div`
     align-items: center;
     border-radius: 50%;
     position: absolute;
-    //top: 0;
-    //bottom: 0;
     margin: auto;
     cursor: pointer;
     overflow: hidden;
     user-select: none;
-    @media screen and (max-width: 991px) {
-      background-color: #433056;
-      color: #fff;
-    }
   }
 
   .prev:focus,
@@ -86,17 +81,14 @@ const StyledWrapper = styled.div`
       left: -33px;
     }
 
-    //@media screen and (max-width: 1024px) {
-    //  left: -5%;
-    //}
-
     @media screen and (max-width: 991px) {
-      left: 0;
-      bottom: -17%;
+      top: 50%;
+      left: -14px;
     }
   }
 
   .next {
+    z-index: 3;
     left: auto;
     right: -88px;
     bottom: 43%;
@@ -104,12 +96,9 @@ const StyledWrapper = styled.div`
       right: -33px;
     }
 
-    //@media screen and (max-width: 1024px) {
-    //  right: -5%;
-    //}
     @media screen and (max-width: 991px) {
-      left: -80%;
-      bottom: -17%;
+      right: -19px;
+      top: 50%;
     }
   }
 
@@ -122,25 +111,25 @@ const StyledWrapper = styled.div`
     transition: all 0.3s linear;
   }
 
-  article.activeSlide,
-  article.lastSlide,
-  article.nextSlide {
+  .activeSlide,
+  .lastSlide,
+  .nextSlide {
     vertical-align: top;
     width: 100%;
     height: 100%;
     white-space: normal;
   }
 
-  article.activeSlide {
+  .activeSlide {
     opacity: 1;
     transform: translateX(0);
 
 
-    article.lastSlide {
+    .lastSlide {
       transform: translateX(-100%);
     }
 
-    article.nextSlide {
+    .nextSlide {
       transform: translateX(100%);
     }
 
