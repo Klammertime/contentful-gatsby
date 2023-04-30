@@ -185,6 +185,14 @@ const StyledWrapper = styled.div`
     background-color: #222;
   }
 `
+const RoundDotBtn = styled.button`
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  display: inline;
+  margin: 0;
+  padding: 0;
+`
 
 function PortfolioSlider({ slideContent }) {
   const [portfolioItems, setPortfolioItems] = useState(slideContent)
@@ -237,11 +245,11 @@ function PortfolioSlider({ slideContent }) {
         <div className="slider-nav">
           {portfolioItems.map((item, itemIndex) => {
             return (
-              <a
+              <RoundDotBtn
                 key={item.id}
                 className={itemIndex === index ? 'activeImg' : 'nonActiveImg'}
                 onClick={() => setIndex(itemIndex)}
-              ></a>
+              ></RoundDotBtn>
             )
           })}
         </div>
