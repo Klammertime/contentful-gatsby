@@ -1,7 +1,7 @@
 :root {
   /* font-family */
+  --font-cursif: 'Dancing Script', cursif;
   --font-sans: 'Inter', sans-serif;
-  --font-cursif: 'Dancing Script', sans-serif;
   --font-serif: 'Times New Roman', Times, serif;
   /* todo: check monospace font */
   --font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
