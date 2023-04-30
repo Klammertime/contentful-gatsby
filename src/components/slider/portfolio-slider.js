@@ -83,7 +83,7 @@ const StyledWrapper = styled.div`
 
     @media screen and (max-width: 991px) {
       top: 50%;
-      left: -14px;
+      left: -9px;
     }
   }
 
@@ -97,7 +97,7 @@ const StyledWrapper = styled.div`
     }
 
     @media screen and (max-width: 991px) {
-      right: -19px;
+      right: -9px;
       top: 50%;
     }
   }
