@@ -10,7 +10,7 @@ const Preview = styled.div`
   width: 100px;
   height: 100px;
   overflow: hidden;
-  
+
   @media screen and (max-width: 991px) {
     width: 88px;
     height: 88px;
@@ -158,7 +158,7 @@ const PortfolioNavigation = ({ previous, next, nextImg, prevImg }) => {
             >
               <Preview>
                 <GatsbyImage
-                  imgStyle={{ 'border-radius': '50%' }}
+                  imgStyle={{ borderRadius: '50%' }}
                   image={prevImg}
                   alt={prevImg?.description || ''}
                 />
@@ -199,7 +199,7 @@ const PortfolioNavigation = ({ previous, next, nextImg, prevImg }) => {
               </div>
               <Preview>
                 <GatsbyImage
-                  imgStyle={{ 'border-radius': '50%' }}
+                  imgStyle={{ borderRadius: '50%' }}
                   image={nextImg}
                   alt={nextImg?.description || ''}
                 />

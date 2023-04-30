@@ -142,7 +142,7 @@ const TestimonialCard = ({ testimonial }) => {
           {image && (
             <div>
               <GatsbyImage
-                imgStyle={{ 'border-radius': '50%' }}
+                imgStyle={{ borderRadius: '50%' }}
                 className="avatar"
                 alt={name}
                 image={image?.gatsbyImageData}
