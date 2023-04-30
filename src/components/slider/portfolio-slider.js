@@ -237,11 +237,11 @@ function PortfolioSlider({ slideContent }) {
         <div className="slider-nav">
           {portfolioItems.map((item, itemIndex) => {
             return (
-              <div
+              <a
                 key={item.id}
                 className={itemIndex === index ? 'activeImg' : 'nonActiveImg'}
                 onClick={() => setIndex(itemIndex)}
-              ></div>
+              ></a>
             )
           })}
         </div>
