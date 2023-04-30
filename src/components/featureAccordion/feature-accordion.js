@@ -23,12 +23,9 @@ function FeatureAccordion({ featuresList }) {
   return (
     <Container>
       <section className="info">
-        {features.map((feature) => {
+        {features.map((feature, index) => {
           return (
-            <SingleAccordionItem
-              key={feature.id}
-              {...feature}
-            ></SingleAccordionItem>
+            <SingleAccordionItem key={index} {...feature}></SingleAccordionItem>
           )
         })}
       </section>
