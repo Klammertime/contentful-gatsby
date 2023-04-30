@@ -14,6 +14,7 @@
     "@contentful/rich-text-types": "^16.0.3",
     "@fontsource/dancing-script": "^4.5.11",
     "@fontsource/inter": "^4.5.15",
+    "@fontsource/monoton": "^4.5.10",
     "babel-plugin-styled-components": "^2.0.7",
     "gatsby": "^5.5.0",
     "gatsby-cli": "^5.6.0",
