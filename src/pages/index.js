@@ -1,4 +1,4 @@
-import { graphql, Link } from 'gatsby'
+import { graphql } from 'gatsby'
 import get from 'lodash/get'
 import React from 'react'
 import styled from 'styled-components'
@@ -8,6 +8,7 @@ import Quote from '../components/quote'
 import Section from '../components/ui/section'
 import Text from '../components/ui/text'
 import Skills from '../components/skills'
+import Link from '../components/ui/link'
 
 const WorkGrid1 = styled.div`
   display: grid;
