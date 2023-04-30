@@ -18,15 +18,13 @@ const Grid = styled.div`
     grid-template-rows: auto;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   }
-
-  @media (max-width: 640px) {
-    grid: auto auto / 1fr;
-    grid-gap: 0;
-  }
-  @media screen and (max-width: 479px) {
+  @media screen and (max-width: 767px) {
     grid-row-gap: 48px;
-    grid-column-gap: 0;
     grid-template-columns: 1fr;
+  }
+
+  @media screen and (max-width: 479px) {
+    grid-column-gap: 0;
   }
 `
 

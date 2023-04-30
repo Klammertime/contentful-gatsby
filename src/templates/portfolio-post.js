@@ -115,6 +115,9 @@ const WorkBlocks = styled.div`
   border-style: solid;
   border-width: 1px;
   border-radius: 8px;
+  @media screen and (max-width: 479px) {
+    width: 100%;
+  }
 `
 
 const WorkBlock = styled.div`
@@ -125,6 +128,10 @@ const WorkBlock = styled.div`
   box-shadow: 1px 0 0 0 #e4e8ed;
   @media screen and (max-width: 767px) {
     padding: 24px 32px;
+  }
+  @media screen and (max-width: 479px) {
+    padding-right: 24px;
+    padding-left: 24px;
   }
 `
 

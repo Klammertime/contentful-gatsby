@@ -57,7 +57,7 @@ const AboutPage = ({ location }) => {
   return (
     <Layout header={title} location={location} pageDescription={pageHeader}>
       <Seo title={title} />
-      <Section noPaddingBottom>
+      <Section>
         <GridSection>
           <AboutImgWrapper>
             <GatsbyImage

@@ -13,6 +13,7 @@ const Container = styled.div`
   border-radius: var(--radius);
 
   @media screen and (max-width: 990px) {
+    max-width: 100%;
     padding: 0;
   }
 `
