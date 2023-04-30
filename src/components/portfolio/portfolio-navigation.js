@@ -1,4 +1,4 @@
-import { Link } from 'gatsby'
+import Link from '../ui/link'
 import { GatsbyImage } from 'gatsby-plugin-image'
 import React from 'react'
 import styled from 'styled-components'

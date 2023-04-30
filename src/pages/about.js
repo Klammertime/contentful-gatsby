@@ -62,7 +62,7 @@ const AboutPage = ({ location }) => {
           <AboutImgWrapper>
             <GatsbyImage
               image={profilePic?.gatsbyImageData}
-              alt={profilePic.description || ''}
+              alt={profilePic.description || 'Image of Audrey Klammer'}
             />
           </AboutImgWrapper>
           <AboutTextWrapper>

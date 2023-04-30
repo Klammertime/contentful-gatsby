@@ -249,7 +249,7 @@ function PortfolioSlider({ slideContent }) {
                 key={item.id}
                 className={itemIndex === index ? 'activeImg' : 'nonActiveImg'}
                 onClick={() => setIndex(itemIndex)}
-              ></RoundDotBtn>
+              />
             )
           })}
         </div>
