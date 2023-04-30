@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import Link from '../ui/link'
 import Section from '../ui/section'
 import PortfolioCard from './portfolio-card'
 
@@ -39,6 +38,14 @@ const BtnContainer = styled.div`
   .active {
     color: var(--primary);
   }
+`
+const FilterBtn = styled.button`
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  display: inline;
+  margin: 0;
+  padding: 0;
 `
 
 const CardGrid = styled.div`
@@ -83,8 +90,7 @@ function Filter({ posts }) {
         <BtnContainer>
           {categories.map((category) => {
             return (
-              <Link
-                type="button"
+              <FilterBtn
                 className={`${
                   isCurrent === category ? 'filter-btn active' : 'filter-btn'
                 }`}
@@ -92,7 +98,7 @@ function Filter({ posts }) {
                 onClick={() => filterItems(category)}
               >
                 <span>{category}</span>
-              </Link>
+              </FilterBtn>
             )
           })}
         </BtnContainer>
