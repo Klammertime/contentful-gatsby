@@ -38,9 +38,8 @@ export const pageQuery = graphql`
           description
           gatsbyImageData(
             placeholder: BLURRED
-            layout: CONSTRAINED
-            height: 1280
-            width: 1280
+            layout: FULL_WIDTH
+            aspectRatio: 1
             cropFocus: CENTER
           )
         }

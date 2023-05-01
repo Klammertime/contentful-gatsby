@@ -10,7 +10,7 @@ module.exports = {
       summary: `I am passionate about web development and building useful things.`,
     },
     twitterUsername: '@klammertime',
-    image: `/gatsby-icon.png`,
+    image: ``,
     heading: `My name is Audrey Klammer. I'm a UI Engineer based in San Francisco.`,
     description: `My name is Audrey Klammer. I'm a UI Engineer based in San Francisco.`,
     siteUrl: `https://audreyklammer.com`,
