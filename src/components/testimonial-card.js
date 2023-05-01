@@ -2,6 +2,7 @@ import { GatsbyImage } from 'gatsby-plugin-image'
 import React from 'react'
 import { IoMdQuote } from 'react-icons/io'
 import { RiStarFill } from 'react-icons/ri'
+
 import GenericRichText from './ui/generic-rich-text'
 import styled from 'styled-components'
 
@@ -20,7 +21,7 @@ const TestimonialWrapper = styled.div`
       box-shadow 400ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
     @media screen and (max-width: 479px) {
       margin: 15px 0;
-      padding: 24px 16px;
+      padding: 0 16px;
     }
   }
 `
@@ -119,7 +120,6 @@ const Bottom = styled.div`
     display: flex;
     align-items: center;
     margin-left: -1px;
-    padding-top: 12px;
     padding-bottom: 0;
     color: #ffae2e;
     font-size: 20px;

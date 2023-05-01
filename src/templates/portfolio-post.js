@@ -172,8 +172,10 @@ const TestimonialsContainer = styled.div`
   padding-right: 8px;
   padding-left: 8px;
   column-count: 2;
+  display: flex;
   @media screen and (max-width: 990px) {
     column-count: 1;
+    flex-direction: column;
   }
 `
 
@@ -273,10 +275,6 @@ class PortfolioPostTemplate extends React.Component {
           <MainGrid>
             <BodyWrapper sidebar={post?.sidebar}>
               {post?.body?.raw && renderRichText(post.body, options)}
-              {post?.shortQuotes &&
-                post?.shortQuotes?.map((val) => {
-                  return <TestimonialCard key={val.id} testimonial={val} />
-                })}
             </BodyWrapper>
 
             {post?.sidebar && (
@@ -366,16 +364,6 @@ export const pageQuery = graphql`
       workCardDescription {
         workCardDescription
       }
-      shortQuotes {
-        id
-        name
-        title
-        articleLink
-        company
-        text {
-          text
-        }
-      }
       sidebar
       featuresAccordion {
         title
@@ -395,15 +383,6 @@ export const pageQuery = graphql`
         paragraphText {
           raw
         }
-      }
-      testimonialQuote {
-        id
-        blurbQuote {
-          blurbQuote
-        }
-        title
-        name
-        company
       }
       inTheNews {
         id
