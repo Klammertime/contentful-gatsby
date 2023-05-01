@@ -106,6 +106,10 @@ class RootIndex extends React.Component {
     if (!posts) return null
     if (!Array.isArray(posts)) return null
     const [card1, card2, card3] = posts
+    const quotePosts = get(
+      this,
+      'props.data.contentfulHomepage.shortQuoteByCards'
+    )
     return (
       <Layout location={this.props.location}>
         <Section color="white">
@@ -122,9 +126,8 @@ class RootIndex extends React.Component {
                 </SideLink>
               </DynamicWorksIntro>
               <PortfolioCard cardInfo={card1} />
-              <Quote />
+              <Quote testimonialQuote={quotePosts} />
             </WorkGrid1>
-
             <WorkGrid2>
               <PortfolioCard small cardInfo={card2} />
               <PortfolioCard small cardInfo={card3} />
@@ -142,6 +145,17 @@ export default RootIndex
 export const pageQuery = graphql`
   query HomeQuery {
     contentfulHomepage {
+      shortQuoteByCards {
+        highlightedQuote {
+          raw
+        }
+        image {
+          gatsbyImageData
+        }
+        company
+        name
+        title
+      }
       title
       pageHeader {
         pageHeader

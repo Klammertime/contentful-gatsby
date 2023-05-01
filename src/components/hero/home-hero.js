@@ -51,7 +51,7 @@ const HeroV1Section = styled.section`
   }
   @media screen and (max-width: 479px) {
     padding-top: 32vw;
-    padding-bottom: 26vw;
+    padding-bottom: 17vw;
   }
 `
 
