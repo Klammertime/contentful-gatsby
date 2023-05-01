@@ -43,6 +43,15 @@ const AboutTextWrapper = styled.div`
   }
 `
 
+const Signature = styled.p`
+  margin-top: 10px;
+  color: #8e94a2;
+  font-weight: 500;
+  font-size: 24px;
+  font-family: var(--font-cursif);
+  line-height: 32px;
+`
+
 const AboutPage = ({ location }) => {
   const {
     pageHeader,
@@ -52,6 +61,7 @@ const AboutPage = ({ location }) => {
     writerQuote,
     subhead,
     profilePic,
+    signature,
   } = useAboutData()
 
   return (
@@ -75,6 +85,7 @@ const AboutPage = ({ location }) => {
             <Text variant="textGrey" asType="p" color="grey">
               {bioText.bioText}
             </Text>
+            <Signature>{signature}</Signature>
             <GenericRichText data1={writerQuote} />
           </AboutTextWrapper>
         </GridSection>

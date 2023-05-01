@@ -59,6 +59,7 @@ export const useAboutData = () => {
         writerQuote {
           raw
         }
+        signature
         pageHeader {
           pageHeader
         }

@@ -6,6 +6,4 @@ import '@fontsource/inter/400.css'
 import '@fontsource/inter/500.css'
 import '@fontsource/inter/600.css'
 import '@fontsource/inter/700.css'
-import '@fontsource/dancing-script' // Defaults to weight 400.
 import '@fontsource/dancing-script/500.css'
-import '@fontsource/monoton'
