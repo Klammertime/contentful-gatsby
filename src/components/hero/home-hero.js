@@ -50,8 +50,8 @@ const HeroV1Section = styled.section`
     padding-bottom: 10vw;
   }
   @media screen and (max-width: 479px) {
-    margin-bottom: -32px;
-    padding: 32vw 0 26vw 0;
+    padding-top: 32vw;
+    padding-bottom: 26vw;
   }
 `
 

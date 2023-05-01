@@ -74,6 +74,10 @@ const DynamicWorksIntro = styled.div`
   flex-flow: row wrap;
   align-items: center;
   text-align: left;
+  @media screen and (max-width: 479px) {
+    align-items: flex-start;
+    flex-direction: column;
+  }
 `
 
 const SideLink = styled(Link)`
@@ -87,6 +91,13 @@ const SideLink = styled(Link)`
   border-left: 1px solid #e4e8ed;
   -webkit-transition: color 400ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
   transition: color 400ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+  span {
+    @media screen and (max-width: 479px) {
+      font-size: 15px;
+      line-height: 20px;
+    }
+  }
 `
 
 class RootIndex extends React.Component {
@@ -101,7 +112,7 @@ class RootIndex extends React.Component {
           <DynamicWorks>
             <WorkGrid1>
               <DynamicWorksIntro>
-                <Text margin="0 24px 0 0" asType="h2" variant="large">
+                <Text margin="0 24px 16px 0" asType="h2" variant="large">
                   Recent Works
                 </Text>
                 <SideLink to="/portfolio">
