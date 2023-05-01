@@ -171,8 +171,11 @@ const TestimonialsContainer = styled.div`
   margin-bottom: 64px;
   padding-right: 8px;
   padding-left: 8px;
+  -webkit-column-count: 2;
   column-count: 2;
-  display: flex;
+  width: 100%;
+  max-width: 1234px;
+
   @media screen and (max-width: 990px) {
     column-count: 1;
     flex-direction: column;
