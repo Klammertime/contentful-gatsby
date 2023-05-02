@@ -173,7 +173,6 @@ const TestimonialsContainer = styled.div`
   padding-left: 8px;
   -webkit-column-count: 2;
   column-count: 2;
-  width: 100%;
   max-width: 1234px;
 
   @media screen and (max-width: 990px) {
