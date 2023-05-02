@@ -57,7 +57,8 @@ const BodyWrapper = styled.div`
     }
   }
 
-  p {
+  p,
+  ul {
     max-width: 50rem;
   }
 `
@@ -168,16 +169,16 @@ const SliderWrapper = styled.div`
 
 const TestimonialsContainer = styled.div`
   width: 100%;
+  max-width: 1234px;
   margin-bottom: 64px;
   padding-right: 8px;
   padding-left: 8px;
   -webkit-column-count: 2;
   column-count: 2;
-  max-width: 1234px;
 
   @media screen and (max-width: 990px) {
-    column-count: 1;
     flex-direction: column;
+    column-count: 1;
   }
 `
 
@@ -201,7 +202,7 @@ class PortfolioPostTemplate extends React.Component {
     )
 
     const BulletText = ({ children }) => (
-      <Text margin="0 0 1.55rem 0" variant="bulletText" asType="ul">
+      <Text margin="0 0 1.55rem 0" variant="body" asType="ul">
         {children}
       </Text>
     )
