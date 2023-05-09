@@ -1,4 +1,4 @@
-import { graphql, Link } from 'gatsby'
+import { graphql } from 'gatsby'
 import get from 'lodash/get'
 import React from 'react'
 import styled from 'styled-components'
@@ -8,6 +8,7 @@ import Quote from '../components/quote'
 import Section from '../components/ui/section'
 import Text from '../components/ui/text'
 import Skills from '../components/skills'
+import Link from '../components/ui/link'
 
 const WorkGrid1 = styled.div`
   display: grid;
@@ -73,6 +74,10 @@ const DynamicWorksIntro = styled.div`
   flex-flow: row wrap;
   align-items: center;
   text-align: left;
+  @media screen and (max-width: 479px) {
+    align-items: flex-start;
+    flex-direction: column;
+  }
 `
 
 const SideLink = styled(Link)`
@@ -86,6 +91,13 @@ const SideLink = styled(Link)`
   border-left: 1px solid #e4e8ed;
   -webkit-transition: color 400ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
   transition: color 400ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+  span {
+    @media screen and (max-width: 479px) {
+      font-size: 15px;
+      line-height: 20px;
+    }
+  }
 `
 
 class RootIndex extends React.Component {
@@ -94,13 +106,17 @@ class RootIndex extends React.Component {
     if (!posts) return null
     if (!Array.isArray(posts)) return null
     const [card1, card2, card3] = posts
+    const quotePosts = get(
+      this,
+      'props.data.contentfulHomepage.shortQuoteByCards'
+    )
     return (
       <Layout location={this.props.location}>
         <Section color="white">
           <DynamicWorks>
             <WorkGrid1>
               <DynamicWorksIntro>
-                <Text margin="0 24px 0 0" asType="h2" variant="large">
+                <Text margin="0 24px 16px 0" asType="h2" variant="large">
                   Recent Works
                 </Text>
                 <SideLink to="/portfolio">
@@ -110,9 +126,8 @@ class RootIndex extends React.Component {
                 </SideLink>
               </DynamicWorksIntro>
               <PortfolioCard cardInfo={card1} />
-              <Quote />
+              <Quote testimonialQuote={quotePosts} />
             </WorkGrid1>
-
             <WorkGrid2>
               <PortfolioCard small cardInfo={card2} />
               <PortfolioCard small cardInfo={card3} />
@@ -130,6 +145,17 @@ export default RootIndex
 export const pageQuery = graphql`
   query HomeQuery {
     contentfulHomepage {
+      shortQuoteByCards {
+        highlightedQuote {
+          raw
+        }
+        image {
+          gatsbyImageData
+        }
+        company
+        name
+        title
+      }
       title
       pageHeader {
         pageHeader

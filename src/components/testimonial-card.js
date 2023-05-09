@@ -2,6 +2,7 @@ import { GatsbyImage } from 'gatsby-plugin-image'
 import React from 'react'
 import { IoMdQuote } from 'react-icons/io'
 import { RiStarFill } from 'react-icons/ri'
+
 import GenericRichText from './ui/generic-rich-text'
 import styled from 'styled-components'
 
@@ -18,6 +19,10 @@ const TestimonialWrapper = styled.div`
     box-shadow: 0 0 0 1px #e4e8ed;
     transition: transform 400ms cubic-bezier(0.25, 0.46, 0.45, 0.94),
       box-shadow 400ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    @media screen and (max-width: 479px) {
+      margin: 15px 0;
+      padding: 0 16px;
+    }
   }
 `
 
@@ -38,6 +43,8 @@ const Author = styled.div`
     width: 60px;
     height: 60px;
     margin-right: 20px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
     border-radius: 50%;
   }
 
@@ -102,9 +109,9 @@ const Bottom = styled.div`
 
   .signature {
     color: #8e94a2;
-    font-weight: 300;
+    font-weight: 500;
     font-size: 24px;
-    font-family: Slender, sans-serif;
+    font-family: var(--font-cursif);
     line-height: 32px;
     text-align: right;
   }
@@ -113,7 +120,6 @@ const Bottom = styled.div`
     display: flex;
     align-items: center;
     margin-left: -1px;
-    padding-top: 12px;
     padding-bottom: 0;
     color: #ffae2e;
     font-size: 20px;
@@ -136,6 +142,7 @@ const TestimonialCard = ({ testimonial }) => {
           {image && (
             <div>
               <GatsbyImage
+                imgStyle={{ borderRadius: '50%' }}
                 className="avatar"
                 alt={name}
                 image={image?.gatsbyImageData}

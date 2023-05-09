@@ -5,71 +5,66 @@ import styled from 'styled-components'
 import Section from '../ui/section'
 
 const StyledWrapper = styled.div`
+  position: relative;
+  clear: both;
   width: 100%;
-  height: 588px;
   max-width: 970px;
+  height: 588px;
   margin: 0 auto;
   padding: 38px;
+  text-align: center;
+  background-color: #fff;
   border-radius: 30px;
   box-shadow: 0 5px 15px 0 rgba(32, 36, 46, 0.3);
-  position: relative;
-  text-align: center;
-  clear: both;
-  background-color: #fff;
   @media screen and (max-width: 1024px) {
     width: 90%;
   }
   @media screen and (max-width: 991px) {
     width: 100%;
-    height: 50vh;
     max-width: 100%;
+
+    height: 525px;
     margin: 0;
     padding: 0;
   }
 
   .screen-mask {
-    min-height: 420px;
     position: relative;
-    display: block;
-    overflow: hidden;
-    z-index: 1;
-    left: 0;
     right: 0;
+    left: 0;
+    z-index: 1;
+    display: block;
     height: 100%;
+    min-height: 420px;
+    overflow: hidden;
     white-space: nowrap;
+    background-color: #f7f8fc;
     border: 2px solid #e2e4eb;
     border-radius: 8px;
-    background-color: #f7f8fc;
   }
 
   .prev,
   .next {
-    color: #333640;
-    transform: translateY(-50%);
-    background-color: var(--white);
-    place-items: center;
-    border-color: transparent;
-    box-shadow: 0 5px 15px 0 rgba(32, 36, 46, 0.06);
-    transition: transform 0.3s, -webkit-transform 0.3s;
+    position: absolute;
     display: flex;
+    align-items: center;
+    justify-content: center;
     width: 56px;
     height: 56px;
-    padding: 11px;
-    font-size: 3rem;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    position: absolute;
-    //top: 0;
-    //bottom: 0;
     margin: auto;
-    cursor: pointer;
+    padding: 11px;
     overflow: hidden;
+    color: #333640;
+    font-size: 3rem;
+    background-color: var(--white);
+    border-color: transparent;
+    border-radius: 50%;
+    box-shadow: 0 5px 15px 0 rgba(32, 36, 46, 0.06);
+    transform: translateY(-50%);
+    cursor: pointer;
+    transition: transform 0.3s, -webkit-transform 0.3s;
     user-select: none;
-    @media screen and (max-width: 991px) {
-      background-color: #433056;
-      color: #fff;
-    }
+    place-items: center;
   }
 
   .prev:focus,
@@ -78,41 +73,34 @@ const StyledWrapper = styled.div`
   }
 
   .prev {
-    z-index: 3;
     right: auto;
-    left: -88px;
     bottom: 43%;
+    left: -88px;
+    z-index: 3;
     @media screen and (max-width: 1185px) {
       left: -33px;
     }
 
-    //@media screen and (max-width: 1024px) {
-    //  left: -5%;
-    //}
-
     @media screen and (max-width: 991px) {
-      left: 0;
-      bottom: -17%;
+      top: 50%;
+      left: -9px;
     }
   }
 
   .next {
-    left: auto;
     right: -88px;
     bottom: 43%;
+    left: auto;
+    z-index: 3;
     @media screen and (max-width: 1185px) {
       right: -33px;
     }
 
-    //@media screen and (max-width: 1024px) {
-    //  right: -5%;
-    //}
     @media screen and (max-width: 991px) {
-      left: -80%;
-      bottom: -17%;
+      top: 50%;
+      right: -9px;
     }
   }
-
 
   article {
     position: absolute;
@@ -122,76 +110,88 @@ const StyledWrapper = styled.div`
     transition: all 0.3s linear;
   }
 
-  article.activeSlide,
-  article.lastSlide,
-  article.nextSlide {
-    vertical-align: top;
+  .activeSlide,
+  .lastSlide,
+  .nextSlide {
     width: 100%;
     height: 100%;
     white-space: normal;
+    vertical-align: top;
   }
 
-  article.activeSlide {
-    opacity: 1;
+  .activeSlide {
     transform: translateX(0);
+    opacity: 1;
+  }
 
+  .lastSlide {
+    transform: translateX(-100%);
+  }
 
-    article.lastSlide {
-      transform: translateX(-100%);
+  .nextSlide {
+    transform: translateX(100%);
+  }
+
+  .item-img {
+    position: absolute;
+    display: inline-block;
+    width: 100%;
+    max-width: none;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    object-fit: cover;
+    vertical-align: middle;
+    border: 0;
+    inset: 0;
+    @media screen and (max-width: 479px) {
+      height: auto;
     }
+  }
 
-    article.nextSlide {
-      transform: translateX(100%);
+  .slider-nav {
+    position: absolute;
+    top: auto;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 5;
+    height: 40px;
+    margin: auto;
+    padding-top: 13px;
+    font-size: 6px;
+    text-align: center;
+    opacity: 0.4;
+    -webkit-tap-highlight-color: transparent;
+    @media screen and (max-width: 991px) {
+      bottom: -40px;
     }
+  }
 
-    .item-img {
-      border: 0;
-      vertical-align: middle;
-      display: inline-block;
-      height: 100%;
-      margin: 0;
-      max-width: none;
-      padding: 0;
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      object-fit: cover;
-      @media screen and (max-width: 479px) {
-        height: auto;
-      }
+  .activeImg,
+  .nonActiveImg {
+    position: relative;
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    margin: 0 3px 0.5em 3px;
+    background-color: rgba(34, 34, 34, 0.4);
+    border-radius: 100%;
+    cursor: pointer;
+    transition: background-color 0.1s, color 0.1s;
+  }
 
-    }
-
-    .slider-nav {
-      height: 40px;
-      padding-top: 13px;
-      opacity: 0.4;
-      font-size: 6px;
-      color: #fff;
-      position: absolute;
-      z-index: 2;
-      inset: auto 0 0 0;
-      margin: auto;
-      text-align: center;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    .activeImg,
-    .nonActiveImg {
-      position: relative;
-      display: inline-block;
-      width: 1em;
-      height: 1em;
-      cursor: pointer;
-      margin: 0 3px 0.5em 3px;
-      transition: background-color 0.1s, color 0.1s;
-      background-color: rgba(34, 34, 34, 0.4);
-      border-radius: 100%;
-    }
-
-    .activeImg {
-      background-color: #222;
-    }
+  .activeImg {
+    background-color: #222;
+  }
+`
+const RoundDotBtn = styled.button`
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  display: inline;
+  margin: 0;
+  padding: 0;
 `
 
 function PortfolioSlider({ slideContent }) {
@@ -245,11 +245,11 @@ function PortfolioSlider({ slideContent }) {
         <div className="slider-nav">
           {portfolioItems.map((item, itemIndex) => {
             return (
-              <div
+              <RoundDotBtn
                 key={item.id}
                 className={itemIndex === index ? 'activeImg' : 'nonActiveImg'}
                 onClick={() => setIndex(itemIndex)}
-              ></div>
+              />
             )
           })}
         </div>

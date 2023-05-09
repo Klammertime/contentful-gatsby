@@ -1,10 +1,11 @@
 :root {
   /* font-family */
+  --font-cursif: 'Dancing Script', cursif;
   --font-sans: 'Inter', sans-serif;
   --font-serif: 'Times New Roman', Times, serif;
   /* todo: check monospace font */
   --font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
-  'Courier New', monospace;
+    'Courier New', monospace;
 
   /* font-weight */
   --body: 400;
@@ -78,14 +79,13 @@
   --size-logo: var(--space-2xl);
   --size-max-width: 80rem;
 
-
   /* text */
   /* color */
   --text-color: var(--black);
   /* size */
   --text-lead: var(--text-lg);
   --text-prose: var(--text-md);
-  --text-title: var(  --text-xl);
+  --text-title: var(--text-xl);
   /* tracking */
   --text-prose-tracking: -0.011em;
 

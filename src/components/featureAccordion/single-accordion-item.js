@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
-import { AiOutlineCheck, AiOutlineDown, AiOutlineUp } from 'react-icons/ai'
+import { AiOutlineCheck } from 'react-icons/ai'
 import styled from 'styled-components'
+import { GrDown, GrUp } from 'react-icons/gr'
 
 const AccordionItemContainer = styled.div`
   margin-bottom: 4px;
@@ -62,7 +63,7 @@ const SingleAccordionItem = ({ title, info }) => {
           <h4>{title}</h4>
         </div>
         <Btn onClick={() => setShowInfo(!showInfo)}>
-          {showInfo ? <AiOutlineUp /> : <AiOutlineDown />}
+          {showInfo ? <GrUp /> : <GrDown />}
         </Btn>
       </header>
       {showInfo && <p>{info?.info}</p>}

@@ -80,6 +80,10 @@ const InfoCardWrapper = styled.div`
     justify-content: flex-start;
     max-width: 100%;
     padding: 28px 20px 24px;
+    
+    @media screen and (max-width: 767px) {
+      padding: 28px 0 0 0;
+    }
   }
 
   .link-text {

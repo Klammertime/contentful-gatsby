@@ -8,7 +8,8 @@ let styles = {
     width: '26px',
     height: '22px',
     right: '30px',
-    top: '39%',
+    top: '30px',
+    zIndex: 10,
   },
   bmBurgerBars: {
     background: '#151515',

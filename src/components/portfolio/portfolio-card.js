@@ -1,4 +1,4 @@
-import { Link } from 'gatsby'
+import Link from '../ui/link'
 import { GatsbyImage } from 'gatsby-plugin-image'
 import React from 'react'
 import styled from 'styled-components'
@@ -30,7 +30,7 @@ const PortfolioCard = ({ cardInfo, small }) => {
         />
       </Link>
       {small ? (
-        <Text margin="20px 0 12px 0" asType="h4" variant="small">
+        <Text margin="20px 0 12px 0" asType="h2" variant="small">
           {title}
         </Text>
       ) : (

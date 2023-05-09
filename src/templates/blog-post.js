@@ -5,7 +5,6 @@ import { renderRichText } from 'gatsby-source-contentful/rich-text'
 import { documentToPlainTextString } from '@contentful/rich-text-plain-text-renderer'
 import { BLOCKS } from '@contentful/rich-text-types'
 import { GatsbyImage } from 'gatsby-plugin-image'
-import readingTime from 'reading-time'
 import Seo from '../components/seo'
 import Layout from '../components/layout'
 // import BlogPostHero from '../components/blog-post-hero'
@@ -21,7 +20,6 @@ class BlogPostTemplate extends React.Component {
       JSON.parse(post.description.raw)
     )
     const plainTextBody = documentToPlainTextString(JSON.parse(post.body.raw))
-    const { minutes: timeToRead } = readingTime(plainTextBody)
 
     const options = {
       renderNode: {
@@ -53,8 +51,7 @@ class BlogPostTemplate extends React.Component {
         <div className={styles.container}>
           <span className={styles.meta}>
             {post.author?.name} &middot;{' '}
-            <time dateTime={post.rawDate}>{post.publishDate}</time> –{' '}
-            {timeToRead} minute read
+            <time dateTime={post.rawDate}>{post.publishDate}</time>
           </span>
           <div className={styles.article}>
             <div className={styles.body}>

@@ -11,7 +11,7 @@ const DynamicTextWrapper = styled.div`
   @media screen and (max-width: 991px) {
     margin-bottom: 12px;
   }
-  
+
   @media screen and (max-width: 767px) {
     margin-top: -4px;
   }
@@ -50,8 +50,8 @@ const HeroV1Section = styled.section`
     padding-bottom: 10vw;
   }
   @media screen and (max-width: 479px) {
-    margin-bottom: -32px;
-    padding: 32vw 0 26vw 0;
+    padding-top: 32vw;
+    padding-bottom: 17vw;
   }
 `
 
@@ -188,7 +188,7 @@ const HeroSection = () => {
           <HeroPhoto className="hero-v1-photo">
             <GatsbyImage
               image={hero?.gatsbyImageData}
-              alt={hero?.description}
+              alt="Hero Image"
               imgStyle={{ borderRadius: '50%' }}
             />
           </HeroPhoto>

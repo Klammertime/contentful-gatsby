@@ -13,22 +13,19 @@ const Container = styled.div`
   border-radius: var(--radius);
 
   @media screen and (max-width: 990px) {
+    max-width: 100%;
     padding: 0;
   }
 `
 
 function FeatureAccordion({ featuresList }) {
-  console.log('featuresList', featuresList)
   const [features, setFeature] = useState(featuresList)
   return (
     <Container>
       <section className="info">
-        {features.map((feature) => {
+        {features.map((feature, index) => {
           return (
-            <SingleAccordionItem
-              key={feature.id}
-              {...feature}
-            ></SingleAccordionItem>
+            <SingleAccordionItem key={index} {...feature}></SingleAccordionItem>
           )
         })}
       </section>

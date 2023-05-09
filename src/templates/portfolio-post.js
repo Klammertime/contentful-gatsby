@@ -21,48 +21,29 @@ const MainGrid = styled.div`
   grid: auto-flow auto / repeat(12, 1fr [col-start]);
   padding-top: 0;
   perspective: 2000px;
-
-  .mobileImage {
-    display: none;
-    @media screen and (max-width: 990px) {
-      display: block;
-      margin-bottom: 32px;
-      grid-row-start: 1;
-      grid-column: 1/13;
-    }
-
-    .infoCellHeader {
-      margin-right: 8px;
-      color: #777;
-    }
-
-    .sectionHeader {
-      margin: 23px 0 16px 0;
-      font-size: 40px;
-      line-height: 48px;
-      font-weight: 700;
-    }
 `
 
 const RightContainer = styled.div`
-  grid-column: 8/13;
   grid-row: 2;
+  grid-column: 8/13;
 
   @media screen and (max-width: 990px) {
+    grid-row-start: 2;
     grid-column: 1/13;
   }
 `
 
 const BodyWrapper = styled.div`
   position: relative;
-  grid-row: 2;
   top: 0;
   flex: 1;
+  grid-row: 2;
   grid-column: ${(props) => (props.sidebar ? '1/8' : '1/13')};
   text-align: left;
 
   @media (max-width: 990px) {
     position: static;
+    grid-row-start: 3;
     grid-column: 1/13;
     padding: 0;
   }
@@ -72,99 +53,105 @@ const BodyWrapper = styled.div`
     border: 1px solid #e4e4e4;
 
     @media (max-width: 990px) {
-      margin: 36px 0 36px 0;
+      border: none;
     }
   }
 
-  p {
+  p,
+  ul {
     max-width: 50rem;
   }
 `
+
 const WorkIntro = styled.div`
+  display: flex;
   flex-direction: row;
   grid-row-start: 1;
   grid-column: 1/13;
-  display: flex;
-  margin: 0;
+  align-items: flex-start;
+  margin: 0 0 20px 0;
+  padding: 60px 0;
   font-size: 17px;
   line-height: 24px;
-  padding: 60px 0;
-  align-items: flex-start;
-  @media (max-width: 990px) {
+  @media screen and (max-width: 990px) {
     flex-direction: column;
     align-items: center;
-    padding: 0;
   }
+`
+const WorkCardDescription = styled.p`
+  width: 50%;
+  margin: 0;
+  padding-top: 16px;
+  padding-right: 10%;
+  padding-bottom: 16px;
+  color: #666d7a;
+  font-weight: 500;
+  font-size: 17px;
+  line-height: 24px;
+  text-align: left;
 
-  p {
-    width: 50%;
-    padding-top: 16px;
-    padding-right: 10%;
-    padding-bottom: 16px;
-    color: #666d7a;
+  @media (max-width: 990px) {
+    width: 80%;
+    margin-bottom: 24px;
+    padding-right: 0;
+    text-align: center;
   }
-
-  .workCardDescription {
-    font-size: 17px;
-    line-height: 24px;
-    padding: 16px 0;
-    color: #666d7a;
-    font-weight: 500;
-    margin: 0;
-    width: 50%;
-    padding-right: 10%;
-    text-align: left;
-
-    @media (max-width: 990px) {
-      width: 80%;
-      padding-right: 0;
-      text-align: center;
-      margin-bottom: 24px;
-    }
+  @media screen and (max-width: 479px) {
+    width: 100%;
   }
 `
 
 const WorkBlocks = styled.div`
-  text-align: center;
   display: grid;
-  overflow: hidden;
   flex: 1;
   grid-auto-columns: 1fr;
-  grid-column-gap: 0px;
-  grid-row-gap: 0px;
-  grid-template-columns: 1fr 1fr;
+  grid-row-gap: 0;
+  grid-column-gap: 0;
   grid-template-rows: auto;
+  grid-template-columns: 1fr 1fr;
+  overflow: hidden;
+  text-align: center;
+  border-color: #e4e8ed;
   border-style: solid;
   border-width: 1px;
-  border-color: #e4e8ed;
   border-radius: 8px;
+  @media screen and (max-width: 479px) {
+    width: 100%;
+  }
 `
 
 const WorkBlock = styled.div`
   display: flex;
-  padding: 32px;
   flex-direction: column;
   align-items: center;
+  padding: 32px;
   box-shadow: 1px 0 0 0 #e4e8ed;
+  @media screen and (max-width: 767px) {
+    padding: 24px 32px;
+  }
+  @media screen and (max-width: 479px) {
+    padding-right: 24px;
+    padding-left: 24px;
+  }
 `
 
 const WorkBlockHeading = styled.h6`
-  margin-top: 0px;
+  margin-top: 0;
   margin-bottom: 16px;
+  font-weight: 700;
   font-size: 15px;
   line-height: 20px;
-  font-weight: 700;
   @media screen and (max-width: 990px) {
+    margin-bottom: 12px;
     font-size: 14px;
     line-height: 18px;
-    margin-bottom: 12px;
   }
 `
 const WorkBlockInfo = styled.div`
-  font-size: 17px;
-  line-height: 24px;
   color: #666d7a;
   font-weight: 500;
+  font-size: 17px;
+  line-height: 24px;
   @media screen and (max-width: 990px) {
     font-size: 15px;
     line-height: 20px;
@@ -172,9 +159,9 @@ const WorkBlockInfo = styled.div`
 `
 
 const SliderWrapper = styled.div`
-  padding-top: 60px;
   grid-row-start: 2;
   grid-column: 1/13;
+  padding-top: 60px;
   @media screen and (max-width: 767px) {
     display: none;
   }
@@ -182,22 +169,23 @@ const SliderWrapper = styled.div`
 
 const TestimonialsContainer = styled.div`
   width: 100%;
+  max-width: 1234px;
   margin-bottom: 64px;
   padding-right: 8px;
   padding-left: 8px;
+  -webkit-column-count: 2;
   column-count: 2;
+
   @media screen and (max-width: 990px) {
+    flex-direction: column;
     column-count: 1;
   }
 `
 
 const Col = styled.div`
   display: grid;
-  grid-template-columns: ${(props) =>
-    props.isEven ? '1fr 1fr' : '1fr 1fr 1fr'};
-
-  grid-template-rows: auto;
   grid-gap: 30px;
+  grid-template-rows: auto;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 `
 
@@ -214,7 +202,7 @@ class PortfolioPostTemplate extends React.Component {
     )
 
     const BulletText = ({ children }) => (
-      <Text margin="0 0 1.55rem 0" variant="bulletText" asType="ul">
+      <Text margin="0 0 1.55rem 0" variant="body" asType="ul">
         {children}
       </Text>
     )
@@ -242,7 +230,6 @@ class PortfolioPostTemplate extends React.Component {
         [BLOCKS.HEADING_2]: (node, children) => <Heading2>{children}</Heading2>,
         [BLOCKS.HEADING_3]: (node, children) => <Heading3>{children}</Heading3>,
         [BLOCKS.HEADING_4]: (node, children) => <Heading4>{children}</Heading4>,
-
         [BLOCKS.PARAGRAPH]: (node, children) => (
           <ParagraphText>{children}</ParagraphText>
         ),
@@ -251,13 +238,12 @@ class PortfolioPostTemplate extends React.Component {
           <BulletText>{children}</BulletText>
         ),
         [BLOCKS.LIST_ITEM]: (node, children) => {
-          const normalisedChildren = documentToReactComponents(node, {
+          return documentToReactComponents(node, {
             renderNode: {
               [BLOCKS.PARAGRAPH]: (node, children) => children,
               [BLOCKS.LIST_ITEM]: (node, children) => <li>{children}</li>,
             },
           })
-          return normalisedChildren
         },
         [BLOCKS.EMBEDDED_ASSET]: (node) => {
           const { gatsbyImageData, description } = node?.data?.target
@@ -292,10 +278,6 @@ class PortfolioPostTemplate extends React.Component {
           <MainGrid>
             <BodyWrapper sidebar={post?.sidebar}>
               {post?.body?.raw && renderRichText(post.body, options)}
-              {post?.shortQuotes &&
-                post?.shortQuotes?.map((val) => {
-                  return <TestimonialCard key={val.id} testimonial={val} />
-                })}
             </BodyWrapper>
 
             {post?.sidebar && (
@@ -306,9 +288,9 @@ class PortfolioPostTemplate extends React.Component {
 
             <WorkIntro>
               {post?.workCardDescription?.workCardDescription && (
-                <p className="workCardDescription">
+                <WorkCardDescription>
                   {post?.workCardDescription?.workCardDescription}
-                </p>
+                </WorkCardDescription>
               )}
               <WorkBlocks>
                 <WorkBlock>
@@ -385,16 +367,6 @@ export const pageQuery = graphql`
       workCardDescription {
         workCardDescription
       }
-      shortQuotes {
-        id
-        name
-        title
-        articleLink
-        company
-        text {
-          text
-        }
-      }
       sidebar
       featuresAccordion {
         title
@@ -414,15 +386,6 @@ export const pageQuery = graphql`
         paragraphText {
           raw
         }
-      }
-      testimonialQuote {
-        id
-        blurbQuote {
-          blurbQuote
-        }
-        title
-        name
-        company
       }
       inTheNews {
         id

@@ -83,12 +83,6 @@ const StyledLink = styled(Link)`
     outline: 0;
   }
 
-  //&:active {
-  //  text-decoration: none;
-  //  background-color: transparent;
-  //  outline: 0;
-  //}
-
   &.active {
     color: var(--primary);
   }

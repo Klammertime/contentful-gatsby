@@ -57,12 +57,12 @@ const AboutPage = ({ location }) => {
   return (
     <Layout header={title} location={location} pageDescription={pageHeader}>
       <Seo title={title} />
-      <Section noPaddingBottom>
+      <Section>
         <GridSection>
           <AboutImgWrapper>
             <GatsbyImage
               image={profilePic?.gatsbyImageData}
-              alt={profilePic.description || ''}
+              alt={profilePic.description || 'Image of Audrey Klammer'}
             />
           </AboutImgWrapper>
           <AboutTextWrapper>
