@@ -4,6 +4,10 @@
 
 ### This is the repo for my personal site, [audreyklammer.com](https://www.audreyklammer.com).
 
+## Screenshots
+
+![App Screenshot](smartmockups_lhh8ewnl.png)
+
 This site uses [Gatsby](http://gatsbyjs.com/), the headless CMS [Contentful](https://www.contentful.com), and hosting
 platform
 [Netlify](https://www.netlify.com/).
