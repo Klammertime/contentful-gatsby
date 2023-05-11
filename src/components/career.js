@@ -1,12 +1,13 @@
 import React from 'react'
 import styled from 'styled-components'
-import { useAboutData } from '../hooks/use-about-data'
 import GridSection from './ui/grid-section'
 import Section from './ui/section'
 import Text from './ui/text'
+import { useAboutData } from '../hooks/use-about-data'
 import { useResumeCompanyData } from '../hooks/use-resume-company-data'
 import GenericRichText from './ui/generic-rich-text'
 import Tag from './ui/tag'
+import Link from './ui/link'
 
 const Date = styled.div`
   grid-area: Date;
@@ -137,21 +138,21 @@ const CareerBlock = styled.div`
 `
 
 const Career = () => {
-  const { fullResumeContent } = useAboutData()
+  const { fullResumeContent, resume } = useAboutData()
   const { collectionItems } = useResumeCompanyData()
   return (
     <Section noPaddingTop color="white">
       <GridSection>
         <SectionLeft>
           <Text margin="0 0 16px 0" asType="h2" variant="large">
-            {fullResumeContent.resumeSubhead}
+            {fullResumeContent?.resumeSubhead}
           </Text>
           <Text color="grey" variant="textGrey" asType="p">
-            {fullResumeContent.resumeSummary.resumeSummary}
+            {fullResumeContent?.resumeSummary?.resumeSummary}
           </Text>
-          {/*<Button href={fullResumeContent.resumePdf?.file?.url} download>*/}
-          {/*  Download Resume*/}
-          {/*</Button>*/}
+          <Link variant="button" to={resume?.url}>
+            Resume
+          </Link>
         </SectionLeft>
         <SectionRight>
           {collectionItems.map((job) => {

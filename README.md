@@ -2,7 +2,9 @@
 
 # Hi, I'm Audrey 👋
 
-### This is the repo for my personal site, [audreyklammer.com](https://www.audreyklammer.com).
+### This is the repo for my personal site, [audreyklammer.com](https://www.audreyklammer.com)
+
+![App Screenshot](./smartmockups_lhh8ewnl.png)
 
 This site uses [Gatsby](http://gatsbyjs.com/), the headless CMS [Contentful](https://www.contentful.com), and hosting
 platform

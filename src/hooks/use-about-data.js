@@ -11,6 +11,13 @@ export const useAboutData = () => {
         bioText {
           bioText
         }
+        resume {
+          file {
+            url
+            fileName
+          }
+          url
+        }
         fullResumeContent {
           fullCareerHistory {
             id
@@ -30,13 +37,6 @@ export const useAboutData = () => {
           resumeSubhead
           resumeSummary {
             resumeSummary
-          }
-          resumePdf {
-            file {
-              url
-              fileName
-            }
-            url
           }
         }
         fullSkillsList {
