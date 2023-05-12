@@ -138,20 +138,20 @@ const CareerBlock = styled.div`
 `
 
 const Career = () => {
-  const { fullResumeContent, resume } = useAboutData()
+  const { resume, resumeSectionHeader, resumeSummary } = useAboutData()
   const { collectionItems } = useResumeCompanyData()
   return (
     <Section noPaddingTop color="white">
       <GridSection>
         <SectionLeft>
           <Text margin="0 0 16px 0" asType="h2" variant="large">
-            {fullResumeContent?.resumeSubhead}
+            {resumeSectionHeader}
           </Text>
           <Text color="grey" variant="textGrey" asType="p">
-            {fullResumeContent?.resumeSummary?.resumeSummary}
+            {resumeSummary?.resumeSummary}
           </Text>
           <Link variant="button" to={resume?.url}>
-            Resume
+            Download Resume
           </Link>
         </SectionLeft>
         <SectionRight>
