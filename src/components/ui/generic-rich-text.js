@@ -44,6 +44,7 @@ const options = {
 // }
 
 function GenericRichText({ data1, richTextLabel }) {
+  console.log('data1', data1)
   let raw = data1 && richTextLabel ? data1[richTextLabel] : data1
   if (data1) {
     return <>{data1 && renderRichText(raw, options)}</>
