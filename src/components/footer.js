@@ -33,7 +33,7 @@ const StyledLink = styled(Link)`
   display: inline-block;
   margin: 8px 3vw 8px 0;
   padding: 3px 0;
-  font-weight: 500;
+  font-weight: var(--medium);
   font-size: 17px;
   @media (max-width: 991px) {
     margin-right: 20px;
@@ -61,7 +61,7 @@ const StyledFooterLinks = styled.li`
   align-items: center;
   padding: 6px 0;
   overflow: hidden;
-  font-weight: 600;
+  font-weight: var(--semibold);
   font-size: 13px;
   line-height: 10px;
 

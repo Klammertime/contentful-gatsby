@@ -30,7 +30,6 @@ h4,
 h5,
 h6 {
   margin: 0;
-  font-weight: var(--semibold);
   line-height: var(--dense);
 }
 
@@ -60,7 +59,7 @@ tt,
 code,
 kbd {
   font-size: 90%;
-  /*font-family: var(--font-monospace);*/
+  font-family: var(--font-monospace);
 }
 
 tt,

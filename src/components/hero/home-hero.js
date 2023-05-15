@@ -114,7 +114,7 @@ const HeroH1 = styled.h1`
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-weight: 700;
+  font-weight: var(--bold);
   font-size: 36px;
   line-height: 48px;
 
@@ -128,7 +128,7 @@ const HeroInfo = styled.div`
   flex: 1 1 0;
   padding-top: 60px;
   padding-left: 8%;
-  font-weight: 700;
+  font-weight: var(--bold);
   font-size: 36px;
   line-height: 48px;
 

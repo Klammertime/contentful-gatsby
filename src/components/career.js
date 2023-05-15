@@ -61,7 +61,7 @@ const Job = styled.div`
 
 const JobHeading = styled.h3`
   margin: 0 0 8px 0;
-  font-weight: 700;
+  font-weight: var(--bold);
   font-size: 24px;
   line-height: 1.3;
 `
@@ -132,7 +132,7 @@ const CareerBlock = styled.div`
 
   &:last-of-type {
     .timeline {
-      background-color: white;
+      background-color: var(--white);
     }
   }
 `

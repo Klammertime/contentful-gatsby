@@ -32,7 +32,7 @@ const InfoCardWrapper = styled.div`
     justify-content: center;
     max-width: 878px;
     padding: 20px;
-    background-color: #fff;
+    background-color: var(--white);
     border-radius: 4px;
   }
 
@@ -44,7 +44,7 @@ const InfoCardWrapper = styled.div`
 
   .title {
     color: #8e94a2;
-    font-weight: 600;
+    font-weight: var(--semibold);
     font-size: 10px;
     line-height: 16px;
     letter-spacing: 2px;
@@ -64,7 +64,7 @@ const InfoCardWrapper = styled.div`
     margin-top: 8px;
     padding-right: 12px;
     color: hsla(225, 15.38%, 15.29%, 1);
-    font-weight: 600;
+    font-weight: var(--semibold);
     font-size: 12px;
     line-height: 16px;
     text-decoration: none;
@@ -80,7 +80,7 @@ const InfoCardWrapper = styled.div`
     justify-content: flex-start;
     max-width: 100%;
     padding: 28px 20px 24px;
-    
+
     @media screen and (max-width: 767px) {
       padding: 28px 0 0 0;
     }
@@ -125,13 +125,13 @@ const InfoCardWrapper = styled.div`
     align-items: center;
     justify-content: center;
     padding: 120px 40px;
-    background-color: white;
+    background-color: var(--white);
   }
 
   h4 {
     margin-top: 0;
     margin-bottom: 0;
-    font-weight: 600;
+    font-weight: var(--semibold);
     font-size: 18px;
     line-height: 24px;
   }
@@ -145,7 +145,7 @@ const InfoCardWrapper = styled.div`
   overflow: hidden;
   color: #111;
   text-decoration: none;
-  background-color: #fff;
+  background-color: var(--white);
   border: 1px solid var(--border);
 `
 const Category = styled.div`
@@ -158,13 +158,13 @@ const Category = styled.div`
   margin: 40px;
   padding: 4px 8px 0 10px;
   color: #111;
-  font-weight: 700;
+  font-weight: var(--bold);
   font-size: 8px;
   line-height: 16px;
   letter-spacing: 1.5px;
   text-align: center;
   text-transform: uppercase;
-  background-color: #fff;
+  background-color: var(--white);
 `
 const InfoCard = ({ info }) => {
   const {
