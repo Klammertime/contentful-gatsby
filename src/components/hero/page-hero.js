@@ -59,7 +59,7 @@ const PageHeader = styled.div`
 
 const PageHeading = styled.h1`
   margin: 0;
-  font-weight: 700;
+  font-weight: var(--bold);
   font-size: 3.7vw;
   line-height: 4.4vw;
 
@@ -98,7 +98,7 @@ const Angle = styled.div`
   height: 20vw;
   margin-right: auto;
   margin-left: auto;
-  background-color: #fff;
+  background-color: var(--white);
   transform: translate(0px, 12.5vw) rotate(-2.5deg);
 `
 

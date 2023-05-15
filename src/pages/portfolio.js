@@ -1,7 +1,7 @@
-import Filter from '../components/portfolio/filter'
 import { graphql } from 'gatsby'
 import get from 'lodash/get'
 import React from 'react'
+import Filter from '../components/portfolio/filter'
 import Layout from '../components/layout'
 import Seo from '../components/seo'
 import Section from '../components/ui/section'

@@ -1,9 +1,10 @@
+import React from 'react'
 import { BLOCKS, MARKS } from '@contentful/rich-text-types'
 import { graphql } from 'gatsby'
 import { GatsbyImage } from 'gatsby-plugin-image'
 import { renderRichText } from 'gatsby-source-contentful/rich-text'
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import get from 'lodash/get'
-import React from 'react'
 import styled from 'styled-components'
 import InfoCard from '../components/info-card'
 import Layout from '../components/layout'
@@ -13,7 +14,6 @@ import PortfolioSlider from '../components/portfolio/portfolio-slider'
 import TestimonialCard from '../components/testimonial-card'
 import Section from '../components/ui/section'
 import Text from '../components/ui/text'
-import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import FeatureAccordion from '../components/featureAccordion/feature-accordion'
 
 const MainGrid = styled.div`
@@ -84,8 +84,8 @@ const WorkCardDescription = styled.p`
   padding-top: 16px;
   padding-right: 10%;
   padding-bottom: 16px;
-  color: #666d7a;
-  font-weight: 500;
+  color: var(--grey);
+  font-weight: var(--medium);
   font-size: 17px;
   line-height: 24px;
   text-align: left;
@@ -111,7 +111,7 @@ const WorkBlocks = styled.div`
   grid-template-columns: 1fr 1fr;
   overflow: hidden;
   text-align: center;
-  border-color: #e4e8ed;
+  border-color: var(--border);
   border-style: solid;
   border-width: 1px;
   border-radius: 8px;
@@ -125,7 +125,7 @@ const WorkBlock = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 32px;
-  box-shadow: 1px 0 0 0 #e4e8ed;
+  box-shadow: 1px 0 0 0 var(--border);
   @media screen and (max-width: 767px) {
     padding: 24px 32px;
   }
@@ -138,7 +138,7 @@ const WorkBlock = styled.div`
 const WorkBlockHeading = styled.h6`
   margin-top: 0;
   margin-bottom: 16px;
-  font-weight: 700;
+  font-weight: var(--bold);
   font-size: 15px;
   line-height: 20px;
   @media screen and (max-width: 990px) {
@@ -148,8 +148,8 @@ const WorkBlockHeading = styled.h6`
   }
 `
 const WorkBlockInfo = styled.div`
-  color: #666d7a;
-  font-weight: 500;
+  color: var(--grey);
+  font-weight: var(--medium);
   font-size: 17px;
   line-height: 24px;
   @media screen and (max-width: 990px) {
