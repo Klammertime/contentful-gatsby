@@ -37,13 +37,8 @@ const options = {
   },
 }
 
-// TODO use or lose
-// function RichText({ data }) {
-//   const { bodyRichText } = data.contentfulBlogPost
-//   return <div>{bodyRichText && renderRichText(bodyRichText, options)}</div>
-// }
-
 function GenericRichText({ data1, richTextLabel }) {
+  console.log('data1', data1)
   let raw = data1 && richTextLabel ? data1[richTextLabel] : data1
   if (data1) {
     return <>{data1 && renderRichText(raw, options)}</>

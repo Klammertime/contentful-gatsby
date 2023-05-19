@@ -24,8 +24,8 @@ const StyledInput = styled.input`
   margin-top: 10px;
   padding: 11px 20px 12px;
   font: normal 400 15px/24px Inter, sans-serif;
-  background-color: #f2f3f5;
-  border: 1px solid #e4e8ed;
+  background-color: var(--tag-grey);
+  border: 1px solid var(--border);
   border-radius: 6px;
   @media (max-width: 640px) {
     grid-column: 1/13;
@@ -72,8 +72,8 @@ const Textarea = styled.textarea`
   padding: 24px 20px;
   font-size: 15px;
   line-height: 24px;
-  background-color: #f2f3f5;
-  border: 1px solid #e4e8ed;
+  background-color: var(--tag-grey);
+  border: 1px solid var(--border);
   border-radius: 6px;
 `
 

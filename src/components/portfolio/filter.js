@@ -23,7 +23,7 @@ const BtnContainer = styled.div`
     padding: 4px 0;
     overflow: hidden;
     color: var(--black);
-    font-weight: 500;
+    font-weight: var(--medium);
     font-size: 20px;
     line-height: 24px;
     letter-spacing: 1px;
@@ -40,12 +40,12 @@ const BtnContainer = styled.div`
   }
 `
 const FilterBtn = styled.button`
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
   display: inline;
   margin: 0;
   padding: 0;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
 `
 
 const CardGrid = styled.div`

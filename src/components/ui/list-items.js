@@ -22,7 +22,7 @@ const Item = styled.li`
   flex-wrap: wrap;
   align-items: flex-start;
   padding: 8px 0 8px 32px;
-  font-weight: 500;
+  font-weight: var(--medium);
   font-size: 17px;
   list-style-type: none;
 `

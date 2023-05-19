@@ -186,12 +186,12 @@ const StyledWrapper = styled.div`
   }
 `
 const RoundDotBtn = styled.button`
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
   display: inline;
   margin: 0;
   padding: 0;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
 `
 
 function PortfolioSlider({ slideContent }) {

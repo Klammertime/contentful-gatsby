@@ -16,7 +16,7 @@ const Grid = styled.div`
     grid-row-gap: 64px;
     grid-column-gap: 16px;
     grid-template-rows: auto;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: repeat(8, 1fr);
   }
   @media screen and (max-width: 767px) {
     grid-row-gap: 48px;

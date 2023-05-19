@@ -4,6 +4,10 @@ export const useAboutData = () => {
   const { contentfulAboutPage } = useStaticQuery(graphql`
     query {
       contentfulAboutPage {
+        resumeSectionHeader
+        resumeSummary {
+          resumeSummary
+        }
         title
         bioHeader {
           bioHeader
@@ -11,33 +15,12 @@ export const useAboutData = () => {
         bioText {
           bioText
         }
-        fullResumeContent {
-          fullCareerHistory {
-            id
-            bullets
-            city
-            company
-            jobTitle
-            date
-          }
-          fullEducationList {
-            id
-            degree
-            school
-            subject
-            year
-          }
-          resumeSubhead
-          resumeSummary {
-            resumeSummary
-          }
-          resumePdf {
-            file {
-              url
-              fileName
-            }
+        resume {
+          file {
             url
+            fileName
           }
+          url
         }
         fullSkillsList {
           skillLogos {

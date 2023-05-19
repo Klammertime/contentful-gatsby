@@ -21,7 +21,7 @@ const Site = styled.div`
     )
     1fr 2em;
   min-height: 100vh;
-  background: white;
+  background: var(--white);
 
   @media screen and (max-width: 479px) {
     grid-template-columns: 1fr;
@@ -31,12 +31,12 @@ const Site = styled.div`
 const SiteHeader = styled.header`
   grid-row: 1;
   grid-column: span 5;
-  color: black;
+  color: var(--black);
 `
 
 const SiteMain = styled.main`
   grid-column: span 5;
-  background: white;
+  background: var(--white);
 `
 
 const SiteFooter = styled.footer`

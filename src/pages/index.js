@@ -75,8 +75,8 @@ const DynamicWorksIntro = styled.div`
   align-items: center;
   text-align: left;
   @media screen and (max-width: 479px) {
-    align-items: flex-start;
     flex-direction: column;
+    align-items: flex-start;
   }
 `
 
@@ -84,11 +84,11 @@ const SideLink = styled(Link)`
   position: relative;
   padding: 7px 16px 8px;
   overflow: hidden;
-  color: #151515;
-  font-weight: 600;
+  color: var(--black);
+  font-weight: var(--semibold);
   font-size: 13px;
   line-height: 16px;
-  border-left: 1px solid #e4e8ed;
+  border-left: 1px solid var(--border);
   -webkit-transition: color 400ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
   transition: color 400ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
 

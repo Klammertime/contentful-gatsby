@@ -2,7 +2,9 @@
 
 # Hi, I'm Audrey 👋
 
-### This is the repo for my personal site, [audreyklammer.com](https://www.audreyklammer.com).
+### This is the repo for my personal site, [audreyklammer.com](https://www.audreyklammer.com)
+
+![App Screenshot](./smartmockups_lhh8ewnl.png)
 
 ## Screenshots
 

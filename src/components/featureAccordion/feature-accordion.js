@@ -9,7 +9,7 @@ const Container = styled.div`
   max-width: 920px;
   margin: 0 auto 1rem 0;
   padding: 0 0 2.5rem 2rem;
-  background: #fff;
+  background: var(--white);
   border-radius: var(--radius);
 
   @media screen and (max-width: 990px) {
@@ -22,7 +22,7 @@ function FeatureAccordion({ featuresList }) {
   const [features, setFeature] = useState(featuresList)
   return (
     <Container>
-      <section className="info">
+      <section>
         {features.map((feature, index) => {
           return (
             <SingleAccordionItem key={index} {...feature}></SingleAccordionItem>
