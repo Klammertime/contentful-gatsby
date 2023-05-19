@@ -6,10 +6,6 @@
 
 ![App Screenshot](./smartmockups_lhh8ewnl.png)
 
-## Screenshots
-
-![App Screenshot](smartmockups_lhh8ewnl.png)
-
 This site uses [Gatsby](http://gatsbyjs.com/), the headless CMS [Contentful](https://www.contentful.com), and hosting
 platform
 [Netlify](https://www.netlify.com/).
